@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://hori031617.github.io/hori031617/atom.xml" rel="self"/>
   <link href="http://hori031617.github.io/hori031617/"/>
-  <updated>2016-04-24T19:28:27+09:00</updated>
+  <updated>2016-04-26T08:15:25+09:00</updated>
   <id>http://hori031617.github.io/hori031617/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -18,11 +18,11 @@
     <link href="http://hori031617.github.io/hori031617/blog/2016/04/24/hello-world/"/>
     <updated>2016-04-24T19:12:54+09:00</updated>
     <id>http://hori031617.github.io/hori031617/blog/2016/04/24/hello-world</id>
-    <content type="html"><![CDATA[<h1>My First Blog</h1>
+    <content type="html"><![CDATA[<h2>My First Blog</h2>
 
 <p>初めての投稿です。
 仕事はWEBエンジニアをやっています。
-趣味でiPhoneアプリを作り出し、
+趣味でiPhoneアプリを作成し、
 この前、無事に公開されました。
 これから、技術ブログとしてどんどん更新していこうと思います。</p>
 
