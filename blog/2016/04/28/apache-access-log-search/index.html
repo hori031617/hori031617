@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ApacheのアクセスログからURLごと、時間帯べつでURLごとにアクセスを集計する - エンジニア日記</title>
+  <title>ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="パラメータを除外し、URL毎に集計 1
+  <meta name="description" content="パラメータを除外し、URLごとに集計 1
 cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output.txt &hellip;">
   
 
@@ -68,7 +68,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   
   <header>
     
-      <h1 class="entry-title">ApacheのアクセスログからURLごと、時間帯べつでURLごとにアクセスを集計する</h1>
+      <h1 class="entry-title">ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する</h1>
     
     
       <p class="meta">
@@ -91,15 +91,15 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   </header>
 
 
-<div class="entry-content"><h3>パラメータを除外し、URL毎に集計</h3>
+<div class="entry-content"><h3>パラメータを除外し、URLごとに集計</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output.txt</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>時間帯のURL毎に集計</h3>
+<h3>時間帯のURLごとに集計</h3>
 
-<p>例) 2016/04/27/ 18:00 台の時間帯にアクセスのあったURL毎の集計</p>
+<p>例) 2016/04/27/ 18:00 台の時間帯にアクセスのあったURLごとの集計</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | grep '\[27/Apr/2016:18:00:' | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output_1800.txt</span></code></pre></td></tr></table></div></figure>
@@ -167,7 +167,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/hori031617/blog/2016/04/28/apache-access-log-search/">ApacheのアクセスログからURLごと、時間帯べつでURLごとにアクセスを集計する</a>
+        <a href="/hori031617/blog/2016/04/28/apache-access-log-search/">ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する</a>
       </li>
     
       <li class="post">
