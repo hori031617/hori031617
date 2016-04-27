@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[エンジニア日記]]></title>
   <link href="http://hori031617.github.io/hori031617/atom.xml" rel="self"/>
   <link href="http://hori031617.github.io/hori031617/"/>
-  <updated>2016-04-26T08:15:25+09:00</updated>
+  <updated>2016-04-28T00:21:33+09:00</updated>
   <id>http://hori031617.github.io/hori031617/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -20,11 +20,11 @@
     <id>http://hori031617.github.io/hori031617/blog/2016/04/24/hello-world</id>
     <content type="html"><![CDATA[<h2>My First Blog</h2>
 
-<p>初めての投稿です。
-仕事はWEBエンジニアをやっています。
-趣味でiPhoneアプリを作成し、
-この前、無事に公開されました。
-これから、技術ブログとしてどんどん更新していこうと思います。</p>
+<p>初めての投稿です。<br/>
+仕事はWEBエンジニアをやっています。<br/>
+趣味でiPhoneアプリ作成もやっています。<br/>
+この前、無事に公開されました^^<br/>
+これから、日々の開発中にうまくいったこと、うまくいかなかったことなどをまとめる技術ブログとして、どんどん更新していこうと思います。</p>
 
 <p>よろしくお願いします。</p>
 ]]></content>
