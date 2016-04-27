@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>エンジニア日記</title>
+  <title>ApacheのアクセスログからURLごと、時間帯べつでURLごとにアクセスを集計する - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
@@ -19,7 +19,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hori031617.github.io/hori031617/">
+  <link rel="canonical" href="http://hori031617.github.io/hori031617/blog/2016/04/28/apache-access-log-search/">
   <link href="/hori031617/favicon.png" rel="icon">
   <link href="/hori031617/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/hori031617/javascripts/modernizr-2.0.js"></script>
@@ -63,15 +63,12 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/hori031617/blog/2016/04/28/apache-access-log-search/">ApacheのアクセスログからURLごと、時間帯べつでURLごとにアクセスを集計する</a></h1>
+      <h1 class="entry-title">ApacheのアクセスログからURLごと、時間帯べつでURLごとにアクセスを集計する</h1>
     
     
       <p class="meta">
@@ -94,7 +91,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   </header>
 
 
-  <div class="entry-content"><h3>パラメータを除外し、URL毎に集計</h3>
+<div class="entry-content"><h3>パラメータを除外し、URL毎に集計</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output.txt</span></code></pre></td></tr></table></div></figure>
@@ -116,22 +113,16 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
 </pre></td><td class='code'><pre><code class=''><span class='line'>cat access1.log access2.log access3.log &gt; total_access.log</span></code></pre></td></tr></table></div></figure>
 
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/hori031617/blog/2016/04/24/hello-world/">Hello World</a></h1>
-    
-    
-      <p class="meta">
-        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Masahiro Hori</span></span>
+
+      
 
 
 
@@ -143,35 +134,32 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   
 
 
-<time datetime="2016-04-24T19:12:54+09:00" pubdate data-updated="true"></time>
-        
-      </p>
+<time datetime="2016-04-28T00:30:01+09:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><h2>My First Blog</h2>
-
-<p>初めての投稿です。<br/>
-仕事はWEBエンジニアをやっています。<br/>
-趣味でiPhoneアプリ作成もやっています。<br/>
-この前、無事に公開されました^^<br/>
-これから、日々の開発中にうまくいったこと、うまくいかなかったことなどをまとめる技術ブログとして、どんどん更新していこうと思います。</p>
-
-<p>よろしくお願いします。</p>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hori031617.github.io/hori031617/blog/2016/04/28/apache-access-log-search/" data-via="" data-counturl="http://hori031617.github.io/hori031617/blog/2016/04/28/apache-access-log-search/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/hori031617/blog/2016/04/24/hello-world/" title="Previous Post: Hello World">&laquo; Hello World</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/hori031617/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -195,6 +183,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
 
   
 </aside>
+
 
     </div>
   </div>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://hori031617.github.io/hori031617/blog/2016/04/28/apache-access-log-search/</loc>
+<lastmod>2016-04-28T00:30:01+09:00</lastmod>
+</url>
+<url>
 <loc>http://hori031617.github.io/hori031617/blog/2016/04/24/hello-world/</loc>
 <lastmod>2016-04-24T19:12:54+09:00</lastmod>
 </url>
