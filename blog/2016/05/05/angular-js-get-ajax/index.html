@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>エンジニア日記</title>
+  <title>Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
@@ -41,7 +41,7 @@ JSONデータにはあるグループのグループ名、コメント、登録�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hori031617.github.io/hori031617/">
+  <link rel="canonical" href="http://hori031617.github.io/hori031617/blog/2016/05/05/angular-js-get-ajax/">
   <link href="/hori031617/favicon.png" rel="icon">
   <link href="/hori031617/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/hori031617/javascripts/modernizr-2.0.js"></script>
@@ -97,15 +97,12 @@ JSONデータにはあるグループのグループ名、コメント、登録�
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/hori031617/blog/2016/05/05/angular-js-get-ajax/">Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する</a></h1>
+      <h1 class="entry-title">Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する</h1>
     
     
       <p class="meta">
@@ -128,7 +125,7 @@ JSONデータにはあるグループのグループ名、コメント、登録�
   </header>
 
 
-  <div class="entry-content"><ul>
+<div class="entry-content"><ul>
 <li>APIはJSONデータを返却する</li>
 <li>JSONデータにはあるグループのグループ名、コメント、登録日が格納されている</li>
 <li>返却されたJSONデータを <em>ng-repeat(ループ)</em> で表示する</li>
@@ -223,114 +220,16 @@ JSONデータにはあるグループのグループ名、コメント、登録�
 </span><span class='line'>&lt;/html&gt;</span></code></pre></td></tr></table></div></figure>
 
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/hori031617/blog/2016/04/30/swift-uicollectionview/">SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Masahiro Hori</span></span>
 
-<time datetime="2016-04-30T22:33:33+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>やり方</h3>
-
-<p>罫線は背景色を表示する方法をとる。<br/>
-(この例の場合は黒)<br/>
-よって、セルとセルの間に均等にスペースが空くように配置する</p>
-
-<h3>イメージ</h3>
-
-<p><img src="/hori031617/images/UICollectionViewCapture.png" alt="キャプチャ" /></p>
-
-<h3>ソースコード</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class ViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-</span><span class='line'>
-</span><span class='line'>    let linePoint: CGFloat = 1     // 罫線の太さ
-</span><span class='line'>    let numberOfCols: CGFloat = 6  // 1行に表示するセルの数
-</span><span class='line'>
-</span><span class='line'>    // セルのレイアウト調整
-</span><span class='line'>    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -&gt; CGSize {
-</span><span class='line'>        // セルのサイズ = (端末の横幅 - (罫線の太さ*(1行に表示するセルの個数-1=外の線を引いた内側の線の数))) / 1行に表示するセルの個数
-</span><span class='line'>        let size = floor((collectionView.frame.size.width - (linePoint*(numberOfCols-1))) / numberOfCols)
-</span><span class='line'>        return CGSizeMake(size, size)
-</span><span class='line'>    }
-</span><span class='line'>    
-</span><span class='line'>    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -&gt; UIEdgeInsets {
-</span><span class='line'>        return UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
-</span><span class='line'>    }
-</span><span class='line'>    
-</span><span class='line'>    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -&gt; CGFloat {
-</span><span class='line'>        return linePoint
-</span><span class='line'>    }
-</span><span class='line'>    
-</span><span class='line'>    ......
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/hori031617/blog/2016/04/28/apache-access-log-search/">ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -342,91 +241,32 @@ JSONデータにはあるグループのグループ名、コメント、登録�
   
 
 
-<time datetime="2016-04-28T00:30:01+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>パラメータを除外し、URLごとに集計</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output.txt</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>時間帯のURLごとに集計</h3>
-
-<p>例) 2016/04/27/ 18:00 台の時間帯にアクセスのあったURLごとの集計</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | grep '\[27/Apr/2016:18:00:' | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output_1800.txt</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>その他</h3>
-
-<p>複数あるアクセスログファイルを1つにまとめる</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access1.log access2.log access3.log &gt; total_access.log</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
+<time datetime="2016-05-05T08:14:21+09:00" pubdate data-updated="true"></time>
       
-  <header>
+
+
+    </p>
     
-      <h1 class="entry-title"><a href="/hori031617/blog/2016/04/24/hello-world/">Hello World</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
+      <div class="sharing">
   
-
-
-<time datetime="2016-04-24T19:12:54+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>My First Blog</h2>
-
-<p>初めての投稿です。<br/>
-仕事はWEBエンジニアをやっています。<br/>
-趣味でiPhoneアプリ作成もやっています。<br/>
-この前、無事に公開されました^^<br/>
-これから、日々の開発中にうまくいったこと、うまくいかなかったことなどをまとめる技術ブログとして、どんどん更新していこうと思います。</p>
-
-<p>よろしくお願いします。</p>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hori031617.github.io/hori031617/blog/2016/05/05/angular-js-get-ajax/" data-via="" data-counturl="http://hori031617.github.io/hori031617/blog/2016/05/05/angular-js-get-ajax/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/hori031617/blog/2016/04/30/swift-uicollectionview/" title="Previous Post: SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する">&laquo; SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/hori031617/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -458,6 +298,7 @@ JSONデータにはあるグループのグループ名、コメント、登録�
 
   
 </aside>
+
 
     </div>
   </div>
