@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://hori031617.github.io/hori031617/atom.xml" rel="self"/>
   <link href="http://hori031617.github.io/hori031617/"/>
-  <updated>2016-05-05T09:48:48+09:00</updated>
+  <updated>2016-05-05T10:17:24+09:00</updated>
   <id>http://hori031617.github.io/hori031617/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -25,93 +25,50 @@
 </ul>
 
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!doctype html&gt;
-</span><span class='line'>  &lt;html lang="ja"&gt;
-</span><span class='line'>    &lt;body ng-app="group" ng-cloak&gt;
-</span><span class='line'>      &lt;div ng-controller="GroupController"&gt;
-</span><span class='line'>        &lt;table&gt;
-</span><span class='line'>          &lt;thead&gt;
-</span><span class='line'>            &lt;tr&gt;
-</span><span class='line'>              &lt;th&gt;グループ名&lt;/th&gt;
-</span><span class='line'>              &lt;th&gt;コメント&lt;/th&gt;
-</span><span class='line'>              &lt;th&gt;登録日&lt;/th&gt;
-</span><span class='line'>            &lt;/tr&gt;
-</span><span class='line'>          &lt;/thead&gt;
-</span><span class='line'>          &lt;tbody&gt;
-</span><span class='line'>            &lt;tr ng-repeat="group in data.group_list"&gt;
-</span><span class='line'>              &lt;td&gt;  &lt;/td&gt;
-</span><span class='line'>              &lt;td&gt;  &lt;/td&gt;
-</span><span class='line'>              &lt;td&gt;  &lt;/td&gt;
-</span><span class='line'>            &lt;/tr&gt;
-</span><span class='line'>          &lt;/tbody&gt;
-</span><span class='line'>        &lt;/table&gt;
-</span><span class='line'>      &lt;/div&gt;
-</span><span class='line'>   &lt;!-- Anguler JS 読み込み ここから --&gt;
-</span><span class='line'>      &lt;script src="angular.js"&gt;&lt;/script&gt;
-</span><span class='line'>      &lt;script src="angular-resource.js"&gt;&lt;/script&gt;
-</span><span class='line'>   &lt;!-- Anguler JS 読み込み ここまで --&gt;
-</span><span class='line'>      &lt;script&gt;
-</span><span class='line'>        var GroupController = function($scope, $resource){
-</span><span class='line'>
-</span><span class='line'>        // GETパラーメータ
-</span><span class='line'>        var parameter = {hoge: 'fuga'};
-</span><span class='line'>
-</span><span class='line'>        var group_api = $resource(" APIパス ");
-</span><span class='line'>        
-</span><span class='line'>        // 非同期でGET通信
-</span><span class='line'>        group_api.get(parameter, function(data){
-</span><span class='line'>            $scope.data = data;
-</span><span class='line'>        });
-</span><span class='line'>
-</span><span class='line'>        var appModule = angular.module('group', ['ngResource']);
-</span><span class='line'>        appModule.controller('GroupController', GroupController);
-</span><span class='line'>      &lt;/script&gt;
-</span><span class='line'>  &lt;/body&gt;
-</span><span class='line'>&lt;/html&gt;</span></code></pre></td></tr></table></div></figure>
+<pre><code>&lt;!doctype html&gt;
+  &lt;html lang="ja"&gt;
+    &lt;body ng-app="group" ng-cloak&gt;
+      &lt;div ng-controller="GroupController"&gt;
+        &lt;table&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th&gt;グループ名&lt;/th&gt;
+              &lt;th&gt;コメント&lt;/th&gt;
+              &lt;th&gt;登録日&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;tr ng-repeat="group in data.group_list"&gt;
+              &lt;td&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/div&gt;
+   &lt;!-- Anguler JS 読み込み ここから --&gt;
+      &lt;script src="angular.js"&gt;&lt;/script&gt;
+      &lt;script src="angular-resource.js"&gt;&lt;/script&gt;
+   &lt;!-- Anguler JS 読み込み ここまで --&gt;
+      &lt;script&gt;
+        var GroupController = function($scope, $resource){
 
+        // GETパラーメータ
+        var parameter = {hoge: 'fuga'};
+
+        var group_api = $resource(" APIパス ");
+
+        // 非同期でGET通信
+        group_api.get(parameter, function(data){
+            $scope.data = data;
+        });
+
+        var appModule = angular.module('group', ['ngResource']);
+        appModule.controller('GroupController', GroupController);
+      &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 ]]></content>
   </entry>
   
