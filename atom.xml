@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://hori031617.github.io/hori031617/atom.xml" rel="self"/>
   <link href="http://hori031617.github.io/hori031617/"/>
-  <updated>2016-05-05T10:17:24+09:00</updated>
+  <updated>2016-05-05T10:20:24+09:00</updated>
   <id>http://hori031617.github.io/hori031617/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -39,9 +39,9 @@
           &lt;/thead&gt;
           &lt;tbody&gt;
             &lt;tr ng-repeat="group in data.group_list"&gt;
-              &lt;td&gt;&lt;/td&gt;
-              &lt;td&gt;&lt;/td&gt;
-              &lt;td&gt;&lt;/td&gt;
+              &lt;td&gt;}&lt;/td&gt;
+              &lt;td&gt;}&lt;/td&gt;
+              &lt;td&gt;}&lt;/td&gt;
             &lt;/tr&gt;
           &lt;/tbody&gt;
         &lt;/table&gt;
