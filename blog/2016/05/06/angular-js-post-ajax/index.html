@@ -5,13 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する - エンジニア日記</title>
+  <title>Angular JS で、APIを非同期でPOST呼び出しし、返却されたデータを表示する - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="やり方 罫線は背景色を表示する方法をとる。
-(この例の場合は黒)
-よって、セルとセルの間に均等にスペースが空くように配置する イメージ ソースコード 1
+  <meta name="description" content="APIはPHPで作成
+ユーザーのパスワードをリセットするAPI
+リセットボタンを押下して呼び出される
+APIは実行結果をJSONデータで返却する
+JSONデータの戻り値を見て、成功、失敗を判断する
+失敗時にはエラーメッセージを表示する 1
 2
 3
 4
@@ -23,17 +26,7 @@
 10
 11
 12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-class &hellip;">
+13 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -42,7 +35,7 @@ class &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hori031617.github.io/hori031617/blog/2016/04/30/swift-uicollectionview/">
+  <link rel="canonical" href="http://hori031617.github.io/hori031617/blog/2016/05/06/angular-js-post-ajax/">
   <link href="/hori031617/favicon.png" rel="icon">
   <link href="/hori031617/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/hori031617/javascripts/modernizr-2.0.js"></script>
@@ -103,7 +96,7 @@ class &hellip;">
   
   <header>
     
-      <h1 class="entry-title">SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する</h1>
+      <h1 class="entry-title">Angular JS で、APIを非同期でPOST呼び出しし、返却されたデータを表示する</h1>
     
     
       <p class="meta">
@@ -119,24 +112,22 @@ class &hellip;">
   
 
 
-<time datetime="2016-04-30T22:33:33+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-05-06T10:58:19+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3>やり方</h3>
+<div class="entry-content"><ul>
+<li>APIはPHPで作成</li>
+<li>ユーザーのパスワードをリセットするAPI</li>
+<li>リセットボタンを押下して呼び出される</li>
+<li>APIは実行結果をJSONデータで返却する</li>
+<li>JSONデータの戻り値を見て、成功、失敗を判断する</li>
+<li>失敗時にはエラーメッセージを表示する</li>
+</ul>
 
-<p>罫線は背景色を表示する方法をとる。<br/>
-(この例の場合は黒)<br/>
-よって、セルとセルの間に均等にスペースが空くように配置する</p>
-
-<h3>イメージ</h3>
-
-<p><img src="/hori031617/images/UICollectionViewCapture.png" alt="キャプチャ" /></p>
-
-<h3>ソースコード</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -160,28 +151,68 @@ class &hellip;">
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class ViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!doctype html&gt;
+</span><span class='line'>&lt;html lang="ja"&gt;
 </span><span class='line'>
-</span><span class='line'>    let linePoint: CGFloat = 1     // 罫線の太さ
-</span><span class='line'>    let numberOfCols: CGFloat = 6  // 1行に表示するセルの数
+</span><span class='line'>&lt;body ng-app="user_edit" ng-controller="UserController" ng-cloak&gt;
+</span><span class='line'>&lt;button ng-click="reset()"&gt;リセットボタン&lt;/button&gt;
 </span><span class='line'>
-</span><span class='line'>    // セルのレイアウト調整
-</span><span class='line'>    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -&gt; CGSize {
-</span><span class='line'>        // セルのサイズ = (端末の横幅 - (罫線の太さ*(1行に表示するセルの個数-1=外の線を引いた内側の線の数))) / 1行に表示するセルの個数
-</span><span class='line'>        let size = floor((collectionView.frame.size.width - (linePoint*(numberOfCols-1))) / numberOfCols)
-</span><span class='line'>        return CGSizeMake(size, size)
+</span><span class='line'>&lt;!-- Anguler JS 読み込み ここから --&gt;
+</span><span class='line'>  &lt;script src="angular.js"&gt;&lt;/script&gt;
+</span><span class='line'>  &lt;script src="angular-resource.js"&gt;&lt;/script&gt;
+</span><span class='line'>&lt;!-- Anguler JS 読み込み ここまで --&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;script&gt;
+</span><span class='line'>    var UserController = function($scope, $resource){
+</span><span class='line'>
+</span><span class='line'>    // リセットボタン
+</span><span class='line'>    $scope.reset = function(){
+</span><span class='line'>
+</span><span class='line'>        var reset_password_api = $resource(" APIパス");
+</span><span class='line'>        var parameter = {user_id: 'hoge'};
+</span><span class='line'>
+</span><span class='line'>        // POST送信
+</span><span class='line'>        reset_password_api.save(parameter, function(ret){
+</span><span class='line'>
+</span><span class='line'>            if(ret['result'] == 'NG'){
+</span><span class='line'>                alert(ret['message']);
+</span><span class='line'>            } else {
+</span><span class='line'>                alert('成功');
+</span><span class='line'>            }
+</span><span class='line'>        });
 </span><span class='line'>    }
-</span><span class='line'>    
-</span><span class='line'>    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -&gt; UIEdgeInsets {
-</span><span class='line'>        return UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
-</span><span class='line'>    }
-</span><span class='line'>    
-</span><span class='line'>    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -&gt; CGFloat {
-</span><span class='line'>        return linePoint
-</span><span class='line'>    }
-</span><span class='line'>    
-</span><span class='line'>    ......
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>    var appModule = angular.module('user_edit', ['ngResource']);
+</span><span class='line'>    appModule.controller('UserController', UserController);
+</span><span class='line'>&lt;/script&gt;
+</span><span class='line'>&lt;/body&gt;
+</span><span class='line'>&lt;/html&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>補足</h3>
+
+<p>PHPでAPIを作成した場合、POSTパラメータを受け取るには下記処理が必要</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+</span><span class='line'>// ポストパラメータ受け取り
+</span><span class='line'>$post_data = json_decode(fgets(fopen('php://input','r')), true);
+</span><span class='line'>$user_id   = (!empty($post_data['user_id'])) ? $post_data['user_id'] : null;</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -205,7 +236,7 @@ class &hellip;">
   
 
 
-<time datetime="2016-04-30T22:33:33+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-05-06T10:58:19+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -213,7 +244,7 @@ class &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hori031617.github.io/hori031617/blog/2016/04/30/swift-uicollectionview/" data-via="" data-counturl="http://hori031617.github.io/hori031617/blog/2016/04/30/swift-uicollectionview/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hori031617.github.io/hori031617/blog/2016/05/06/angular-js-post-ajax/" data-via="" data-counturl="http://hori031617.github.io/hori031617/blog/2016/05/06/angular-js-post-ajax/" >Tweet</a>
   
   
   
@@ -222,10 +253,8 @@ class &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/hori031617/blog/2016/04/28/apache-access-log-search/" title="Previous Post: ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する">&laquo; ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する</a>
+        <a class="basic-alignment left" href="/hori031617/blog/2016/05/05/angular-js-get-ajax/" title="Previous Post: Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する">&laquo; Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する</a>
       
-      
-        <a class="basic-alignment right" href="/hori031617/blog/2016/05/05/angular-js-get-ajax/" title="Next Post: Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する">Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する &raquo;</a>
       
     </p>
   </footer>
