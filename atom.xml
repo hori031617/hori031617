@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://hori031617.github.io/hori031617/atom.xml" rel="self"/>
   <link href="http://hori031617.github.io/hori031617/"/>
-  <updated>2016-05-06T10:59:43+09:00</updated>
+  <updated>2016-05-06T11:01:30+09:00</updated>
   <id>http://hori031617.github.io/hori031617/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Angular JS で、APIを非同期でPOST呼び出しし、返却されたデータを表示する]]></title>
+    <title type="html"><![CDATA[Angular JS で、APIを非同期でPOST呼び出しし、実行結果をアラート表示する]]></title>
     <link href="http://hori031617.github.io/hori031617/blog/2016/05/06/angular-js-post-ajax/"/>
     <updated>2016-05-06T10:58:19+09:00</updated>
     <id>http://hori031617.github.io/hori031617/blog/2016/05/06/angular-js-post-ajax</id>
