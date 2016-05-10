@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[エンジニア日記]]></title>
-  <link href="http://hori031617.github.io/hori031617/atom.xml" rel="self"/>
-  <link href="http://hori031617.github.io/hori031617/"/>
-  <updated>2016-05-06T11:01:30+09:00</updated>
-  <id>http://hori031617.github.io/hori031617/</id>
+  <link href="http://engineer-diary.click/atom.xml" rel="self"/>
+  <link href="http://engineer-diary.click/"/>
+  <updated>2016-05-10T21:29:50+09:00</updated>
+  <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Angular JS で、APIを非同期でPOST呼び出しし、実行結果をアラート表示する]]></title>
-    <link href="http://hori031617.github.io/hori031617/blog/2016/05/06/angular-js-post-ajax/"/>
+    <link href="http://engineer-diary.click/blog/2016/05/06/angular-js-post-ajax/"/>
     <updated>2016-05-06T10:58:19+09:00</updated>
-    <id>http://hori031617.github.io/hori031617/blog/2016/05/06/angular-js-post-ajax</id>
+    <id>http://engineer-diary.click/blog/2016/05/06/angular-js-post-ajax</id>
     <content type="html"><![CDATA[<ul>
 <li>APIはPHPで作成</li>
 <li>ユーザーのパスワードをリセットするAPI</li>
@@ -118,9 +118,9 @@
   
   <entry>
     <title type="html"><![CDATA[Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する]]></title>
-    <link href="http://hori031617.github.io/hori031617/blog/2016/05/05/angular-js-get-ajax/"/>
+    <link href="http://engineer-diary.click/blog/2016/05/05/angular-js-get-ajax/"/>
     <updated>2016-05-05T08:14:21+09:00</updated>
-    <id>http://hori031617.github.io/hori031617/blog/2016/05/05/angular-js-get-ajax</id>
+    <id>http://engineer-diary.click/blog/2016/05/05/angular-js-get-ajax</id>
     <content type="html"><![CDATA[<ul>
 <li>APIはJSONデータを返却する</li>
 <li>JSONデータにはあるグループのグループ名、コメント、登録日が格納されている</li>
@@ -177,9 +177,9 @@
   
   <entry>
     <title type="html"><![CDATA[SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する]]></title>
-    <link href="http://hori031617.github.io/hori031617/blog/2016/04/30/swift-uicollectionview/"/>
+    <link href="http://engineer-diary.click/blog/2016/04/30/swift-uicollectionview/"/>
     <updated>2016-04-30T22:33:33+09:00</updated>
-    <id>http://hori031617.github.io/hori031617/blog/2016/04/30/swift-uicollectionview</id>
+    <id>http://engineer-diary.click/blog/2016/04/30/swift-uicollectionview</id>
     <content type="html"><![CDATA[<h3>やり方</h3>
 
 <p>罫線は背景色を表示する方法をとる。<br/>
@@ -188,7 +188,7 @@
 
 <h3>イメージ</h3>
 
-<p><img src="http://hori031617.github.io/hori031617/images/UICollectionViewCapture.png" alt="キャプチャ" /></p>
+<p><img src="http://engineer-diary.click/images/UICollectionViewCapture.png" alt="キャプチャ" /></p>
 
 <h3>ソースコード</h3>
 
@@ -242,9 +242,9 @@
   
   <entry>
     <title type="html"><![CDATA[ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する]]></title>
-    <link href="http://hori031617.github.io/hori031617/blog/2016/04/28/apache-access-log-search/"/>
+    <link href="http://engineer-diary.click/blog/2016/04/28/apache-access-log-search/"/>
     <updated>2016-04-28T00:30:01+09:00</updated>
-    <id>http://hori031617.github.io/hori031617/blog/2016/04/28/apache-access-log-search</id>
+    <id>http://engineer-diary.click/blog/2016/04/28/apache-access-log-search</id>
     <content type="html"><![CDATA[<h3>パラメータを除外し、URLごとに集計</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -271,9 +271,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hello World]]></title>
-    <link href="http://hori031617.github.io/hori031617/blog/2016/04/24/hello-world/"/>
+    <link href="http://engineer-diary.click/blog/2016/04/24/hello-world/"/>
     <updated>2016-04-24T19:12:54+09:00</updated>
-    <id>http://hori031617.github.io/hori031617/blog/2016/04/24/hello-world</id>
+    <id>http://engineer-diary.click/blog/2016/04/24/hello-world</id>
     <content type="html"><![CDATA[<h2>My First Blog</h2>
 
 <p>初めての投稿です。<br/>
