@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する - エンジニア日記</title>
+  <title>Github Pages、Octopressで独自ドメイン設定 - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="パラメータを除外し、URLごとに集計 1
-cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output.txt &hellip;">
+  <meta name="description" content="GitHub PagesとOctopressを利用し、独自ドメインを設定するときにはまったのでメモ。
+独自ドメイン取得の流れと設定方法は下記 お名前.comで独自ドメイン取得
+取得したドメインにAレコードを2つ追加し、それぞれGithubのDNSサーバーのIPアドレス(2016/05/10 時点で &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/04/28/apache-access-log-search/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2016/05/10/github-pages-octopress-original-domain/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -80,7 +81,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   
   <header>
     
-      <h1 class="entry-title">ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する</h1>
+      <h1 class="entry-title">Github Pages、Octopressで独自ドメイン設定</h1>
     
     
       <p class="meta">
@@ -96,33 +97,80 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   
 
 
-<time datetime="2016-04-28T00:30:01+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-05-10T21:37:07+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3>パラメータを除外し、URLごとに集計</h3>
+<div class="entry-content"><p>GitHub PagesとOctopressを利用し、独自ドメインを設定するときにはまったのでメモ。<br/>
+独自ドメイン取得の流れと設定方法は下記</p>
+
+<ol>
+<li>お名前.comで独自ドメイン取得</li>
+<li>取得したドメインにAレコードを2つ追加し、それぞれGithubのDNSサーバーのIPアドレス(2016/05/10 時点で 192.30.252.153、192.30.252.154)を設定</li>
+<li>source/CNAME ファイルに取得した独自ドメインを記述</li>
+</ol>
+
+
+<p>と、ここまでは<strong>「GitHub Pages 独自ドメイン 設定」</strong>等でググれば、結構出てくるので問題はなかった。<br/>
+だが、いざ取得した独自ドメインでアクセスすると、CSSやJSのパスが上手く独自ドメイン反映後に対応していなく、CSSの読み込みエラーでページが崩れた。</p>
+
+<h3>何が起きたのか?</h3>
+
+<p>Github PagesのトップページのURLは **<a href="http://username.github.io/repository-name**">http://username.github.io/repository-name**</a> となる。<br/>
+(リポジトリごとのWebページとして作成)<br/>
+そのため、CSSなどの読み込みパスは</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output.txt</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/repository-name/hoge.css</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>時間帯のURLごとに集計</h3>
+<p> <br/>
+となる。</p>
 
-<p>例) 2016/04/27/ 18:00 台の時間帯にアクセスのあったURLごとの集計</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | grep '\[27/Apr/2016:18:00:' | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output_1800.txt</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>その他</h3>
-
-<p>複数あるアクセスログファイルを1つにまとめる</p>
+<p>独自ドメイン設定後は **<a href="http://original-domain**">http://original-domain**</a> となるため<br/>
+CSSの読み込みパスは</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access1.log access2.log access3.log &gt; total_access.log</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/hoge.css</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+としたいのだが、HTMLの読み込みパスは変わらず (当たり前か笑)、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/repository-name/hoge.css</span></code></pre></td></tr></table></div></figure>
+
+
+<p> <br/>
+のままとなり、読み込みエラーとなった。</p>
+
+<h3>解決方法</h3>
+
+<p>_config.yml を修正</p>
+
+<ul>
+<li>修正前</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># If publishing to a subdirectory as in http://site.com/project set 'root: /project'  
+</span><span class='line'>root: /repository-name</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>修正後</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># If publishing to a subdirectory as in http://site.com/project set 'root: /project'  
+</span><span class='line'>root: /</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -146,7 +194,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   
 
 
-<time datetime="2016-04-28T00:30:01+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-05-10T21:37:07+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -154,7 +202,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/04/28/apache-access-log-search/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/04/28/apache-access-log-search/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/05/10/github-pages-octopress-original-domain/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/05/10/github-pages-octopress-original-domain/" >Tweet</a>
   
   
   
@@ -163,10 +211,8 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/04/24/hello-world/" title="Previous Post: Hello World">&laquo; Hello World</a>
+        <a class="basic-alignment left" href="/blog/2016/05/06/angular-js-post-ajax/" title="Previous Post: Angular JS で、APIを非同期でPOST呼び出しし、実行結果をアラート表示する">&laquo; Angular JS で、APIを非同期でPOST呼び出しし、実行結果をアラート表示する</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/04/30/swift-uicollectionview/" title="Next Post: SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する">SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する &raquo;</a>
       
     </p>
   </footer>
