@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://engineer-diary.click/blog/2016/05/12/session-write-close/</loc>
+<lastmod>2016-05-12T07:24:11+09:00</lastmod>
+</url>
+<url>
 <loc>http://engineer-diary.click/blog/2016/05/10/github-pages-octopress-original-domain/</loc>
 <lastmod>2016-05-10T21:37:07+09:00</lastmod>
 </url>
