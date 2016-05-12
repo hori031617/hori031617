@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[エンジニア日記]]></title>
-  <link href="http://engineer-diary.click/atom.xml" rel="self"/>
-  <link href="http://engineer-diary.click/"/>
-  <updated>2016-05-12T21:53:17+09:00</updated>
-  <id>http://engineer-diary.click/</id>
+  <link href="http://hori031617.github.io/atom.xml" rel="self"/>
+  <link href="http://hori031617.github.io/"/>
+  <updated>2016-05-12T22:27:17+09:00</updated>
+  <id>http://hori031617.github.io/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[PHPでAPIを作成し、画面が表示されるときに非同期で２つ以上のAPIを呼ぶ]]></title>
-    <link href="http://engineer-diary.click/blog/2016/05/12/session-write-close/"/>
+    <link href="http://hori031617.github.io/blog/2016/05/12/session-write-close/"/>
     <updated>2016-05-12T07:24:11+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/05/12/session-write-close</id>
+    <id>http://hori031617.github.io/blog/2016/05/12/session-write-close</id>
     <content type="html"><![CDATA[<p>表題の実装を行った。<br/>
 APIを1つだけしか呼ばない場合だと問題は表面化しなかったのだが、<br/>
 ２つ以上を呼び出すと先に呼び出したAPIの処理が終わってから次のAPIが実行されるという<br/>
@@ -51,9 +51,9 @@ session_start() 処理が走るとセッションに排他ロックがかかる�
   
   <entry>
     <title type="html"><![CDATA[Github Pages、Octopressで独自ドメイン設定]]></title>
-    <link href="http://engineer-diary.click/blog/2016/05/10/github-pages-octopress-original-domain/"/>
+    <link href="http://hori031617.github.io/blog/2016/05/10/github-pages-octopress-original-domain/"/>
     <updated>2016-05-10T21:37:07+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/05/10/github-pages-octopress-original-domain</id>
+    <id>http://hori031617.github.io/blog/2016/05/10/github-pages-octopress-original-domain</id>
     <content type="html"><![CDATA[<p>GitHub PagesとOctopressを利用し、独自ドメインを設定するときにはまったのでメモ。<br/>
 独自ドメイン取得の流れと設定方法は下記</p>
 
@@ -106,9 +106,9 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
   
   <entry>
     <title type="html"><![CDATA[Angular JS で、APIを非同期でPOST呼び出しし、実行結果をアラート表示する]]></title>
-    <link href="http://engineer-diary.click/blog/2016/05/06/angular-js-post-ajax/"/>
+    <link href="http://hori031617.github.io/blog/2016/05/06/angular-js-post-ajax/"/>
     <updated>2016-05-06T10:58:19+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/05/06/angular-js-post-ajax</id>
+    <id>http://hori031617.github.io/blog/2016/05/06/angular-js-post-ajax</id>
     <content type="html"><![CDATA[<ul>
 <li>APIはPHPで作成</li>
 <li>ユーザーのパスワードをリセットするAPI</li>
@@ -209,9 +209,9 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
   
   <entry>
     <title type="html"><![CDATA[Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する]]></title>
-    <link href="http://engineer-diary.click/blog/2016/05/05/angular-js-get-ajax/"/>
+    <link href="http://hori031617.github.io/blog/2016/05/05/angular-js-get-ajax/"/>
     <updated>2016-05-05T08:14:21+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/05/05/angular-js-get-ajax</id>
+    <id>http://hori031617.github.io/blog/2016/05/05/angular-js-get-ajax</id>
     <content type="html"><![CDATA[<ul>
 <li>APIはJSONデータを返却する</li>
 <li>JSONデータにはあるグループのグループ名、コメント、登録日が格納されている</li>
@@ -268,9 +268,9 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
   
   <entry>
     <title type="html"><![CDATA[SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する]]></title>
-    <link href="http://engineer-diary.click/blog/2016/04/30/swift-uicollectionview/"/>
+    <link href="http://hori031617.github.io/blog/2016/04/30/swift-uicollectionview/"/>
     <updated>2016-04-30T22:33:33+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/04/30/swift-uicollectionview</id>
+    <id>http://hori031617.github.io/blog/2016/04/30/swift-uicollectionview</id>
     <content type="html"><![CDATA[<h3>やり方</h3>
 
 <p>罫線は背景色を表示する方法をとる。<br/>
@@ -279,7 +279,7 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
 
 <h3>イメージ</h3>
 
-<p><img src="http://engineer-diary.click/images/UICollectionViewCapture.png" alt="キャプチャ" /></p>
+<p><img src="http://hori031617.github.io/images/UICollectionViewCapture.png" alt="キャプチャ" /></p>
 
 <h3>ソースコード</h3>
 
@@ -333,9 +333,9 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
   
   <entry>
     <title type="html"><![CDATA[ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する]]></title>
-    <link href="http://engineer-diary.click/blog/2016/04/28/apache-access-log-search/"/>
+    <link href="http://hori031617.github.io/blog/2016/04/28/apache-access-log-search/"/>
     <updated>2016-04-28T00:30:01+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/04/28/apache-access-log-search</id>
+    <id>http://hori031617.github.io/blog/2016/04/28/apache-access-log-search</id>
     <content type="html"><![CDATA[<h3>パラメータを除外し、URLごとに集計</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -362,9 +362,9 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
   
   <entry>
     <title type="html"><![CDATA[Hello World]]></title>
-    <link href="http://engineer-diary.click/blog/2016/04/24/hello-world/"/>
+    <link href="http://hori031617.github.io/blog/2016/04/24/hello-world/"/>
     <updated>2016-04-24T19:12:54+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/04/24/hello-world</id>
+    <id>http://hori031617.github.io/blog/2016/04/24/hello-world</id>
     <content type="html"><![CDATA[<h2>My First Blog</h2>
 
 <p>初めての投稿です。<br/>
