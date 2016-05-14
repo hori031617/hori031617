@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-05-14T11:11:54+09:00</updated>
+  <updated>2016-05-14T13:18:20+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PostgreSQLでのAUTO_INCREMENTのしくみ]]></title>
+    <link href="http://engineer-diary.click/blog/2016/05/14/postgresql-sequence/"/>
+    <updated>2016-05-14T12:56:15+09:00</updated>
+    <id>http://engineer-diary.click/blog/2016/05/14/postgresql-sequence</id>
+    <content type="html"><![CDATA[<p>PostgreSQLでのPrimaryKeyはシーケンス番号で管理されている。<br/>
+MySQLだと特に気にしなくてもいいのだがPostgreSQLで特に何も気にしてなかったときにエラーとなった事象。</p>
+
+<h3>テーブル定義</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> hoge_id | integer | not null default nextval('mst_hoge_ hoge_id_seq'::regclass)</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>hoge_idの登録状況</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>select  hoge_id from mst_hoge order by  hoge_id desc limit 2;
+</span><span class='line'>  hoge_id
+</span><span class='line'>---------------------
+</span><span class='line'>                 111
+</span><span class='line'>                 110</span></code></pre></td></tr></table></div></figure>
+
+
+<p> hoge_id を nextval で取得しアプリケーションからINSERTを行ったところあるときに突然下記エラーとなった。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>postgres: ERROR: duplicate key value violates unique constraint "mst_hoge_pkey" </span></code></pre></td></tr></table></div></figure>
+
+
+<h3>原因</h3>
+
+<p>テストデータで直接INSET分を実行したときにmst_hoge_ hoge_id_seqの値を同様に更新する考慮が漏れていた。<br/>
+結果、nextvalで取得できる値がテストデータ投入前時のhoge_idが返却され、一意制約エラーとなった。</p>
+
+<h3>対応</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SELECT setval('mst=hoge_id_seq', 最後の数値);  -- これで値が書きかわる 
+</span><span class='line'>
+</span><span class='line'>select last_value from mst_hoge_ hoge_id_seq;  -- 確認
+</span><span class='line'> last_value
+</span><span class='line'>------------
+</span><span class='line'>        110</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PHPでAPIを作成し、画面が表示されるときに非同期で２つ以上のAPIを呼ぶ]]></title>
