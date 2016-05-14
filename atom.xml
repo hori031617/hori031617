@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-05-14T21:13:00+09:00</updated>
+  <updated>2016-05-15T00:19:58+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,107 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MacにgoをインストールしHello Worldをやってみた]]></title>
+    <link href="http://engineer-diary.click/blog/2016/05/15/go-lang-hello-world/"/>
+    <updated>2016-05-15T00:02:34+09:00</updated>
+    <id>http://engineer-diary.click/blog/2016/05/15/go-lang-hello-world</id>
+    <content type="html"><![CDATA[<h3>Goのインストール</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo brew install go</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Goの開発ディレクトリ元となる GOPATH 環境変数を設定</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export GOPATH=$HOME/github/go
+</span><span class='line'>export PATH=$PATH:$GOPATH/bin
+</span><span class='line'>echo 'export GOPATH=$HOME/github/go' &gt;&gt; ~/.zshrc
+</span><span class='line'>echo 'export PATH=$PATH:$GOPATH/bin' &gt;&gt; ~/.zshrc</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>開発元ディレクトリに移動し、src/{プロジェクト名}ディレクトリを作成</h3>
+
+<p>Goではsrcディレクトリの下にどんどんプロジェクトを作成していくイメージ</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ${GOPATH}
+</span><span class='line'>mkdir -p src/helloworld/</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Hello Worldを出力するモジュールを作成</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vi src/helloworld/helloworld.go
+</span><span class='line'>
+</span><span class='line'>package main
+</span><span class='line'>
+</span><span class='line'>import (
+</span><span class='line'>    "fmt"
+</span><span class='line'>)
+</span><span class='line'>
+</span><span class='line'>func main(){
+</span><span class='line'>    fmt.Println("Hello, World!")
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>プロジェクト名を指定し、コンパイル</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ${GOPATH}/src
+</span><span class='line'>go install helloworld/</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>コンパイルが成功すると、srcディレクトリと同じ階層にbinディレクトリが作成され、その中にバイナリファイルが作成される</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ${GOPATH}
+</span><span class='line'>tree
+</span><span class='line'>.
+</span><span class='line'>├── bin
+</span><span class='line'>│   └── helloworld
+</span><span class='line'>└── src
+</span><span class='line'>    └── helloworld
+</span><span class='line'>    └── helloworld.go</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>実行</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ${GOPATH}/bin
+</span><span class='line'>./helloworld
+</span><span class='line'>
+</span><span class='line'>Hello, World!</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PostgreSQLでのAUTO_INCREMENTのしくみ]]></title>
