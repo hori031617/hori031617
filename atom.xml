@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-05-14T13:20:44+09:00</updated>
+  <updated>2016-05-14T21:13:00+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -24,7 +24,7 @@ MySQLだと特に気にしなくてもいいのだがPostgreSQLで特に何も�
 <h3>テーブル定義</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'> hoge_id | integer | not null default nextval('mst_hoge_ hoge_id_seq'::regclass)</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'> hoge_id | integer | not null default nextval('mst_hoge_hoge_id_seq'::regclass)</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>hoge_idの登録状況</h3>
@@ -49,7 +49,7 @@ MySQLだと特に気にしなくてもいいのだがPostgreSQLで特に何も�
 
 <h3>原因</h3>
 
-<p>テストデータで直接INSET分を実行したときにmst_hoge_ hoge_id_seqの値を同様に更新する考慮が漏れていた。<br/>
+<p>テストデータで直接INSET文を実行したときにmst_hoge_ hoge_id_seqの値を同様に更新する考慮が漏れていた。<br/>
 結果、nextvalで取得できる値がテストデータ投入前時のhoge_idが返却され、一意制約エラーとなった。</p>
 
 <h3>対応</h3>
