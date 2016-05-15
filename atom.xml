@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-05-15T00:19:58+09:00</updated>
+  <updated>2016-05-15T16:42:47+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -32,8 +32,8 @@
 <span class='line-number'>4</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>export GOPATH=$HOME/github/go
 </span><span class='line'>export PATH=$PATH:$GOPATH/bin
-</span><span class='line'>echo 'export GOPATH=$HOME/github/go' &gt;&gt; ~/.zshrc
-</span><span class='line'>echo 'export PATH=$PATH:$GOPATH/bin' &gt;&gt; ~/.zshrc</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>echo 'export GOPATH=$HOME/github/go' &gt;&gt; ~/.bash_profile
+</span><span class='line'>echo 'export PATH=$PATH:$GOPATH/bin' &gt;&gt; ~/.bash_profile</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>開発元ディレクトリに移動し、src/{プロジェクト名}ディレクトリを作成</h3>
