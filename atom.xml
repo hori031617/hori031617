@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-05-18T00:14:42+09:00</updated>
+  <updated>2016-05-22T23:52:18+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Smartyで出来る便利だと思ったこと]]></title>
+    <link href="http://engineer-diary.click/blog/2016/05/21/php-smarty/"/>
+    <updated>2016-05-21T21:13:33+09:00</updated>
+    <id>http://engineer-diary.click/blog/2016/05/21/php-smarty</id>
+    <content type="html"><![CDATA[<h3>GETパラメータを取得</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.get.パラメータ名}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>POSTパラメータを取得</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.post.パラメータ名}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>クッキーを取得</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.cookie.クッキー名}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>セッション変数を取得</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.session.セッション変数名}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>PHPの定数にアクセス</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.const.定数名}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>現在時間を取得</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.now}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>出力文字をスケープ</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{$hoge|escape}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>タイムスタンプで日付を比較</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{if $hoge|strtotime &gt;= $fuga|strtotime}
+</span><span class='line'>  piyo
+</span><span class='line'>{/if}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>日付のフォーマットを整える</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{* YYYY/mm/dd *}
+</span><span class='line'>{$date|date_format|"%Y/%m/%d"}</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Goでtwitterに投稿するプログラムを作成]]></title>
