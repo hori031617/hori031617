@@ -9,12 +9,9 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="選択範囲を行全体に広げる 1
-shift + space 選択範囲を列全体に広げる 1
-ctrl + space 行や列を挿入するショートカットキー 1
-ctrl + shift +「+」 行を1行削除する 1
-ctrl + 「-」 行を1行非表示にする 1
-ctrl + 9 行を再表示させる 1 &hellip;">
+  <meta name="description" content="まずcomposerコマンドをインストール 1
+curl -sS https://getcomposer.org/installer | php composerコマンドをパスが通ってる場所に移動 1
+sudo mv composer.phar /usr/local/bin/composer &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +78,89 @@ ctrl + 9 行を再表示させる 1 &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/06/11/laravel-install/">Macにlaravelをインストールする</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-06-11T15:07:14+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>まずcomposerコマンドをインストール</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl -sS https://getcomposer.org/installer | php</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>composerコマンドをパスが通ってる場所に移動</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mv composer.phar /usr/local/bin/composer</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>移動したことを確認</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>which composer
+</span><span class='line'>  /usr/local/bin/composer
+</span><span class='line'>
+</span><span class='line'>composer --version
+</span><span class='line'>  Composer version 1.1.2 </span></code></pre></td></tr></table></div></figure>
+
+
+<h3>最新バージョンのインストール</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>composer create-project laravel/laravel プロジェクト名 --prefer-dist</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>その他</h2>
+
+<h3>Laravel5の動作条件</h3>
+
+<p>【Laravel 5.0】<br/>
+PHP >= 5.4<br/>
+Mcrypt PHP Extension<br/>
+OpenSSL PHP Extension<br/>
+Mbstring PHP Extension<br/>
+Tokenizer PHP Extension</p>
+
+<p>【Laravel 5.1】<br/>
+PHP >= 5.5.9<br/>
+OpenSSL PHP Extension<br/>
+Mbstring PHP Extension<br/>
+Tokenizer PHP Extension</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1212,136 +1292,6 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/05/06/angular-js-post-ajax/">Angular JS で、APIを非同期でPOST呼び出しし、実行結果をアラート表示する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-05-06T10:58:19+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li>APIはPHPで作成</li>
-<li>ユーザーのパスワードをリセットするAPI</li>
-<li>リセットボタンを押下して呼び出される</li>
-<li>APIは実行結果をJSONデータで返却する</li>
-<li>JSONデータの戻り値を見て、成功、失敗を判断する</li>
-<li>失敗時にはエラーメッセージを表示する</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!doctype html&gt;
-</span><span class='line'>&lt;html lang="ja"&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;body ng-app="user_edit" ng-controller="UserController" ng-cloak&gt;
-</span><span class='line'>&lt;button ng-click="reset()"&gt;リセットボタン&lt;/button&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;!-- Anguler JS 読み込み ここから --&gt;
-</span><span class='line'>  &lt;script src="angular.js"&gt;&lt;/script&gt;
-</span><span class='line'>  &lt;script src="angular-resource.js"&gt;&lt;/script&gt;
-</span><span class='line'>&lt;!-- Anguler JS 読み込み ここまで --&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;script&gt;
-</span><span class='line'>    var UserController = function($scope, $resource){
-</span><span class='line'>
-</span><span class='line'>    // リセットボタン
-</span><span class='line'>    $scope.reset = function(){
-</span><span class='line'>
-</span><span class='line'>        var reset_password_api = $resource(" APIパス");
-</span><span class='line'>        var parameter = {user_id: 'hoge'};
-</span><span class='line'>
-</span><span class='line'>        // POST送信
-</span><span class='line'>        reset_password_api.save(parameter, function(ret){
-</span><span class='line'>
-</span><span class='line'>            if(ret['result'] == 'NG'){
-</span><span class='line'>                alert(ret['message']);
-</span><span class='line'>            } else {
-</span><span class='line'>                alert('成功');
-</span><span class='line'>            }
-</span><span class='line'>        });
-</span><span class='line'>    }
-</span><span class='line'>    var appModule = angular.module('user_edit', ['ngResource']);
-</span><span class='line'>    appModule.controller('UserController', UserController);
-</span><span class='line'>&lt;/script&gt;
-</span><span class='line'>&lt;/body&gt;
-</span><span class='line'>&lt;/html&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>補足</h3>
-
-<p>PHPでAPIを作成した場合、POSTパラメータを受け取るには下記処理が必要</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
-</span><span class='line'>// ポストパラメータ受け取り
-</span><span class='line'>$post_data = json_decode(fgets(fopen('php://input','r')), true);
-</span><span class='line'>$user_id   = (!empty($post_data['user_id'])) ? $post_data['user_id'] : null;</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="2">&larr; Older</a>
@@ -1369,6 +1319,10 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/06/11/laravel-install/">macにlaravelをインストールする</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/05/25/excel-win/">エクセルの列、行に関するショートカットキーまとめ(Windows)</a>
       </li>
     
@@ -1382,10 +1336,6 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
     
       <li class="post">
         <a href="/blog/2016/05/17/go-twitter-post/">Goでtwitterに投稿するプログラムを作成</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/16/go-jsonfile-read/">GoでJSONファイルを読み込み内容を構造体に詰め込むときにはまったのでメモ</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-06-11T12:52:50+09:00</updated>
+  <updated>2016-06-11T15:18:50+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[macにlaravelをインストールする]]></title>
+    <link href="http://engineer-diary.click/blog/2016/06/11/laravel-install/"/>
+    <updated>2016-06-11T15:07:14+09:00</updated>
+    <id>http://engineer-diary.click/blog/2016/06/11/laravel-install</id>
+    <content type="html"><![CDATA[<h3>まずcomposerコマンドをインストール</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl -sS https://getcomposer.org/installer | php</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>composerコマンドをパスが通ってる場所に移動</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mv composer.phar /usr/local/bin/composer</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>移動したことを確認</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>which composer
+</span><span class='line'>  /usr/local/bin/composer
+</span><span class='line'>
+</span><span class='line'>composer --version
+</span><span class='line'>  Composer version 1.1.2 </span></code></pre></td></tr></table></div></figure>
+
+
+<h3>最新バージョンのインストール</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>composer create-project laravel/laravel プロジェクト名 --prefer-dist</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>その他</h2>
+
+<h3>Laravel5の動作条件</h3>
+
+<p>【Laravel 5.0】<br/>
+PHP >= 5.4<br/>
+Mcrypt PHP Extension<br/>
+OpenSSL PHP Extension<br/>
+Mbstring PHP Extension<br/>
+Tokenizer PHP Extension</p>
+
+<p>【Laravel 5.1】<br/>
+PHP >= 5.5.9<br/>
+OpenSSL PHP Extension<br/>
+Mbstring PHP Extension<br/>
+Tokenizer PHP Extension</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[エクセルの列、行に関するショートカットキーまとめ(Windows)]]></title>
