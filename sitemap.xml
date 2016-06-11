@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://engineer-diary.click/blog/2016/05/25/excel-win/</loc>
+<lastmod>2016-05-25T23:07:50+09:00</lastmod>
+</url>
+<url>
+<loc>http://engineer-diary.click/blog/2016/05/23/git-reset-revert/</loc>
+<lastmod>2016-05-23T23:40:01+09:00</lastmod>
+</url>
+<url>
 <loc>http://engineer-diary.click/blog/2016/05/21/php-smarty/</loc>
 <lastmod>2016-05-21T21:13:33+09:00</lastmod>
 </url>

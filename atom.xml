@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-05-22T23:52:18+09:00</updated>
+  <updated>2016-06-11T12:52:50+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,244 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[エクセルの列、行に関するショートカットキーまとめ(Windows)]]></title>
+    <link href="http://engineer-diary.click/blog/2016/05/25/excel-win/"/>
+    <updated>2016-05-25T23:07:50+09:00</updated>
+    <id>http://engineer-diary.click/blog/2016/05/25/excel-win</id>
+    <content type="html"><![CDATA[<h3>選択範囲を行全体に広げる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>shift + space</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>選択範囲を列全体に広げる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + space</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>行や列を挿入するショートカットキー</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + shift +「+」</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>行を1行削除する</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + 「-」</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>行を1行非表示にする</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + 9</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>行を再表示させる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + shift + 9</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>列を1列非表示にする</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + 0</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>列を再表示させる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + shift + 0</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[git reset と git revertの違い]]></title>
+    <link href="http://engineer-diary.click/blog/2016/05/23/git-reset-revert/"/>
+    <updated>2016-05-23T23:40:01+09:00</updated>
+    <id>http://engineer-diary.click/blog/2016/05/23/git-reset-revert</id>
+    <content type="html"><![CDATA[<p>どちらもコミットしたものを取り消すコマンドだが、取り消され方や、取り消されるコミットの範囲の違いをまとめる。</p>
+
+<h2>git reset &ndash;haed コミットID</h2>
+
+<p>指定したコミットIDから以降のコミットをなかったことにする。<br/>
+コミットログからも抹消される。<br/>
+例)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>commit abcdefghijklmnopqrstuvwxyz0123456789
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Sun May 22 23:53:54 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット3
+</span><span class='line'>
+</span><span class='line'>commit 0123456789abcdefghijklmnopqrstuvwxyz
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Sun May 22 23:53:20 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット2
+</span><span class='line'>
+</span><span class='line'>commit abcdefghijklm0123456789nopqrstuvwxyz
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Tue May 17 00:40:38 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット1</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git reset --haed 0123456789abcdefghijklmnopqrstuvwxyz
+</span><span class='line'>                 (コミット2のコミットIDを渡す)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>結果</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>commit abcdefghijklm0123456789nopqrstuvwxyz
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Tue May 17 00:40:38 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>となり、指定したコミットID以降のコミットが取り消され、コミットログもなくなる。<br/>
+※取り消前の状態をpushしていれば、コミット取り消後はpushができなくなる。</p>
+
+<h2>git revert コミットID</h2>
+
+<p>指定したコミットIDのコミットのみ変更を取り消す。<br/>
+取り消したこともコミットログとして残る。<br/>
+例)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>commit abcdefghijklmnopqrstuvwxyz0123456789
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Sun May 22 23:53:54 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット3
+</span><span class='line'>
+</span><span class='line'>commit 0123456789abcdefghijklmnopqrstuvwxyz
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Sun May 22 23:53:20 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット2
+</span><span class='line'>
+</span><span class='line'>commit abcdefghijklm0123456789nopqrstuvwxyz
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Tue May 17 00:40:38 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット1</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git revert 0123456789abcdefghijklmnopqrstuvwxyz
+</span><span class='line'>           (コミット2のコミットIDを渡す)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>結果</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>commit 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Sat Jun 11 12:36:33 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    Revert "コミット2"
+</span><span class='line'>    
+</span><span class='line'>    This reverts commit 0123456789abcdefghijklmnopqrstuvwxyz.
+</span><span class='line'>
+</span><span class='line'>commit abcdefghijklmnopqrstuvwxyz0123456789
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Sun May 22 23:53:54 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット3
+</span><span class='line'>
+</span><span class='line'>commit 0123456789abcdefghijklmnopqrstuvwxyz
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Sun May 22 23:53:20 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット2
+</span><span class='line'>
+</span><span class='line'>commit abcdefghijklm0123456789nopqrstuvwxyz
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Tue May 17 00:40:38 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>となり、コミット2のみのコミット内容が取り消され、コミットログに取り消しログが残る。<br/>
+※取り消前の状態をpushしていても、コミット取り消後もpushはできる。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Smartyで出来る便利だと思ったこと]]></title>

@@ -5,35 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する - エンジニア日記</title>
+  <title>エクセルの列、行に関するショートカットキーまとめ(Windows) - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="やり方 罫線は背景色を表示する方法をとる。
-(この例の場合は黒)
-よって、セルとセルの間に均等にスペースが空くように配置する イメージ ソースコード 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-class &hellip;">
+  <meta name="description" content="選択範囲を行全体に広げる 1
+shift + space 選択範囲を列全体に広げる 1
+ctrl + space 行や列を挿入するショートカットキー 1
+ctrl + shift +「+」 行を1行削除する 1
+ctrl + 「-」 行を1行非表示にする 1
+ctrl + 9 行を再表示させる 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -42,7 +23,7 @@ class &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/04/30/swift-uicollectionview/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2016/05/25/excel-win/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -103,7 +84,7 @@ class &hellip;">
   
   <header>
     
-      <h1 class="entry-title">SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する</h1>
+      <h1 class="entry-title">エクセルの列、行に関するショートカットキーまとめ(Windows)</h1>
     
     
       <p class="meta">
@@ -119,69 +100,59 @@ class &hellip;">
   
 
 
-<time datetime="2016-04-30T22:33:33+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-05-25T23:07:50+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3>やり方</h3>
-
-<p>罫線は背景色を表示する方法をとる。<br/>
-(この例の場合は黒)<br/>
-よって、セルとセルの間に均等にスペースが空くように配置する</p>
-
-<h3>イメージ</h3>
-
-<p><img src="/images/UICollectionViewCapture.png" alt="キャプチャ" /></p>
-
-<h3>ソースコード</h3>
+<div class="entry-content"><h3>選択範囲を行全体に広げる</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class ViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-</span><span class='line'>
-</span><span class='line'>    let linePoint: CGFloat = 1     // 罫線の太さ
-</span><span class='line'>    let numberOfCols: CGFloat = 6  // 1行に表示するセルの数
-</span><span class='line'>
-</span><span class='line'>    // セルのレイアウト調整
-</span><span class='line'>    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -&gt; CGSize {
-</span><span class='line'>        // セルのサイズ = (端末の横幅 - (罫線の太さ*(1行に表示するセルの個数-1=外の線を引いた内側の線の数))) / 1行に表示するセルの個数
-</span><span class='line'>        let size = floor((collectionView.frame.size.width - (linePoint*(numberOfCols-1))) / numberOfCols)
-</span><span class='line'>        return CGSizeMake(size, size)
-</span><span class='line'>    }
-</span><span class='line'>    
-</span><span class='line'>    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -&gt; UIEdgeInsets {
-</span><span class='line'>        return UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
-</span><span class='line'>    }
-</span><span class='line'>    
-</span><span class='line'>    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -&gt; CGFloat {
-</span><span class='line'>        return linePoint
-</span><span class='line'>    }
-</span><span class='line'>    
-</span><span class='line'>    ......
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>shift + space</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>選択範囲を列全体に広げる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + space</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>行や列を挿入するショートカットキー</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + shift +「+」</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>行を1行削除する</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + 「-」</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>行を1行非表示にする</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + 9</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>行を再表示させる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + shift + 9</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>列を1列非表示にする</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + 0</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>列を再表示させる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + shift + 0</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -205,7 +176,7 @@ class &hellip;">
   
 
 
-<time datetime="2016-04-30T22:33:33+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-05-25T23:07:50+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -213,7 +184,7 @@ class &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/04/30/swift-uicollectionview/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/04/30/swift-uicollectionview/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/05/25/excel-win/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/05/25/excel-win/" >Tweet</a>
   
   
   
@@ -222,10 +193,8 @@ class &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/04/28/apache-access-log-search/" title="Previous Post: ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する">&laquo; ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する</a>
+        <a class="basic-alignment left" href="/blog/2016/05/23/git-reset-revert/" title="Previous Post: git reset と git revertの違い">&laquo; git reset と git revertの違い</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/05/05/angular-js-get-ajax/" title="Next Post: Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する">Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する &raquo;</a>
       
     </p>
   </footer>

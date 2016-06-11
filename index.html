@@ -9,11 +9,12 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="GETパラメータを取得 1
-{$smarty.get.パラメータ名} POSTパラメータを取得 1
-{$smarty.post.パラメータ名} クッキーを取得 1
-{$smarty.cookie.クッキー名} セッション変数を取得 1
-{$smarty.session.セッション変数名} &hellip;">
+  <meta name="description" content="選択範囲を行全体に広げる 1
+shift + space 選択範囲を列全体に広げる 1
+ctrl + space 行や列を挿入するショートカットキー 1
+ctrl + shift +「+」 行を1行削除する 1
+ctrl + 「-」 行を1行非表示にする 1
+ctrl + 9 行を再表示させる 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +81,298 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/05/25/excel-win/">エクセルの列、行に関するショートカットキーまとめ(Windows)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-25T23:07:50+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>選択範囲を行全体に広げる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>shift + space</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>選択範囲を列全体に広げる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + space</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>行や列を挿入するショートカットキー</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + shift +「+」</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>行を1行削除する</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + 「-」</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>行を1行非表示にする</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + 9</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>行を再表示させる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + shift + 9</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>列を1列非表示にする</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + 0</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>列を再表示させる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + shift + 0</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/05/23/git-reset-revert/">Git Reset と Git Revertの違い</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-23T23:40:01+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>どちらもコミットしたものを取り消すコマンドだが、取り消され方や、取り消されるコミットの範囲の違いをまとめる。</p>
+
+<h2>git reset &ndash;haed コミットID</h2>
+
+<p>指定したコミットIDから以降のコミットをなかったことにする。<br/>
+コミットログからも抹消される。<br/>
+例)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>commit abcdefghijklmnopqrstuvwxyz0123456789
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Sun May 22 23:53:54 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット3
+</span><span class='line'>
+</span><span class='line'>commit 0123456789abcdefghijklmnopqrstuvwxyz
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Sun May 22 23:53:20 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット2
+</span><span class='line'>
+</span><span class='line'>commit abcdefghijklm0123456789nopqrstuvwxyz
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Tue May 17 00:40:38 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット1</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git reset --haed 0123456789abcdefghijklmnopqrstuvwxyz
+</span><span class='line'>                 (コミット2のコミットIDを渡す)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>結果</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>commit abcdefghijklm0123456789nopqrstuvwxyz
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Tue May 17 00:40:38 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>となり、指定したコミットID以降のコミットが取り消され、コミットログもなくなる。<br/>
+※取り消前の状態をpushしていれば、コミット取り消後はpushができなくなる。</p>
+
+<h2>git revert コミットID</h2>
+
+<p>指定したコミットIDのコミットのみ変更を取り消す。<br/>
+取り消したこともコミットログとして残る。<br/>
+例)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>commit abcdefghijklmnopqrstuvwxyz0123456789
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Sun May 22 23:53:54 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット3
+</span><span class='line'>
+</span><span class='line'>commit 0123456789abcdefghijklmnopqrstuvwxyz
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Sun May 22 23:53:20 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット2
+</span><span class='line'>
+</span><span class='line'>commit abcdefghijklm0123456789nopqrstuvwxyz
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Tue May 17 00:40:38 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット1</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git revert 0123456789abcdefghijklmnopqrstuvwxyz
+</span><span class='line'>           (コミット2のコミットIDを渡す)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>結果</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>commit 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Sat Jun 11 12:36:33 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    Revert "コミット2"
+</span><span class='line'>    
+</span><span class='line'>    This reverts commit 0123456789abcdefghijklmnopqrstuvwxyz.
+</span><span class='line'>
+</span><span class='line'>commit abcdefghijklmnopqrstuvwxyz0123456789
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Sun May 22 23:53:54 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット3
+</span><span class='line'>
+</span><span class='line'>commit 0123456789abcdefghijklmnopqrstuvwxyz
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Sun May 22 23:53:20 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット2
+</span><span class='line'>
+</span><span class='line'>commit abcdefghijklm0123456789nopqrstuvwxyz
+</span><span class='line'>Author: Masahiro Hori &lt;mail_address&gt;
+</span><span class='line'>Date:   Tue May 17 00:40:38 2016 +0900
+</span><span class='line'>
+</span><span class='line'>    コミット1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>となり、コミット2のみのコミット内容が取り消され、コミットログに取り消しログが残る。<br/>
+※取り消前の状態をpushしていても、コミット取り消後もpushはできる。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1049,184 +1342,6 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/05/05/angular-js-get-ajax/">Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-05-05T08:14:21+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li>APIはJSONデータを返却する</li>
-<li>JSONデータにはあるグループのグループ名、コメント、登録日が格納されている</li>
-<li>返却されたJSONデータを <em>ng-repeat(ループ)</em> で表示する</li>
-</ul>
-
-
-<pre><code>&lt;!doctype html&gt;
-  &lt;html lang="ja"&gt;
-    &lt;body ng-app="group" ng-cloak&gt;
-      &lt;div ng-controller="GroupController"&gt;
-        &lt;table&gt;
-          &lt;thead&gt;
-            &lt;tr&gt;
-              &lt;th&gt;グループ名&lt;/th&gt;
-              &lt;th&gt;コメント&lt;/th&gt;
-              &lt;th&gt;登録日&lt;/th&gt;
-            &lt;/tr&gt;
-          &lt;/thead&gt;
-          &lt;tbody&gt;
-            &lt;tr ng-repeat="group in data.group_list"&gt;
-              &lt;td&gt;{group.group_name}&lt;/td&gt;
-              &lt;td&gt;{group.comment}&lt;/td&gt;
-              &lt;td&gt;{group.regist_date}&lt;/td&gt;
-            &lt;/tr&gt;
-          &lt;/tbody&gt;
-        &lt;/table&gt;
-      &lt;/div&gt;
-   &lt;!-- Anguler JS 読み込み ここから --&gt;
-      &lt;script src="angular.js"&gt;&lt;/script&gt;
-      &lt;script src="angular-resource.js"&gt;&lt;/script&gt;
-   &lt;!-- Anguler JS 読み込み ここまで --&gt;
-      &lt;script&gt;
-        var GroupController = function($scope, $resource){
-
-        // GETパラーメータ
-        var parameter = {hoge: 'fuga'};
-
-        var group_api = $resource(" APIパス ");
-
-        // 非同期でGET通信
-        group_api.get(parameter, function(data){
-            $scope.data = data;
-        });
-
-        var appModule = angular.module('group', ['ngResource']);
-        appModule.controller('GroupController', GroupController);
-      &lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/04/30/swift-uicollectionview/">SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-04-30T22:33:33+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>やり方</h3>
-
-<p>罫線は背景色を表示する方法をとる。<br/>
-(この例の場合は黒)<br/>
-よって、セルとセルの間に均等にスペースが空くように配置する</p>
-
-<h3>イメージ</h3>
-
-<p><img src="/images/UICollectionViewCapture.png" alt="キャプチャ" /></p>
-
-<h3>ソースコード</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class ViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-</span><span class='line'>
-</span><span class='line'>    let linePoint: CGFloat = 1     // 罫線の太さ
-</span><span class='line'>    let numberOfCols: CGFloat = 6  // 1行に表示するセルの数
-</span><span class='line'>
-</span><span class='line'>    // セルのレイアウト調整
-</span><span class='line'>    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -&gt; CGSize {
-</span><span class='line'>        // セルのサイズ = (端末の横幅 - (罫線の太さ*(1行に表示するセルの個数-1=外の線を引いた内側の線の数))) / 1行に表示するセルの個数
-</span><span class='line'>        let size = floor((collectionView.frame.size.width - (linePoint*(numberOfCols-1))) / numberOfCols)
-</span><span class='line'>        return CGSizeMake(size, size)
-</span><span class='line'>    }
-</span><span class='line'>    
-</span><span class='line'>    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -&gt; UIEdgeInsets {
-</span><span class='line'>        return UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
-</span><span class='line'>    }
-</span><span class='line'>    
-</span><span class='line'>    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -&gt; CGFloat {
-</span><span class='line'>        return linePoint
-</span><span class='line'>    }
-</span><span class='line'>    
-</span><span class='line'>    ......
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="2">&larr; Older</a>
@@ -1254,6 +1369,14 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/05/25/excel-win/">エクセルの列、行に関するショートカットキーまとめ(Windows)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/05/23/git-reset-revert/">git reset と git revertの違い</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/05/21/php-smarty/">Smartyで出来る便利だと思ったこと</a>
       </li>
     
@@ -1263,14 +1386,6 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
     
       <li class="post">
         <a href="/blog/2016/05/16/go-jsonfile-read/">GoでJSONファイルを読み込み内容を構造体に詰め込むときにはまったのでメモ</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/15/go-lang-hello-world/">MacにGoをインストールしHello Worldをやってみた</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/14/postgresql-sequence/">PostgreSQLでのAUTO_INCREMENTのしくみ</a>
       </li>
     
   </ul>
