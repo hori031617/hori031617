@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-06-11T19:39:31+09:00</updated>
+  <updated>2016-06-12T12:43:58+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[macにlaravelをインストールする]]></title>
+    <title type="html"><![CDATA[macにlaravel5をインストールする]]></title>
     <link href="http://engineer-diary.click/blog/2016/06/11/laravel-install/"/>
     <updated>2016-06-11T15:07:14+09:00</updated>
     <id>http://engineer-diary.click/blog/2016/06/11/laravel-install</id>
@@ -44,7 +44,7 @@
 </span><span class='line'>  Composer version 1.1.2 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>最新バージョンのインストール</h3>
+<h3>Laravelの最新バージョンのインストール</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>composer create-project laravel/laravel プロジェクト名 --prefer-dist</span></code></pre></td></tr></table></div></figure>
