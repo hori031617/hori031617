@@ -9,9 +9,10 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="まずcomposerコマンドをインストール 1
-curl -sS https://getcomposer.org/installer | php composerコマンドをパスが通ってる場所に移動 1
-sudo mv composer.phar /usr/local/bin/composer &hellip;">
+  <meta name="description" content="1
+find ./ -type f | xargs sed -i 's/置き換え前/置き換え後/g' ※ 注意 ※
+このコマンドはファイルのバックアップは作成されないので、実行前にバックアップは取っておいたほうがいいです。
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +79,47 @@ sudo mv composer.phar /usr/local/bin/composer &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/06/29/replace-string/">カレントディレクトリにあるファイルの文字列を一度に置換する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-06-29T19:56:42+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>find ./ -type f | xargs sed -i 's/置き換え前/置き換え後/g'</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>※ 注意 ※</strong><br/>
+<strong>このコマンドはファイルのバックアップは作成されないので、実行前にバックアップは取っておいたほうがいいです。</strong></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1210,88 +1252,6 @@ session_start() 処理が走るとセッションに排他ロックがかかる�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/05/10/github-pages-octopress-original-domain/">Github Pages、Octopressで独自ドメイン設定</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-05-10T21:37:07+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>GitHub PagesとOctopressを利用し、独自ドメインを設定するときにはまったのでメモ。<br/>
-独自ドメイン取得の流れと設定方法は下記</p>
-
-<ol>
-<li>お名前.comで独自ドメイン取得</li>
-<li>取得したドメインにAレコードを2つ追加し、それぞれGithubのDNSサーバーのIPアドレス(2016/05/10 時点で 192.30.252.153、192.30.252.154)を設定</li>
-<li>source/CNAME ファイルに取得した独自ドメインを記述</li>
-</ol>
-
-
-<p>と、ここまでは<strong>「GitHub Pages 独自ドメイン 設定」</strong>等でググれば、結構出てくるので問題はなかった。<br/>
-だが、いざ取得した独自ドメインでアクセスすると、CSSやJSのパスが上手く独自ドメイン反映後に対応していなく、CSSの読み込みエラーでページが崩れた。</p>
-
-<h3>何が起きたのか?</h3>
-
-<p>Github PagesのトップページのURLは <a href="http://username.github.io/repository-name">http://username.github.io/repository-name</a> となる。<br/>
-(リポジトリごとのWebページとして作成)<br/>
-そのため、CSSなどの読み込みパスは /repository-name/hoge.css となる。</p>
-
-<p>独自ドメイン設定後は <a href="http://original-domain">http://original-domain</a> となるためCSSの読み込みパスは /hoge.css としたいのだが、<br/>
-HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name/hoge.css のままとなり、読み込みエラーとなった。</p>
-
-<h3>解決方法</h3>
-
-<p>_config.yml を修正</p>
-
-<ul>
-<li>修正前</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># If publishing to a subdirectory as in http://site.com/project set 'root: /project'  
-</span><span class='line'>root: /repository-name</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>修正後</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># If publishing to a subdirectory as in http://site.com/project set 'root: /project'  
-</span><span class='line'>root: /</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/2">&larr; Older</a>
@@ -1319,6 +1279,10 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/06/29/replace-string/">カレントディレクトリにあるファイルの文字列を一度に置換する</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/06/11/laravel-install/">macにlaravel5をインストールする</a>
       </li>
     
@@ -1332,10 +1296,6 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
     
       <li class="post">
         <a href="/blog/2016/05/21/php-smarty/">Smartyで出来る便利だと思ったこと</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/17/go-twitter-post/">Goでtwitterに投稿するプログラムを作成</a>
       </li>
     
   </ul>

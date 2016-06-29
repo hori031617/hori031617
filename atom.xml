@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-06-12T12:43:58+09:00</updated>
+  <updated>2016-06-29T21:06:58+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[カレントディレクトリにあるファイルの文字列を一度に置換する]]></title>
+    <link href="http://engineer-diary.click/blog/2016/06/29/replace-string/"/>
+    <updated>2016-06-29T19:56:42+09:00</updated>
+    <id>http://engineer-diary.click/blog/2016/06/29/replace-string</id>
+    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>find ./ -type f | xargs sed -i 's/置き換え前/置き換え後/g'</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>※ 注意 ※</strong><br/>
+<strong>このコマンドはファイルのバックアップは作成されないので、実行前にバックアップは取っておいたほうがいいです。</strong></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[macにlaravel5をインストールする]]></title>
