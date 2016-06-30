@@ -5,13 +5,17 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する - エンジニア日記</title>
+  <title>カレントディレクトリ配下のファイルの拡張子を変更する - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="APIはJSONデータを返却する
-JSONデータにはあるグループのグループ名、コメント、登録日が格納されている
-返却されたJSONデータを ng-repeat(ループ) で表示する &lt;!doctype html&gt; &lt;html lang="ja"&gt; &lt;body ng- &hellip;">
+  <meta name="description" content="ttlファイルをtxtファイルにするために拡張子の変更をコマンドで行う。
+だが、以下の方法ではダメだった。 1
+mv *.ttl *.txt 一括でファイルを変更するにはfor文で行う。 1
+2
+3
+for fname in *.ttl; do
+mv $fname ${fname%.ttl}. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +24,7 @@ JSONデータにはあるグループのグループ名、コメント、登録�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/05/05/angular-js-get-ajax/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2016/06/30/ext-change/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +85,7 @@ JSONデータにはあるグループのグループ名、コメント、登録�
   
   <header>
     
-      <h1 class="entry-title">Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する</h1>
+      <h1 class="entry-title">カレントディレクトリ配下のファイルの拡張子を変更する</h1>
     
     
       <p class="meta">
@@ -97,64 +101,30 @@ JSONデータにはあるグループのグループ名、コメント、登録�
   
 
 
-<time datetime="2016-05-05T08:14:21+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-06-30T21:13:04+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><ul>
-<li>APIはJSONデータを返却する</li>
-<li>JSONデータにはあるグループのグループ名、コメント、登録日が格納されている</li>
-<li>返却されたJSONデータを <em>ng-repeat(ループ)</em> で表示する</li>
-</ul>
+<div class="entry-content"><p>ttlファイルをtxtファイルにするために拡張子の変更をコマンドで行う。<br/>
+だが、以下の方法ではダメだった。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mv *.ttl *.txt</span></code></pre></td></tr></table></div></figure>
 
 
-<pre><code>&lt;!doctype html&gt;
-  &lt;html lang="ja"&gt;
-    &lt;body ng-app="group" ng-cloak&gt;
-      &lt;div ng-controller="GroupController"&gt;
-        &lt;table&gt;
-          &lt;thead&gt;
-            &lt;tr&gt;
-              &lt;th&gt;グループ名&lt;/th&gt;
-              &lt;th&gt;コメント&lt;/th&gt;
-              &lt;th&gt;登録日&lt;/th&gt;
-            &lt;/tr&gt;
-          &lt;/thead&gt;
-          &lt;tbody&gt;
-            &lt;tr ng-repeat="group in data.group_list"&gt;
-              &lt;td&gt;{group.group_name}&lt;/td&gt;
-              &lt;td&gt;{group.comment}&lt;/td&gt;
-              &lt;td&gt;{group.regist_date}&lt;/td&gt;
-            &lt;/tr&gt;
-          &lt;/tbody&gt;
-        &lt;/table&gt;
-      &lt;/div&gt;
-   &lt;!-- Anguler JS 読み込み ここから --&gt;
-      &lt;script src="angular.js"&gt;&lt;/script&gt;
-      &lt;script src="angular-resource.js"&gt;&lt;/script&gt;
-   &lt;!-- Anguler JS 読み込み ここまで --&gt;
-      &lt;script&gt;
-        var GroupController = function($scope, $resource){
+<p><br>
+一括でファイルを変更するにはfor文で行う。</p>
 
-        // GETパラーメータ
-        var parameter = {hoge: 'fuga'};
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>for fname in *.ttl; do
+</span><span class='line'>mv $fname ${fname%.ttl}.txt;
+</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
 
-        var group_api = $resource(" APIパス ");
-
-        // 非同期でGET通信
-        group_api.get(parameter, function(data){
-            $scope.data = data;
-        });
-
-        var appModule = angular.module('group', ['ngResource']);
-        appModule.controller('GroupController', GroupController);
-      &lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
 </div>
 
 
@@ -177,7 +147,7 @@ JSONデータにはあるグループのグループ名、コメント、登録�
   
 
 
-<time datetime="2016-05-05T08:14:21+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-06-30T21:13:04+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -185,7 +155,7 @@ JSONデータにはあるグループのグループ名、コメント、登録�
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/05/05/angular-js-get-ajax/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/05/05/angular-js-get-ajax/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/06/30/ext-change/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/06/30/ext-change/" >Tweet</a>
   
   
   
@@ -194,10 +164,8 @@ JSONデータにはあるグループのグループ名、コメント、登録�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/04/30/swift-uicollectionview/" title="Previous Post: SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する">&laquo; SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する</a>
+        <a class="basic-alignment left" href="/blog/2016/06/29/replace-string/" title="Previous Post: カレントディレクトリにあるファイルの文字列を一度に置換する">&laquo; カレントディレクトリにあるファイルの文字列を一度に置換する</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/05/06/angular-js-post-ajax/" title="Next Post: Angular JS で、APIを非同期でPOST呼び出しし、実行結果をアラート表示する">Angular JS で、APIを非同期でPOST呼び出しし、実行結果をアラート表示する &raquo;</a>
       
     </p>
   </footer>

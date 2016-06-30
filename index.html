@@ -9,10 +9,13 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="1
-find ./ -type f | xargs sed -i 's/置き換え前/置き換え後/g' ※ 注意 ※
-このコマンドはファイルのバックアップは作成されないので、実行前にバックアップは取っておいたほうがいいです。
-">
+  <meta name="description" content="ttlファイルをtxtファイルにするために拡張子の変更をコマンドで行う。
+だが、以下の方法ではダメだった。 1
+mv *.ttl *.txt 一括でファイルを変更するにはfor文で行う。 1
+2
+3
+for fname in *.ttl; do
+mv $fname ${fname%.ttl}. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +82,58 @@ find ./ -type f | xargs sed -i 's/置き換え前/置き換え後/g' ※ 注意 
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/06/30/ext-change/">カレントディレクトリ配下のファイルの拡張子を変更する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-06-30T21:13:04+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ttlファイルをtxtファイルにするために拡張子の変更をコマンドで行う。<br/>
+だが、以下の方法ではダメだった。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mv *.ttl *.txt</span></code></pre></td></tr></table></div></figure>
+
+
+<p><br>
+一括でファイルを変更するにはfor文で行う。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>for fname in *.ttl; do
+</span><span class='line'>mv $fname ${fname%.ttl}.txt;
+</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1189,69 +1244,6 @@ MySQLだと特に気にしなくてもいいのだがPostgreSQLで特に何も�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/05/12/session-write-close/">PHPでAPIを作成し、画面が表示されるときに非同期で２つ以上のAPIを呼ぶ</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-05-12T07:24:11+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>表題の実装を行った。<br/>
-APIを1つだけしか呼ばない場合だと問題は表面化しなかったのだが、<br/>
-２つ以上を呼び出すと先に呼び出したAPIの処理が終わってから次のAPIが実行されるという<br/>
-処理動作になっていた。<br/>
-そのため、画面表示に少し時間がかかる。</p>
-
-<h3>原因</h3>
-
-<p>APIでは <strong>session_start()</strong> 処理が記述されていた。<br/>
-session_start() 処理が走るとセッションに排他ロックがかかるため<br/>
-次のAPIが書き込み待ちになり実行が遅れるというものだった。</p>
-
-<h3>対応策</h3>
-
-<p>セッションへの書き込みが完了したら（セッションに対する処理が終われば）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>session_write_close()</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-を呼び出し、排他ロックを解除する。</p>
-
-<h3>参考URL</h3>
-
-<p><a href="http://unsolublesugar.com/20121103/113321/">http://unsolublesugar.com/20121103/113321/</a>
-<a href="http://www.objective-php.net/blog/detail/20110813">http://www.objective-php.net/blog/detail/20110813</a>
-<a href="http://blog2.elephantech.net/php/%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%97%E3%81%A6%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E7%B5%82%E4%BA%86%E3%81%99/">http://blog2.elephantech.net/php/%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%97%E3%81%A6%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E7%B5%82%E4%BA%86%E3%81%99/</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/2">&larr; Older</a>
@@ -1279,6 +1271,10 @@ session_start() 処理が走るとセッションに排他ロックがかかる�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/06/30/ext-change/">カレントディレクトリ配下のファイルの拡張子を変更する</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/06/29/replace-string/">カレントディレクトリにあるファイルの文字列を一度に置換する</a>
       </li>
     
@@ -1292,10 +1288,6 @@ session_start() 処理が走るとセッションに排他ロックがかかる�
     
       <li class="post">
         <a href="/blog/2016/05/23/git-reset-revert/">git reset と git revertの違い</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/21/php-smarty/">Smartyで出来る便利だと思ったこと</a>
       </li>
     
   </ul>
