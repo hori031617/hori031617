@@ -5,14 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>カレントディレクトリにあるファイルの文字列を一度に置換する - エンジニア日記</title>
+  <title>MySQLでユーザーにDB、テーブルに対して権限付与するコマンド - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="1
-find ./ -type f | xargs sed -i 's/置き換え前/置き換え後/g' ※ 注意 ※
-このコマンドはファイルのバックアップは作成されないので、実行前にバックアップは取っておいたほうがいいです。
-">
+  <meta name="description" content="ユーザーに付与されている権限を確認 1
+SHOW GRANTS FOR ユーザー名; すべての操作権限を付与 1
+GRANT ALL PRIVILEGES ON `DB名`.テーブル TO 'ユーザ名'@'ホスト名'; すべての操作権限を対象DBのすべてのテーブルに付与 1
+GRANT ALL &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +21,7 @@ find ./ -type f | xargs sed -i 's/置き換え前/置き換え後/g' ※ 注意 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/06/29/replace-string/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2016/07/13/mysql-authority/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,7 +82,7 @@ find ./ -type f | xargs sed -i 's/置き換え前/置き換え後/g' ※ 注意 
   
   <header>
     
-      <h1 class="entry-title">カレントディレクトリにあるファイルの文字列を一度に置換する</h1>
+      <h1 class="entry-title">MySQLでユーザーにDB、テーブルに対して権限付与するコマンド</h1>
     
     
       <p class="meta">
@@ -98,19 +98,36 @@ find ./ -type f | xargs sed -i 's/置き換え前/置き換え後/g' ※ 注意 
   
 
 
-<time datetime="2016-06-29T19:56:42+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-07-13T22:51:12+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>find ./ -type f | xargs sed -i 's/置き換え前/置き換え後/g'</span></code></pre></td></tr></table></div></figure>
+<div class="entry-content"><h3>ユーザーに付与されている権限を確認</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SHOW GRANTS FOR ユーザー名;</span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>※ 注意 ※</strong><br/>
-<strong>このコマンドはファイルのバックアップは作成されないので、実行前にバックアップは取っておいたほうがいいです。</strong></p>
+<h3>すべての操作権限を付与</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT ALL PRIVILEGES ON `DB名`.テーブル TO 'ユーザ名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>すべての操作権限を対象DBのすべてのテーブルに付与</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT ALL PRIVILEGES ON `DB名`.* TO 'ユーザー名'@'%';</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>SELECT、UPDATE、INSERT、DELETE権限を付与</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT SELECT,UPDATE,INSERT,DELETE ON `DB名`.テーブル TO 'ユーザ名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -133,7 +150,7 @@ find ./ -type f | xargs sed -i 's/置き換え前/置き換え後/g' ※ 注意 
   
 
 
-<time datetime="2016-06-29T19:56:42+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-07-13T22:51:12+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -141,7 +158,7 @@ find ./ -type f | xargs sed -i 's/置き換え前/置き換え後/g' ※ 注意 
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/06/29/replace-string/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/06/29/replace-string/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/07/13/mysql-authority/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/07/13/mysql-authority/" >Tweet</a>
   
   
   
@@ -150,10 +167,8 @@ find ./ -type f | xargs sed -i 's/置き換え前/置き換え後/g' ※ 注意 
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/06/11/laravel-install/" title="Previous Post: macにlaravel5をインストールする">&laquo; macにlaravel5をインストールする</a>
+        <a class="basic-alignment left" href="/blog/2016/06/30/ext-change/" title="Previous Post: カレントディレクトリ配下のファイルの拡張子を変更する">&laquo; カレントディレクトリ配下のファイルの拡張子を変更する</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/06/30/ext-change/" title="Next Post: カレントディレクトリ配下のファイルの拡張子を変更する">カレントディレクトリ配下のファイルの拡張子を変更する &raquo;</a>
       
     </p>
   </footer>

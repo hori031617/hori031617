@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-06-30T21:19:08+09:00</updated>
+  <updated>2016-07-13T23:02:14+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MySQLでユーザーにDB、テーブルに対して権限付与するコマンド]]></title>
+    <link href="http://engineer-diary.click/blog/2016/07/13/mysql-authority/"/>
+    <updated>2016-07-13T22:51:12+09:00</updated>
+    <id>http://engineer-diary.click/blog/2016/07/13/mysql-authority</id>
+    <content type="html"><![CDATA[<h3>ユーザーに付与されている権限を確認</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SHOW GRANTS FOR ユーザー名;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>すべての操作権限を付与</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT ALL PRIVILEGES ON `DB名`.テーブル TO 'ユーザ名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>すべての操作権限を対象DBのすべてのテーブルに付与</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT ALL PRIVILEGES ON `DB名`.* TO 'ユーザー名'@'%';</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>SELECT、UPDATE、INSERT、DELETE権限を付与</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT SELECT,UPDATE,INSERT,DELETE ON `DB名`.テーブル TO 'ユーザ名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[カレントディレクトリ配下のファイルの拡張子を変更する]]></title>
