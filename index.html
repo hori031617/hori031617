@@ -9,10 +9,11 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="ユーザーに付与されている権限を確認 1
-SHOW GRANTS FOR ユーザー名; すべての操作権限を付与 1
-GRANT ALL PRIVILEGES ON `DB名`.テーブル TO 'ユーザ名'@'ホスト名'; すべての操作権限を対象DBのすべてのテーブルに付与 1
-GRANT ALL &hellip;">
+  <meta name="description" content="MySQL DBに移動 1
+USE mysql 登録されているユーザーを確認 1
+SELECT user, host FROM user; ユーザーに付与されている権限を確認 1
+SHOW GRANTS FOR 'ユーザ名'@'ホスト名'; すべての操作権限を指定テーブルに付与 1
+GRANT &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,13 +109,25 @@ GRANT ALL &hellip;">
   </header>
 
 
-  <div class="entry-content"><h3>ユーザーに付与されている権限を確認</h3>
+  <div class="entry-content"><h3>MySQL DBに移動</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>SHOW GRANTS FOR ユーザー名;</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>USE mysql</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>すべての操作権限を付与</h3>
+<h3>登録されているユーザーを確認</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SELECT user, host FROM user;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>ユーザーに付与されている権限を確認</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SHOW GRANTS FOR 'ユーザ名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>すべての操作権限を指定テーブルに付与</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>GRANT ALL PRIVILEGES ON `DB名`.テーブル TO 'ユーザ名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
@@ -123,10 +136,10 @@ GRANT ALL &hellip;">
 <h3>すべての操作権限を対象DBのすべてのテーブルに付与</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT ALL PRIVILEGES ON `DB名`.* TO 'ユーザー名'@'%';</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT ALL PRIVILEGES ON `DB名`.* TO 'ユーザー名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>SELECT、UPDATE、INSERT、DELETE権限を付与</h3>
+<h3>SELECT、UPDATE、INSERT、DELETE権限指定テーブルに付与</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>GRANT SELECT,UPDATE,INSERT,DELETE ON `DB名`.テーブル TO 'ユーザ名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
