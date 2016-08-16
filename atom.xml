@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-08-15T22:25:12+09:00</updated>
+  <updated>2016-08-16T20:27:09+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[javascriptでselectボックスの値を取得する]]></title>
+    <link href="http://engineer-diary.click/blog/2016/08/16/javascript-select-value/"/>
+    <updated>2016-08-16T20:21:02+09:00</updated>
+    <id>http://engineer-diary.click/blog/2016/08/16/javascript-select-value</id>
+    <content type="html"><![CDATA[<p>よく忘れるのでメモ。</p>
+
+<h3>取得方法</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>document.フォーム名.セレクト名.value</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>例)</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;form name="frm"&gt;
+</span><span class='line'>  &lt;select name="hoge"&gt;
+</span><span class='line'>    &lt;option value="a"&gt;A&lt;/option&gt;
+</span><span class='line'>    &lt;option value="b"&gt;B&lt;/option&gt;
+</span><span class='line'>    &lt;option value="c"&gt;C&lt;/option&gt;
+</span><span class='line'>  &lt;/select&gt;
+</span><span class='line'>&lt;/form&gt;
+</span><span class='line'>
+</span><span class='line'>document.frm.hoge.value</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MySQLでユーザーにDB、テーブルに対して権限付与するコマンド]]></title>

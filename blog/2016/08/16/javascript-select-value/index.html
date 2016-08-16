@@ -5,12 +5,21 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する - エンジニア日記</title>
+  <title>javascriptでselectボックスの値を取得する - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="パラメータを除外し、URLごとに集計 1
-cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output.txt &hellip;">
+  <meta name="description" content="よく忘れるのでメモ。 取得方法 1
+document.フォーム名.セレクト名.value 例) 1
+2
+3
+4
+5
+6
+7
+8
+9
+&lt;form name="frm"&gt; &lt;select name="hoge"&gt; &lt;option value="a"&gt;A&lt;/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +28,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/04/28/apache-access-log-search/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2016/08/16/javascript-select-value/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -80,7 +89,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   
   <header>
     
-      <h1 class="entry-title">ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する</h1>
+      <h1 class="entry-title">Javascriptでselectボックスの値を取得する</h1>
     
     
       <p class="meta">
@@ -96,33 +105,41 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   
 
 
-<time datetime="2016-04-28T00:30:01+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-08-16T20:21:02+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3>パラメータを除外し、URLごとに集計</h3>
+<div class="entry-content"><p>よく忘れるのでメモ。</p>
+
+<h3>取得方法</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output.txt</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>document.フォーム名.セレクト名.value</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>時間帯のURLごとに集計</h3>
-
-<p>例) 2016/04/27/ 18:00 台の時間帯にアクセスのあったURLごとの集計</p>
+<h3>例)</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | grep '\[27/Apr/2016:18:00:' | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output_1800.txt</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>その他</h3>
-
-<p>複数あるアクセスログファイルを1つにまとめる</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access1.log access2.log access3.log &gt; total_access.log</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;form name="frm"&gt;
+</span><span class='line'>  &lt;select name="hoge"&gt;
+</span><span class='line'>    &lt;option value="a"&gt;A&lt;/option&gt;
+</span><span class='line'>    &lt;option value="b"&gt;B&lt;/option&gt;
+</span><span class='line'>    &lt;option value="c"&gt;C&lt;/option&gt;
+</span><span class='line'>  &lt;/select&gt;
+</span><span class='line'>&lt;/form&gt;
+</span><span class='line'>
+</span><span class='line'>document.frm.hoge.value</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -146,7 +163,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   
 
 
-<time datetime="2016-04-28T00:30:01+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-08-16T20:21:02+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -154,7 +171,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/04/28/apache-access-log-search/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/04/28/apache-access-log-search/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/08/16/javascript-select-value/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/08/16/javascript-select-value/" >Tweet</a>
   
   
   
@@ -163,10 +180,8 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/04/24/hello-world/" title="Previous Post: Hello World">&laquo; Hello World</a>
+        <a class="basic-alignment left" href="/blog/2016/07/13/mysql-authority/" title="Previous Post: MySQLでユーザーにDB、テーブルに対して権限付与するコマンド">&laquo; MySQLでユーザーにDB、テーブルに対して権限付与するコマンド</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/04/30/swift-uicollectionview/" title="Next Post: SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する">SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する &raquo;</a>
       
     </p>
   </footer>
