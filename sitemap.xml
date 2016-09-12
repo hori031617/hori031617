@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://engineer-diary.click/blog/2016/09/12/laravel-meetup-tokyo-vol8/</loc>
+<lastmod>2016-09-12T22:49:10+09:00</lastmod>
+</url>
+<url>
 <loc>http://engineer-diary.click/blog/2016/08/17/mysql-char/</loc>
 <lastmod>2016-08-17T22:36:13+09:00</lastmod>
 </url>
@@ -85,8 +89,5 @@
 </url>
 <url>
 <loc>http://engineer-diary.click/</loc>
-</url>
-<url>
-<loc>http://engineer-diary.click/posts/2/</loc>
 </url>
 </urlset>

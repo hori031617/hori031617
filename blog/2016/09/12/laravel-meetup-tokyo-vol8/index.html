@@ -5,12 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する - エンジニア日記</title>
+  <title>Laravel Meetup Tokyo Vol.8に行ってきました 1/2 - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="パラメータを除外し、URLごとに集計 1
-cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output.txt &hellip;">
+  <meta name="description" content="本日、「Laravel Meetup Tokyo Vol.8」に行ってきました。
+セッションは2つあり、それぞれ内容を2回に分けて簡単にまとめます。
+以下は１つ目のセッションです。
+モジュール、DBのバックアップの大切さ、やり方についてのセッションでした。 Backing up with &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +21,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/04/28/apache-access-log-search/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2016/09/12/laravel-meetup-tokyo-vol8/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -80,7 +82,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   
   <header>
     
-      <h1 class="entry-title">ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する</h1>
+      <h1 class="entry-title">Laravel Meetup Tokyo Vol.8に行ってきました 1/2</h1>
     
     
       <p class="meta">
@@ -96,33 +98,102 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   
 
 
-<time datetime="2016-04-28T00:30:01+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-09-12T22:49:10+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3>パラメータを除外し、URLごとに集計</h3>
+<div class="entry-content"><p>本日、「Laravel Meetup Tokyo Vol.8」に行ってきました。<br/>
+セッションは2つあり、それぞれ内容を2回に分けて簡単にまとめます。<br/>
+以下は１つ目のセッションです。<br/>
+モジュール、DBのバックアップの大切さ、やり方についてのセッションでした。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output.txt</span></code></pre></td></tr></table></div></figure>
+<p><br></p>
+
+<h2>Backing up with Laravel</h2>
+
+<p>ある日、いきなりサーバーが壊れた時にバックアップを同じサーバーに置いていると、<br/>
+バックアップファイルにアクセスできずに痛い目を見る。<br/>
+バックアップの方法は色々ある。</p>
+
+<ul>
+<li>bash script
+
+<ul>
+<li>自分で実装</li>
+</ul>
+</li>
+<li>Ottomatik.io
+
+<ul>
+<li>Backups as a Service</li>
+<li>有償</li>
+</ul>
+</li>
+<li>BackupPC
+
+<ul>
+<li>無償</li>
+<li>設定がやや難しい</li>
+</ul>
+</li>
+</ul>
 
 
-<h3>時間帯のURLごとに集計</h3>
+<h3>Laravelを使うならオススメのプラグイン</h3>
 
-<p>例) 2016/04/27/ 18:00 台の時間帯にアクセスのあったURLごとの集計</p>
+<h4>Laravel Backup</h4>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | grep '\[27/Apr/2016:18:00:' | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output_1800.txt</span></code></pre></td></tr></table></div></figure>
+<p>特徴</p>
+
+<ul>
+<li>PHPモジュール(ファイル)、DBのダンプファイルをzipに圧縮して他サーバーやS3に保存できる</li>
+<li>バックアップファイルが古いものを削除することができる(Cleanup old backups)</li>
+<li>バックアップ失敗、バックアップファイルが随分古い、容量が大きいなどの時に通知を送ることができる(Send Notification)</li>
+<li>インストールや設定が簡単</li>
+</ul>
 
 
-<h3>その他</h3>
+<p>ドキュメント<br/>
+<a href="https://docs.spatie.be/laravel-backup/v3/introduction">https://docs.spatie.be/laravel-backup/v3/introduction</a></p>
 
-<p>複数あるアクセスログファイルを1つにまとめる</p>
+<p>セッション資料<br/>
+<a href="https://speakerdeck.com/freekmurze/backing-up-with-laravel-tokyo">https://speakerdeck.com/freekmurze/backing-up-with-laravel-tokyo</a></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access1.log access2.log access3.log &gt; total_access.log</span></code></pre></td></tr></table></div></figure>
+<p><br></p>
+
+<h2>その他</h2>
+
+<p>その他紹介があったプラグイン</p>
+
+<ul>
+<li>Laravel Permission
+
+<ul>
+<li>ユーザーに権限や許可を簡単に付与することができる</li>
+</ul>
+</li>
+<li>Laravel Analytics
+
+<ul>
+<li>Google Analyticsの情報を取得できる</li>
+</ul>
+</li>
+<li>Laravel Responsecache
+
+<ul>
+<li>同じリクエストをキャッシュし、レスポンスを早くする</li>
+</ul>
+</li>
+<li>Laravel Medialibrary
+
+<ul>
+<li>画像ファイルなどの情報取得にEloquent Modelの記述形式で情報を取得できるようになる</li>
+</ul>
+</li>
+</ul>
 
 </div>
 
@@ -146,7 +217,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
   
 
 
-<time datetime="2016-04-28T00:30:01+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-09-12T22:49:10+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -154,7 +225,7 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/04/28/apache-access-log-search/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/04/28/apache-access-log-search/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/09/12/laravel-meetup-tokyo-vol8/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/09/12/laravel-meetup-tokyo-vol8/" >Tweet</a>
   
   
   
@@ -163,10 +234,8 @@ cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | 
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/04/24/hello-world/" title="Previous Post: Hello World">&laquo; Hello World</a>
+        <a class="basic-alignment left" href="/blog/2016/08/17/mysql-char/" title="Previous Post: MySQLの文字コードを確認">&laquo; MySQLの文字コードを確認</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/04/30/swift-uicollectionview/" title="Next Post: SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する">SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する &raquo;</a>
       
     </p>
   </footer>
