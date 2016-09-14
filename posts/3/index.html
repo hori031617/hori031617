@@ -9,11 +9,8 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="My First Blog 初めての投稿です。
-仕事はWEBエンジニアをやっています。
-趣味でiPhoneアプリ作成もやっています。
-この前、無事に公開されました^^
-これから、日々の開発中にうまくいったこと、うまくいかなかったことなどをまとめる技術ブログとして、どんどん更新していこうと思います &hellip;">
+  <meta name="description" content="パラメータを除外し、URLごとに集計 1
+cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output.txt &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +77,62 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/04/28/apache-access-log-search/">ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-04-28T00:30:01+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>パラメータを除外し、URLごとに集計</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output.txt</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>時間帯のURLごとに集計</h3>
+
+<p>例) 2016/04/27/ 18:00 台の時間帯にアクセスのあったURLごとの集計</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | grep '\[27/Apr/2016:18:00:' | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output_1800.txt</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>その他</h3>
+
+<p>複数あるアクセスログファイルを1つにまとめる</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cat access1.log access2.log access3.log &gt; total_access.log</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -154,6 +207,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/09/15/laravel-5-3/">Laravel Meetup Tokyo Vol.8に行ってきました 2/2</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/09/12/laravel-meetup-tokyo-vol8/">Laravel Meetup Tokyo Vol.8に行ってきました 1/2</a>
       </li>
     
@@ -167,10 +224,6 @@
     
       <li class="post">
         <a href="/blog/2016/07/13/mysql-authority/">MySQLでユーザーにDB、テーブルに対して権限付与するコマンド</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/06/30/ext-change/">カレントディレクトリ配下のファイルの拡張子を変更する</a>
       </li>
     
   </ul>

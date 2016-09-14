@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-09-12T23:16:34+09:00</updated>
+  <updated>2016-09-15T06:47:00+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel Meetup Tokyo Vol.8に行ってきました 2/2]]></title>
+    <link href="http://engineer-diary.click/blog/2016/09/15/laravel-5-3/"/>
+    <updated>2016-09-15T06:32:32+09:00</updated>
+    <id>http://engineer-diary.click/blog/2016/09/15/laravel-5-3</id>
+    <content type="html"><![CDATA[<p>2つ目のセッションの内容はLaravel5.3に搭載された新機能のうち、<br/>
+2つを紹介してくれました。</p>
+
+<h1>1. Simple Pagination</h1>
+
+<p>Blade側で指定できるようになり、Paginationに使用する関数を読んであげるだけで良くなった。<br/>
+※ 今までは自分でカスタマイズする必要があった.</p>
+
+<h2>Paginnation で使うメソッド</h2>
+
+<ul>
+<li>hasPages (ページがあるか？)</li>
+<li>onfirstPage (最初のページ)</li>
+<li>previousPageUrl (前のページ)</li>
+<li>nextPageUrl (次のページ)</li>
+<li>hasMorePages (次のページがあるか?)</li>
+</ul>
+
+
+<h1>2. Notification</h1>
+
+<p>通知を行う処理が楽に実装できるようになった。  <br/>
+※ 今まではEventを作って自分で実装する必要があった.<br/>
+イベント通知の処理は</p>
+
+<ul>
+<li>ユーザーが登録された</li>
+<li>お問い合わせがあった</li>
+</ul>
+
+
+<p>など</p>
+
+<h2>標準で用意されている通知方法</h2>
+
+<ul>
+<li>Mail</li>
+<li>Databaase</li>
+<li>SMS</li>
+<li>Slack</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Laravel Meetup Tokyo Vol.8に行ってきました 1/2]]></title>
@@ -1473,35 +1523,6 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
 </span><span class='line'>    
 </span><span class='line'>    ......
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する]]></title>
-    <link href="http://engineer-diary.click/blog/2016/04/28/apache-access-log-search/"/>
-    <updated>2016-04-28T00:30:01+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/04/28/apache-access-log-search</id>
-    <content type="html"><![CDATA[<h3>パラメータを除外し、URLごとに集計</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output.txt</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>時間帯のURLごとに集計</h3>
-
-<p>例) 2016/04/27/ 18:00 台の時間帯にアクセスのあったURLごとの集計</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | grep '\[27/Apr/2016:18:00:' | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output_1800.txt</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>その他</h3>
-
-<p>複数あるアクセスログファイルを1つにまとめる</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access1.log access2.log access3.log &gt; total_access.log</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>

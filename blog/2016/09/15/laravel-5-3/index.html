@@ -5,15 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Hello World - エンジニア日記</title>
+  <title>Laravel Meetup Tokyo Vol.8に行ってきました 2/2 - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="My First Blog 初めての投稿です。
-仕事はWEBエンジニアをやっています。
-趣味でiPhoneアプリ作成もやっています。
-この前、無事に公開されました^^
-これから、日々の開発中にうまくいったこと、うまくいかなかったことなどをまとめる技術ブログとして、どんどん更新していこうと思います &hellip;">
+  <meta name="description" content="2つ目のセッションの内容はLaravel5.3に搭載された新機能のうち、
+2つを紹介してくれました。 1. Simple Pagination Blade側で指定できるようになり、Paginationに使用する関数を読んであげるだけで良くなった。
+※ 今までは自分でカスタマイズする必要があった. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/04/24/hello-world/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2016/09/15/laravel-5-3/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">Hello World</h1>
+      <h1 class="entry-title">Laravel Meetup Tokyo Vol.8に行ってきました 2/2</h1>
     
     
       <p class="meta">
@@ -99,22 +97,55 @@
   
 
 
-<time datetime="2016-04-24T19:12:54+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-09-15T06:32:32+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>My First Blog</h2>
+<div class="entry-content"><p>2つ目のセッションの内容はLaravel5.3に搭載された新機能のうち、<br/>
+2つを紹介してくれました。</p>
 
-<p>初めての投稿です。<br/>
-仕事はWEBエンジニアをやっています。<br/>
-趣味でiPhoneアプリ作成もやっています。<br/>
-この前、無事に公開されました^^<br/>
-これから、日々の開発中にうまくいったこと、うまくいかなかったことなどをまとめる技術ブログとして、どんどん更新していこうと思います。</p>
+<h1>1. Simple Pagination</h1>
 
-<p>よろしくお願いします。</p>
+<p>Blade側で指定できるようになり、Paginationに使用する関数を読んであげるだけで良くなった。<br/>
+※ 今までは自分でカスタマイズする必要があった.</p>
+
+<h2>Paginnation で使うメソッド</h2>
+
+<ul>
+<li>hasPages (ページがあるか？)</li>
+<li>onfirstPage (最初のページ)</li>
+<li>previousPageUrl (前のページ)</li>
+<li>nextPageUrl (次のページ)</li>
+<li>hasMorePages (次のページがあるか?)</li>
+</ul>
+
+
+<h1>2. Notification</h1>
+
+<p>通知を行う処理が楽に実装できるようになった。  <br/>
+※ 今まではEventを作って自分で実装する必要があった.<br/>
+イベント通知の処理は</p>
+
+<ul>
+<li>ユーザーが登録された</li>
+<li>お問い合わせがあった</li>
+</ul>
+
+
+<p>など</p>
+
+<h2>標準で用意されている通知方法</h2>
+
+<ul>
+<li>Mail</li>
+<li>Databaase</li>
+<li>SMS</li>
+<li>Slack</li>
+</ul>
+
 </div>
 
 
@@ -137,7 +168,7 @@
   
 
 
-<time datetime="2016-04-24T19:12:54+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-09-15T06:32:32+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -145,7 +176,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/04/24/hello-world/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/04/24/hello-world/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/09/15/laravel-5-3/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/09/15/laravel-5-3/" >Tweet</a>
   
   
   
@@ -154,8 +185,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2016/09/12/laravel-meetup-tokyo-vol8/" title="Previous Post: Laravel Meetup Tokyo Vol.8に行ってきました 1/2">&laquo; Laravel Meetup Tokyo Vol.8に行ってきました 1/2</a>
       
-        <a class="basic-alignment right" href="/blog/2016/04/28/apache-access-log-search/" title="Next Post: ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する">ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する &raquo;</a>
       
     </p>
   </footer>

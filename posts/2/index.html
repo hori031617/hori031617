@@ -9,10 +9,11 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="Goでブログを更新したらブログのタイトルを入力して、定型文を投稿してくれるプログラムを作ってみた。 anacondaというtwitter投稿モジュールを使用
-twitterのアクセストークンなどの情報は外部ファイルに定義
-投稿する定型文も外部ファイルとして読み込む
-コマンドを叩きタイトルを入力する &hellip;">
+  <meta name="description" content="GETパラメータを取得 1
+{$smarty.get.パラメータ名} POSTパラメータを取得 1
+{$smarty.post.パラメータ名} クッキーを取得 1
+{$smarty.cookie.クッキー名} セッション変数を取得 1
+{$smarty.session.セッション変数名} &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +80,100 @@ twitterのアクセストークンなどの情報は外部ファイルに定義
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/05/21/php-smarty/">Smartyで出来る便利だと思ったこと</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-21T21:13:33+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>GETパラメータを取得</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.get.パラメータ名}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>POSTパラメータを取得</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.post.パラメータ名}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>クッキーを取得</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.cookie.クッキー名}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>セッション変数を取得</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.session.セッション変数名}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>PHPの定数にアクセス</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.const.定数名}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>現在時間を取得</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.now}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>出力文字をスケープ</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{$hoge|escape}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>タイムスタンプで日付を比較</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{if $hoge|strtotime &gt;= $fuga|strtotime}
+</span><span class='line'>  piyo
+</span><span class='line'>{/if}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>日付のフォーマットを整える</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{* YYYY/mm/dd *}
+</span><span class='line'>{$date|date_format|"%Y/%m/%d"}</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1132,62 +1227,6 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/04/28/apache-access-log-search/">ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-04-28T00:30:01+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>パラメータを除外し、URLごとに集計</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output.txt</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>時間帯のURLごとに集計</h3>
-
-<p>例) 2016/04/27/ 18:00 台の時間帯にアクセスのあったURLごとの集計</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access.log | grep '\[27/Apr/2016:18:00:' | awk -F\" '{print $2}' | awk -F' ' '{print $2}' | cut -f1 -d? | sort | uniq -c | sort -n -r &gt; output_1800.txt</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>その他</h3>
-
-<p>複数あるアクセスログファイルを1つにまとめる</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cat access1.log access2.log access3.log &gt; total_access.log</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/3">&larr; Older</a>
@@ -1219,6 +1258,10 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/09/15/laravel-5-3/">Laravel Meetup Tokyo Vol.8に行ってきました 2/2</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/09/12/laravel-meetup-tokyo-vol8/">Laravel Meetup Tokyo Vol.8に行ってきました 1/2</a>
       </li>
     
@@ -1232,10 +1275,6 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
     
       <li class="post">
         <a href="/blog/2016/07/13/mysql-authority/">MySQLでユーザーにDB、テーブルに対して権限付与するコマンド</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/06/30/ext-change/">カレントディレクトリ配下のファイルの拡張子を変更する</a>
       </li>
     
   </ul>
