@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する - エンジニア日記</title>
+  <title>AndroidアプリにRealmを使用するため、インストールを行う - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="APIはJSONデータを返却する
-JSONデータにはあるグループのグループ名、コメント、登録日が格納されている
-返却されたJSONデータを ng-repeat(ループ) で表示する &lt;!doctype html&gt; &lt;html lang="ja"&gt; &lt;body ng- &hellip;">
+  <meta name="description" content="Realmとは？ NoSQL データベースの1つ
+その他に「MongoDB」「Redis」などがある
+モバイル向けのデータベース Android Studioからインストールする gradleというjavaのパッケージ管理システムを使用する インストール手順 公式サイトより「Java」をクリック &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@ JSONデータにはあるグループのグループ名、コメント、登録�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/05/05/angular-js-get-ajax/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2016/09/25/android-realm/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +81,7 @@ JSONデータにはあるグループのグループ名、コメント、登録�
   
   <header>
     
-      <h1 class="entry-title">Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する</h1>
+      <h1 class="entry-title">AndroidアプリにRealmを使用するため、インストールを行う</h1>
     
     
       <p class="meta">
@@ -97,64 +97,38 @@ JSONデータにはあるグループのグループ名、コメント、登録�
   
 
 
-<time datetime="2016-05-05T08:14:21+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-09-25T16:36:26+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><ul>
-<li>APIはJSONデータを返却する</li>
-<li>JSONデータにはあるグループのグループ名、コメント、登録日が格納されている</li>
-<li>返却されたJSONデータを <em>ng-repeat(ループ)</em> で表示する</li>
+<div class="entry-content"><h1>Realmとは？</h1>
+
+<p>NoSQL データベースの1つ<br/>
+その他に「MongoDB」「Redis」などがある<br/>
+モバイル向けのデータベース</p>
+
+<h1>Android Studioからインストールする</h1>
+
+<p>gradleというjavaのパッケージ管理システムを使用する</p>
+
+<h2>インストール手順</h2>
+
+<ul>
+<li><a href="https://realm.io/" title="公式サイト">公式サイト</a>より「Java」をクリック</li>
+<li>「Getting Started」セクションに記述されている内容を行う
+
+<ul>
+<li>Android Studioの左カラム「Gradle Scripts」より ProjectレベルとApplicationレベルのbuild.gradleファイルにRealmをインストールするパスを記述</li>
+</ul>
+</li>
+<li>ツールバーより「Sync Project with Gradle File」を押下</li>
 </ul>
 
 
-<pre><code>&lt;!doctype html&gt;
-  &lt;html lang="ja"&gt;
-    &lt;body ng-app="group" ng-cloak&gt;
-      &lt;div ng-controller="GroupController"&gt;
-        &lt;table&gt;
-          &lt;thead&gt;
-            &lt;tr&gt;
-              &lt;th&gt;グループ名&lt;/th&gt;
-              &lt;th&gt;コメント&lt;/th&gt;
-              &lt;th&gt;登録日&lt;/th&gt;
-            &lt;/tr&gt;
-          &lt;/thead&gt;
-          &lt;tbody&gt;
-            &lt;tr ng-repeat="group in data.group_list"&gt;
-              &lt;td&gt;{group.group_name}&lt;/td&gt;
-              &lt;td&gt;{group.comment}&lt;/td&gt;
-              &lt;td&gt;{group.regist_date}&lt;/td&gt;
-            &lt;/tr&gt;
-          &lt;/tbody&gt;
-        &lt;/table&gt;
-      &lt;/div&gt;
-   &lt;!-- Anguler JS 読み込み ここから --&gt;
-      &lt;script src="angular.js"&gt;&lt;/script&gt;
-      &lt;script src="angular-resource.js"&gt;&lt;/script&gt;
-   &lt;!-- Anguler JS 読み込み ここまで --&gt;
-      &lt;script&gt;
-        var GroupController = function($scope, $resource){
-
-        // GETパラーメータ
-        var parameter = {hoge: 'fuga'};
-
-        var group_api = $resource(" APIパス ");
-
-        // 非同期でGET通信
-        group_api.get(parameter, function(data){
-            $scope.data = data;
-        });
-
-        var appModule = angular.module('group', ['ngResource']);
-        appModule.controller('GroupController', GroupController);
-      &lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<p>エラーがなければイベントログに「Gradle build finished」となる</p>
 </div>
 
 
@@ -177,7 +151,7 @@ JSONデータにはあるグループのグループ名、コメント、登録�
   
 
 
-<time datetime="2016-05-05T08:14:21+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-09-25T16:36:26+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -185,7 +159,7 @@ JSONデータにはあるグループのグループ名、コメント、登録�
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/05/05/angular-js-get-ajax/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/05/05/angular-js-get-ajax/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/09/25/android-realm/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/09/25/android-realm/" >Tweet</a>
   
   
   
@@ -194,10 +168,8 @@ JSONデータにはあるグループのグループ名、コメント、登録�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/04/30/swift-uicollectionview/" title="Previous Post: SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する">&laquo; SwiftのUIColectionViewでセルを均等に配置し、セルとセルの間に罫線を表示する</a>
+        <a class="basic-alignment left" href="/blog/2016/09/15/laravel-5-3/" title="Previous Post: Laravel Meetup Tokyo Vol.8に行ってきました 2/2">&laquo; Laravel Meetup Tokyo Vol.8に行ってきました 2/2</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/05/06/angular-js-post-ajax/" title="Next Post: Angular JS で、APIを非同期でPOST呼び出しし、実行結果をアラート表示する">Angular JS で、APIを非同期でPOST呼び出しし、実行結果をアラート表示する &raquo;</a>
       
     </p>
   </footer>
