@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-09-25T16:56:22+09:00</updated>
+  <updated>2016-10-17T19:59:22+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[よく使用するartisanコマンド]]></title>
+    <link href="http://engineer-diary.click/blog/2016/10/17/laravel-artisan-command/"/>
+    <updated>2016-10-17T19:11:46+09:00</updated>
+    <id>http://engineer-diary.click/blog/2016/10/17/laravel-artisan-command</id>
+    <content type="html"><![CDATA[<h3>コントローラーの雛形を作成</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:controller HogeController</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>モデルの雛形を作成</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:model Fuga</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>バッチクラスとコマンドを作成</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:console PiyoCommand --command="piyo_cmd"</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>バッチコマンドを実行</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>app/Console/Kernel.php に
+</span><span class='line'>
+</span><span class='line'>protected $commands = [
+</span><span class='line'>    'App\Console\Commands\InspireCommand',
+</span><span class='line'>    'App\Console\Commands\PiyoCommand' // 追加
+</span><span class='line'>];
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>php artisan piyo_cmd</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>テーブルを作成</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:migration create_hoge_table --create=hoge</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>カラムを追加</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:migration add_piyo_fuga_table --table=fuga</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>マイグレーションを実行</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan migrate</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>実行したマイグレーションをロールバック</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan migrate:rollback</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>コマンド一覧確認</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan list</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AndroidアプリにRealmを使用するため、インストールを行う]]></title>
@@ -1436,65 +1513,6 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
 </span><span class='line'>$post_data = json_decode(fgets(fopen('php://input','r')), true);
 </span><span class='line'>$user_id   = (!empty($post_data['user_id'])) ? $post_data['user_id'] : null;</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する]]></title>
-    <link href="http://engineer-diary.click/blog/2016/05/05/angular-js-get-ajax/"/>
-    <updated>2016-05-05T08:14:21+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/05/05/angular-js-get-ajax</id>
-    <content type="html"><![CDATA[<ul>
-<li>APIはJSONデータを返却する</li>
-<li>JSONデータにはあるグループのグループ名、コメント、登録日が格納されている</li>
-<li>返却されたJSONデータを <em>ng-repeat(ループ)</em> で表示する</li>
-</ul>
-
-
-<pre><code>&lt;!doctype html&gt;
-  &lt;html lang="ja"&gt;
-    &lt;body ng-app="group" ng-cloak&gt;
-      &lt;div ng-controller="GroupController"&gt;
-        &lt;table&gt;
-          &lt;thead&gt;
-            &lt;tr&gt;
-              &lt;th&gt;グループ名&lt;/th&gt;
-              &lt;th&gt;コメント&lt;/th&gt;
-              &lt;th&gt;登録日&lt;/th&gt;
-            &lt;/tr&gt;
-          &lt;/thead&gt;
-          &lt;tbody&gt;
-            &lt;tr ng-repeat="group in data.group_list"&gt;
-              &lt;td&gt;{group.group_name}&lt;/td&gt;
-              &lt;td&gt;{group.comment}&lt;/td&gt;
-              &lt;td&gt;{group.regist_date}&lt;/td&gt;
-            &lt;/tr&gt;
-          &lt;/tbody&gt;
-        &lt;/table&gt;
-      &lt;/div&gt;
-   &lt;!-- Anguler JS 読み込み ここから --&gt;
-      &lt;script src="angular.js"&gt;&lt;/script&gt;
-      &lt;script src="angular-resource.js"&gt;&lt;/script&gt;
-   &lt;!-- Anguler JS 読み込み ここまで --&gt;
-      &lt;script&gt;
-        var GroupController = function($scope, $resource){
-
-        // GETパラーメータ
-        var parameter = {hoge: 'fuga'};
-
-        var group_api = $resource(" APIパス ");
-
-        // 非同期でGET通信
-        group_api.get(parameter, function(data){
-            $scope.data = data;
-        });
-
-        var appModule = angular.module('group', ['ngResource']);
-        appModule.controller('GroupController', GroupController);
-      &lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
 ]]></content>
   </entry>
   

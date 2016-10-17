@@ -9,31 +9,9 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="やり方 罫線は背景色を表示する方法をとる。
-(この例の場合は黒)
-よって、セルとセルの間に均等にスペースが空くように配置する イメージ ソースコード 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-class &hellip;">
+  <meta name="description" content="APIはJSONデータを返却する
+JSONデータにはあるグループのグループ名、コメント、登録日が格納されている
+返却されたJSONデータを ng-repeat(ループ) で表示する &lt;!doctype html&gt; &lt;html lang="ja"&gt; &lt;body ng- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,6 +78,92 @@ class &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/05/05/angular-js-get-ajax/">Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-05T08:14:21+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+<li>APIはJSONデータを返却する</li>
+<li>JSONデータにはあるグループのグループ名、コメント、登録日が格納されている</li>
+<li>返却されたJSONデータを <em>ng-repeat(ループ)</em> で表示する</li>
+</ul>
+
+
+<pre><code>&lt;!doctype html&gt;
+  &lt;html lang="ja"&gt;
+    &lt;body ng-app="group" ng-cloak&gt;
+      &lt;div ng-controller="GroupController"&gt;
+        &lt;table&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th&gt;グループ名&lt;/th&gt;
+              &lt;th&gt;コメント&lt;/th&gt;
+              &lt;th&gt;登録日&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;tr ng-repeat="group in data.group_list"&gt;
+              &lt;td&gt;{group.group_name}&lt;/td&gt;
+              &lt;td&gt;{group.comment}&lt;/td&gt;
+              &lt;td&gt;{group.regist_date}&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/div&gt;
+   &lt;!-- Anguler JS 読み込み ここから --&gt;
+      &lt;script src="angular.js"&gt;&lt;/script&gt;
+      &lt;script src="angular-resource.js"&gt;&lt;/script&gt;
+   &lt;!-- Anguler JS 読み込み ここまで --&gt;
+      &lt;script&gt;
+        var GroupController = function($scope, $resource){
+
+        // GETパラーメータ
+        var parameter = {hoge: 'fuga'};
+
+        var group_api = $resource(" APIパス ");
+
+        // 非同期でGET通信
+        group_api.get(parameter, function(data){
+            $scope.data = data;
+        });
+
+        var appModule = angular.module('group', ['ngResource']);
+        appModule.controller('GroupController', GroupController);
+      &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -322,6 +386,10 @@ class &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/10/17/laravel-artisan-command/">よく使用するartisanコマンド</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/09/25/android-realm/">AndroidアプリにRealmを使用するため、インストールを行う</a>
       </li>
     
@@ -335,10 +403,6 @@ class &hellip;">
     
       <li class="post">
         <a href="/blog/2016/08/17/mysql-char/">MySQLの文字コードを確認</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/08/16/javascript-select-value/">javascriptでselectボックスの値を取得する</a>
       </li>
     
   </ul>

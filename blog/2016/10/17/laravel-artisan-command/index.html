@@ -5,15 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>MySQLでユーザーにDB、テーブルに対して権限付与するコマンド - エンジニア日記</title>
+  <title>よく使用するartisanコマンド - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="MySQL DBに移動 1
-USE mysql 登録されているユーザーを確認 1
-SELECT user, host FROM user; ユーザーに付与されている権限を確認 1
-SHOW GRANTS FOR 'ユーザ名'@'ホスト名'; すべての操作権限を指定テーブルに付与 1
-GRANT &hellip;">
+  <meta name="description" content="コントローラーの雛形を作成 1
+php artisan make:controller HogeController モデルの雛形を作成 1
+php artisan make:model Fuga バッチクラスとコマンドを作成 1
+php artisan make:console &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +21,7 @@ GRANT &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/07/13/mysql-authority/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2016/10/17/laravel-artisan-command/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +82,7 @@ GRANT &hellip;">
   
   <header>
     
-      <h1 class="entry-title">MySQLでユーザーにDB、テーブルに対して権限付与するコマンド</h1>
+      <h1 class="entry-title">よく使用するartisanコマンド</h1>
     
     
       <p class="meta">
@@ -99,47 +98,81 @@ GRANT &hellip;">
   
 
 
-<time datetime="2016-07-13T22:51:12+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-10-17T19:11:46+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3>MySQL DBに移動</h3>
+<div class="entry-content"><h3>コントローラーの雛形を作成</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>USE mysql</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:controller HogeController</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>登録されているユーザーを確認</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>SELECT user, host FROM user;</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>ユーザーに付与されている権限を確認</h3>
+<h3>モデルの雛形を作成</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>SHOW GRANTS FOR 'ユーザ名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:model Fuga</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>すべての操作権限を指定テーブルに付与</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT ALL PRIVILEGES ON `DB名`.テーブル TO 'ユーザ名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>すべての操作権限を対象DBのすべてのテーブルに付与</h3>
+<h3>バッチクラスとコマンドを作成</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT ALL PRIVILEGES ON `DB名`.* TO 'ユーザー名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:console PiyoCommand --command="piyo_cmd"</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>SELECT、UPDATE、INSERT、DELETE権限指定テーブルに付与</h3>
+<h3>バッチコマンドを実行</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT SELECT,UPDATE,INSERT,DELETE ON `DB名`.テーブル TO 'ユーザ名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>app/Console/Kernel.php に
+</span><span class='line'>
+</span><span class='line'>protected $commands = [
+</span><span class='line'>    'App\Console\Commands\InspireCommand',
+</span><span class='line'>    'App\Console\Commands\PiyoCommand' // 追加
+</span><span class='line'>];
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>php artisan piyo_cmd</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>テーブルを作成</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:migration create_hoge_table --create=hoge</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>カラムを追加</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:migration add_piyo_fuga_table --table=fuga</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>マイグレーションを実行</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan migrate</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>実行したマイグレーションをロールバック</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan migrate:rollback</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>コマンド一覧確認</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan list</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -163,7 +196,7 @@ GRANT &hellip;">
   
 
 
-<time datetime="2016-07-13T22:51:12+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-10-17T19:11:46+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -171,7 +204,7 @@ GRANT &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/07/13/mysql-authority/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/07/13/mysql-authority/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/10/17/laravel-artisan-command/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/10/17/laravel-artisan-command/" >Tweet</a>
   
   
   
@@ -180,10 +213,8 @@ GRANT &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/06/30/ext-change/" title="Previous Post: カレントディレクトリ配下のファイルの拡張子を変更する">&laquo; カレントディレクトリ配下のファイルの拡張子を変更する</a>
+        <a class="basic-alignment left" href="/blog/2016/09/25/android-realm/" title="Previous Post: AndroidアプリにRealmを使用するため、インストールを行う">&laquo; AndroidアプリにRealmを使用するため、インストールを行う</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/08/16/javascript-select-value/" title="Next Post: javascriptでselectボックスの値を取得する">javascriptでselectボックスの値を取得する &raquo;</a>
       
     </p>
   </footer>
