@@ -5,15 +5,19 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Hello World - エンジニア日記</title>
+  <title>vagrant box add で transfer closed - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="My First Blog 初めての投稿です。
-仕事はWEBエンジニアをやっています。
-趣味でiPhoneアプリ作成もやっています。
-この前、無事に公開されました^^
-これから、日々の開発中にうまくいったこと、うまくいかなかったことなどをまとめる技術ブログとして、どんどん更新していこうと思います &hellip;">
+  <meta name="description" content="下記コマンドでboxを追加 1
+2
+3
+vagrant box add {name} {url} vagrant box add centos/7 https://atlas.hashicorp.com/centos/boxes/7 エラーが発生 1
+2
+3
+4
+5
+An error &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +26,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/04/24/hello-world/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2016/11/02/vagrant-box-add-error/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +87,7 @@
   
   <header>
     
-      <h1 class="entry-title">Hello World</h1>
+      <h1 class="entry-title">Vagrant Box Add で Transfer Closed</h1>
     
     
       <p class="meta">
@@ -99,22 +103,50 @@
   
 
 
-<time datetime="2016-04-24T19:12:54+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-11-02T20:37:22+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>My First Blog</h2>
+<div class="entry-content"><h2>下記コマンドでboxを追加</h2>
 
-<p>初めての投稿です。<br/>
-仕事はWEBエンジニアをやっています。<br/>
-趣味でiPhoneアプリ作成もやっています。<br/>
-この前、無事に公開されました^^<br/>
-これから、日々の開発中にうまくいったこと、うまくいかなかったことなどをまとめる技術ブログとして、どんどん更新していこうと思います。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant box add {name} {url}
+</span><span class='line'>
+</span><span class='line'>vagrant box add centos/7 https://atlas.hashicorp.com/centos/boxes/7</span></code></pre></td></tr></table></div></figure>
 
-<p>よろしくお願いします。</p>
+
+<h2>エラーが発生</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>An error occurred while downloading the remote file. The error
+</span><span class='line'>message, if any, is reproduced below. Please fix this error and try
+</span><span class='line'>again.
+</span><span class='line'>
+</span><span class='line'>transfer closed with 386379308 bytes remaining to read</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>解決方法</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/.vagrant.d/tmp/
+</span><span class='line'>rm *
+</span><span class='line'>
+</span><span class='line'>再度 vagrant box add 〜 を実行</span></code></pre></td></tr></table></div></figure>
+
+
+<p>無事にboxを追加できました。</p>
 </div>
 
 
@@ -137,7 +169,7 @@
   
 
 
-<time datetime="2016-04-24T19:12:54+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-11-02T20:37:22+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -145,7 +177,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/04/24/hello-world/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/04/24/hello-world/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/11/02/vagrant-box-add-error/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/11/02/vagrant-box-add-error/" >Tweet</a>
   
   
   
@@ -154,8 +186,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2016/10/17/laravel-artisan-command/" title="Previous Post: よく使用するartisanコマンド">&laquo; よく使用するartisanコマンド</a>
       
-        <a class="basic-alignment right" href="/blog/2016/04/28/apache-access-log-search/" title="Next Post: ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する">ApacheのアクセスログからURLごと、時間帯別でURLごとにアクセスを集計する &raquo;</a>
       
     </p>
   </footer>
