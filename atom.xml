@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-11-02T20:46:03+09:00</updated>
+  <updated>2016-11-03T17:45:09+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ローカルホストとリモートホストをマウント時にエラー]]></title>
+    <link href="http://engineer-diary.click/blog/2016/11/03/vagrant-shared-folder-error/"/>
+    <updated>2016-11-03T17:29:16+09:00</updated>
+    <id>http://engineer-diary.click/blog/2016/11/03/vagrant-shared-folder-error</id>
+    <content type="html"><![CDATA[<h2>下記エラーが出力された</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Vagrant was unable to mount VirtualBox shared folders. This is usually
+</span><span class='line'>because the filesystem "vboxsf" is not available.</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>解決方法</h2>
+
+<h3>まず、vagrant up時に自動的に新しいバージョンのGuest Additionsに更新してくれる「vagrant-vbguest」というプラグインをインストール</h3>
+
+<p>vagrant plugin install vagrant-vbguest</p>
+
+<h3>Vagrantが起動している状態でマウント失敗している仮想マシンの状態確認</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest --status
+</span><span class='line'>
+</span><span class='line'>[default] No installation found.</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Guest Additionsを更新</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>再度仮想マシンの状態確認</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest --status
+</span><span class='line'>
+</span><span class='line'>[default] GuestAdditions 5.1.8 running --- OK.</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>仮想マシンを再起動</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant reload</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解決しました。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[vagrant box add で transfer closed]]></title>
@@ -1400,61 +1455,6 @@ session_start() 処理が走るとセッションに排他ロックがかかる�
 <p><a href="http://unsolublesugar.com/20121103/113321/">http://unsolublesugar.com/20121103/113321/</a>
 <a href="http://www.objective-php.net/blog/detail/20110813">http://www.objective-php.net/blog/detail/20110813</a>
 <a href="http://blog2.elephantech.net/php/%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%97%E3%81%A6%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E7%B5%82%E4%BA%86%E3%81%99/">http://blog2.elephantech.net/php/%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%97%E3%81%A6%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E7%B5%82%E4%BA%86%E3%81%99/</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Github Pages、Octopressで独自ドメイン設定]]></title>
-    <link href="http://engineer-diary.click/blog/2016/05/10/github-pages-octopress-original-domain/"/>
-    <updated>2016-05-10T21:37:07+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/05/10/github-pages-octopress-original-domain</id>
-    <content type="html"><![CDATA[<p>GitHub PagesとOctopressを利用し、独自ドメインを設定するときにはまったのでメモ。<br/>
-独自ドメイン取得の流れと設定方法は下記</p>
-
-<ol>
-<li>お名前.comで独自ドメイン取得</li>
-<li>取得したドメインにAレコードを2つ追加し、それぞれGithubのDNSサーバーのIPアドレス(2016/05/10 時点で 192.30.252.153、192.30.252.154)を設定</li>
-<li>source/CNAME ファイルに取得した独自ドメインを記述</li>
-</ol>
-
-
-<p>と、ここまでは<strong>「GitHub Pages 独自ドメイン 設定」</strong>等でググれば、結構出てくるので問題はなかった。<br/>
-だが、いざ取得した独自ドメインでアクセスすると、CSSやJSのパスが上手く独自ドメイン反映後に対応していなく、CSSの読み込みエラーでページが崩れた。</p>
-
-<h3>何が起きたのか?</h3>
-
-<p>Github PagesのトップページのURLは <a href="http://username.github.io/repository-name">http://username.github.io/repository-name</a> となる。<br/>
-(リポジトリごとのWebページとして作成)<br/>
-そのため、CSSなどの読み込みパスは /repository-name/hoge.css となる。</p>
-
-<p>独自ドメイン設定後は <a href="http://original-domain">http://original-domain</a> となるためCSSの読み込みパスは /hoge.css としたいのだが、<br/>
-HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name/hoge.css のままとなり、読み込みエラーとなった。</p>
-
-<h3>解決方法</h3>
-
-<p>_config.yml を修正</p>
-
-<ul>
-<li>修正前</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># If publishing to a subdirectory as in http://site.com/project set 'root: /project'  
-</span><span class='line'>root: /repository-name</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>修正後</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># If publishing to a subdirectory as in http://site.com/project set 'root: /project'  
-</span><span class='line'>root: /</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   
