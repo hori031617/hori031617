@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-11-03T17:46:31+09:00</updated>
+  <updated>2016-11-12T19:48:10+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CloudWatch Events cronのタイムゾーン]]></title>
+    <link href="http://engineer-diary.click/blog/2016/11/12/cloudwatch-events/"/>
+    <updated>2016-11-12T19:35:25+09:00</updated>
+    <id>http://engineer-diary.click/blog/2016/11/12/cloudwatch-events</id>
+    <content type="html"><![CDATA[<p>AWS Lambda で関数を作成し、その関数をCloudWatch Eventsで定期的に実行しようとして、<br/>
+cronを設定したが、時間どおりに動作しなかった。</p>
+
+<p>CloudWatch Eventsのトラブルシューティングページを確認すると</p>
+
+<blockquote><p>ScheduleExpressions は UTC です。UTC タイムゾーンで自己トリガーするルールのスケジュールが設定されていることを確認します。</p></blockquote>
+
+<p>とあり、タイムゾーンをUTCで設定する必要があった。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ローカルホストとリモートホストをマウント時にエラー]]></title>
@@ -1421,42 +1437,6 @@ MySQLだと特に気にしなくてもいいのだがPostgreSQLで特に何も�
 </span><span class='line'>------------
 </span><span class='line'>        110</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PHPでAPIを作成し、画面が表示されるときに非同期で２つ以上のAPIを呼ぶ]]></title>
-    <link href="http://engineer-diary.click/blog/2016/05/12/session-write-close/"/>
-    <updated>2016-05-12T07:24:11+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/05/12/session-write-close</id>
-    <content type="html"><![CDATA[<p>表題の実装を行った。<br/>
-APIを1つだけしか呼ばない場合だと問題は表面化しなかったのだが、<br/>
-２つ以上を呼び出すと先に呼び出したAPIの処理が終わってから次のAPIが実行されるという<br/>
-処理動作になっていた。<br/>
-そのため、画面表示に少し時間がかかる。</p>
-
-<h3>原因</h3>
-
-<p>APIでは <strong>session_start()</strong> 処理が記述されていた。<br/>
-session_start() 処理が走るとセッションに排他ロックがかかるため<br/>
-次のAPIが書き込み待ちになり実行が遅れるというものだった。</p>
-
-<h3>対応策</h3>
-
-<p>セッションへの書き込みが完了したら（セッションに対する処理が終われば）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>session_write_close()</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-を呼び出し、排他ロックを解除する。</p>
-
-<h3>参考URL</h3>
-
-<p><a href="http://unsolublesugar.com/20121103/113321/">http://unsolublesugar.com/20121103/113321/</a>
-<a href="http://www.objective-php.net/blog/detail/20110813">http://www.objective-php.net/blog/detail/20110813</a>
-<a href="http://blog2.elephantech.net/php/%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%97%E3%81%A6%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E7%B5%82%E4%BA%86%E3%81%99/">http://blog2.elephantech.net/php/%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%97%E3%81%A6%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E7%B5%82%E4%BA%86%E3%81%99/</a></p>
 ]]></content>
   </entry>
   

@@ -5,14 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ローカルホストとリモートホストをマウント時にエラー - エンジニア日記</title>
+  <title>CloudWatch Events cronのタイムゾーン - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="下記エラーが出力された 1
-2
-Vagrant was unable to mount VirtualBox shared folders. This is usually
-because the filesystem "vboxsf" is not available. 解決方法 まず、 &hellip;">
+  <meta name="description" content="AWS Lambda で関数を作成し、その関数をCloudWatch Eventsで定期的に実行しようとして、
+cronを設定したが、時間どおりに動作しなかった。 CloudWatch Eventsのトラブルシューティングページを確認すると ScheduleExpressions は UTC です &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +19,7 @@ because the filesystem "vboxsf" is not available. 解決方法 まず、 &hellip
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/11/03/vagrant-shared-folder-error/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2016/11/12/cloudwatch-events/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,7 +80,7 @@ because the filesystem "vboxsf" is not available. 解決方法 まず、 &hellip
   
   <header>
     
-      <h1 class="entry-title">ローカルホストとリモートホストをマウント時にエラー</h1>
+      <h1 class="entry-title">CloudWatch Events Cronのタイムゾーン</h1>
     
     
       <p class="meta">
@@ -98,62 +96,21 @@ because the filesystem "vboxsf" is not available. 解決方法 まず、 &hellip
   
 
 
-<time datetime="2016-11-03T17:29:16+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-11-12T19:35:25+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>下記エラーが出力された</h2>
+<div class="entry-content"><p>AWS Lambda で関数を作成し、その関数をCloudWatch Eventsで定期的に実行しようとして、<br/>
+cronを設定したが、時間どおりに動作しなかった。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Vagrant was unable to mount VirtualBox shared folders. This is usually
-</span><span class='line'>because the filesystem "vboxsf" is not available.</span></code></pre></td></tr></table></div></figure>
+<p>CloudWatch Eventsのトラブルシューティングページを確認すると</p>
 
+<blockquote><p>ScheduleExpressions は UTC です。UTC タイムゾーンで自己トリガーするルールのスケジュールが設定されていることを確認します。</p></blockquote>
 
-<h2>解決方法</h2>
-
-<h3>まず、vagrant up時に自動的に新しいバージョンのGuest Additionsに更新してくれる「vagrant-vbguest」というプラグインをインストール</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant plugin install vagrant-vbguest</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Vagrantが起動している状態でマウント失敗している仮想マシンの状態確認</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest --status
-</span><span class='line'>
-</span><span class='line'>[default] No installation found.</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Guest Additionsを更新</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>再度仮想マシンの状態確認</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest --status
-</span><span class='line'>
-</span><span class='line'>[default] GuestAdditions 5.1.8 running --- OK.</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>仮想マシンを再起動</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant reload</span></code></pre></td></tr></table></div></figure>
-
-
-<p>解決しました。</p>
+<p>とあり、タイムゾーンをUTCで設定する必要があった。</p>
 </div>
 
 
@@ -176,7 +133,7 @@ because the filesystem "vboxsf" is not available. 解決方法 まず、 &hellip
   
 
 
-<time datetime="2016-11-03T17:29:16+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-11-12T19:35:25+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -184,7 +141,7 @@ because the filesystem "vboxsf" is not available. 解決方法 まず、 &hellip
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/11/03/vagrant-shared-folder-error/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/11/03/vagrant-shared-folder-error/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/11/12/cloudwatch-events/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/11/12/cloudwatch-events/" >Tweet</a>
   
   
   
@@ -193,10 +150,8 @@ because the filesystem "vboxsf" is not available. 解決方法 まず、 &hellip
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/11/02/vagrant-box-add-error/" title="Previous Post: vagrant box add で transfer closed">&laquo; vagrant box add で transfer closed</a>
+        <a class="basic-alignment left" href="/blog/2016/11/03/vagrant-shared-folder-error/" title="Previous Post: ローカルホストとリモートホストをマウント時にエラー">&laquo; ローカルホストとリモートホストをマウント時にエラー</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/11/12/cloudwatch-events/" title="Next Post: CloudWatch Events cronのタイムゾーン">CloudWatch Events cronのタイムゾーン &raquo;</a>
       
     </p>
   </footer>
