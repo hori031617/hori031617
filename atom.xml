@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-11-12T19:48:10+09:00</updated>
+  <updated>2016-11-12T19:49:50+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -18,8 +18,7 @@
     <link href="http://engineer-diary.click/blog/2016/11/12/cloudwatch-events/"/>
     <updated>2016-11-12T19:35:25+09:00</updated>
     <id>http://engineer-diary.click/blog/2016/11/12/cloudwatch-events</id>
-    <content type="html"><![CDATA[<p>AWS Lambda で関数を作成し、その関数をCloudWatch Eventsで定期的に実行しようとして、<br/>
-cronを設定したが、時間どおりに動作しなかった。</p>
+    <content type="html"><![CDATA[<p>AWS Lambda で関数を作成し、その関数をCloudWatch Eventsで定期的に実行しようとして、cronを設定したが時間どおりに動作しなかった。</p>
 
 <p>CloudWatch Eventsのトラブルシューティングページを確認すると</p>
 
