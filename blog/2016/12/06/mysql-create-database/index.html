@@ -5,14 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>よく使用するartisanコマンド - エンジニア日記</title>
+  <title>MySQLで文字コードを指定しデータベース作成 - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="コントローラーの雛形を作成 1
-php artisan make:controller HogeController モデルの雛形を作成 1
-php artisan make:model Fuga バッチクラスとコマンドを作成 1
-php artisan make:console &hellip;">
+  <meta name="description" content="文字コード utf8で作成 1
+CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8; 文字コード utf8mb4で作成 1
+CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8mb4; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +20,7 @@ php artisan make:console &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/10/17/laravel-artisan-command/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2016/12/06/mysql-create-database/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,7 +81,7 @@ php artisan make:console &hellip;">
   
   <header>
     
-      <h1 class="entry-title">よく使用するartisanコマンド</h1>
+      <h1 class="entry-title">MySQLで文字コードを指定しデータベース作成</h1>
     
     
       <p class="meta">
@@ -98,81 +97,32 @@ php artisan make:console &hellip;">
   
 
 
-<time datetime="2016-10-17T19:11:46+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-12-06T22:30:53+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3>コントローラーの雛形を作成</h3>
+<div class="entry-content"><h2>文字コード utf8で作成</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:controller HogeController</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8;</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>モデルの雛形を作成</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:model Fuga</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>バッチクラスとコマンドを作成</h3>
+<h2>文字コード utf8mb4で作成</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:console PiyoCommand --command="piyo_cmd"</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8mb4;</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>バッチコマンドを実行</h3>
+<h3>utf8mb4とは</h3>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>app/Console/Kernel.php に
-</span><span class='line'>
-</span><span class='line'>protected $commands = [
-</span><span class='line'>    'App\Console\Commands\InspireCommand',
-</span><span class='line'>    'App\Console\Commands\PiyoCommand' // 追加
-</span><span class='line'>];
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>php artisan piyo_cmd</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>テーブルを作成</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:migration create_hoge_table --create=hoge</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>カラムを追加</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:migration add_piyo_fuga_table --table=fuga</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>マイグレーションを実行</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan migrate</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>実行したマイグレーションをロールバック</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan migrate:rollback</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>コマンド一覧確認</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan list</span></code></pre></td></tr></table></div></figure>
+<ul>
+<li>文字コードの一種で、UTF8で4バイト文字を扱う事が出来るもの</li>
+<li>絵文字や中国漢字、日本語でも特殊漢字などは4バイトが含まれている</li>
+<li>MySQLでは5.5からこのutf8mb4に対応している</li>
+</ul>
 
 </div>
 
@@ -196,7 +146,7 @@ php artisan make:console &hellip;">
   
 
 
-<time datetime="2016-10-17T19:11:46+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-12-06T22:30:53+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -204,7 +154,7 @@ php artisan make:console &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/10/17/laravel-artisan-command/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/10/17/laravel-artisan-command/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/12/06/mysql-create-database/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/12/06/mysql-create-database/" >Tweet</a>
   
   
   
@@ -213,10 +163,8 @@ php artisan make:console &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/09/25/android-realm/" title="Previous Post: AndroidアプリにRealmを使用するため、インストールを行う">&laquo; AndroidアプリにRealmを使用するため、インストールを行う</a>
+        <a class="basic-alignment left" href="/blog/2016/12/04/mysql-create-account/" title="Previous Post: MySQLでアカウント作成とパスワード変更">&laquo; MySQLでアカウント作成とパスワード変更</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/11/02/vagrant-box-add-error/" title="Next Post: vagrant box add で transfer closed">vagrant box add で transfer closed &raquo;</a>
       
     </p>
   </footer>
