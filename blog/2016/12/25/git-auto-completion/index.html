@@ -5,17 +5,21 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>カレントディレクトリ配下のファイルの拡張子を変更する - エンジニア日記</title>
+  <title>Macでgitのコマンドやブランチの補完をtabで出来るようにする - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="ttlファイルをtxtファイルにするために拡張子の変更をコマンドで行う。
-だが、以下の方法ではダメだった。 1
-mv *.ttl *.txt 一括でファイルを変更するにはfor文で行う。 1
+  <meta name="description" content="brewで「bash-completion」をインストール 1
+sudo brew install bash-completion .bashrc に下記を追加し、再読み込み 1
 2
 3
-for fname in *.ttl; do
-mv $fname ${fname%.ttl}. &hellip;">
+4
+5
+6
+7
+8
+9
+cd vi .bashrc if [ -f $(brew --prefix)/etc/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,7 +28,7 @@ mv $fname ${fname%.ttl}. &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/06/30/ext-change/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2016/12/25/git-auto-completion/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -85,7 +89,7 @@ mv $fname ${fname%.ttl}. &hellip;">
   
   <header>
     
-      <h1 class="entry-title">カレントディレクトリ配下のファイルの拡張子を変更する</h1>
+      <h1 class="entry-title">Macでgitのコマンドやブランチの補完をtabで出来るようにする</h1>
     
     
       <p class="meta">
@@ -101,30 +105,42 @@ mv $fname ${fname%.ttl}. &hellip;">
   
 
 
-<time datetime="2016-06-30T21:13:04+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-12-25T12:29:52+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>ttlファイルをtxtファイルにするために拡張子の変更をコマンドで行う。<br/>
-だが、以下の方法ではダメだった。</p>
+<div class="entry-content"><h2>brewで「bash-completion」をインストール</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mv *.ttl *.txt</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo brew install bash-completion</span></code></pre></td></tr></table></div></figure>
 
 
-<p><br>
-一括でファイルを変更するにはfor文で行う。</p>
+<h2>.bashrc に下記を追加し、再読み込み</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>for fname in *.ttl; do
-</span><span class='line'>mv $fname ${fname%.ttl}.txt;
-</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd
+</span><span class='line'>
+</span><span class='line'>vi .bashrc
+</span><span class='line'>
+</span><span class='line'>if [ -f $(brew --prefix)/etc/bash_completion ]; then
+</span><span class='line'>  . $(brew --prefix)/etc/bash_completion
+</span><span class='line'>fi
+</span><span class='line'>
+</span><span class='line'>source .bashrc</span></code></pre></td></tr></table></div></figure>
 
+
+<p>tabキーで補完が出来るようになりました。</p>
 </div>
 
 
@@ -147,7 +163,7 @@ mv $fname ${fname%.ttl}. &hellip;">
   
 
 
-<time datetime="2016-06-30T21:13:04+09:00" pubdate data-updated="true"></time>
+<time datetime="2016-12-25T12:29:52+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -155,7 +171,7 @@ mv $fname ${fname%.ttl}. &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/06/30/ext-change/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/06/30/ext-change/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/12/25/git-auto-completion/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/12/25/git-auto-completion/" >Tweet</a>
   
   
   
@@ -164,10 +180,8 @@ mv $fname ${fname%.ttl}. &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/06/29/replace-string/" title="Previous Post: カレントディレクトリにあるファイルの文字列を一度に置換する">&laquo; カレントディレクトリにあるファイルの文字列を一度に置換する</a>
+        <a class="basic-alignment left" href="/blog/2016/12/06/mysql-create-database/" title="Previous Post: MySQLで文字コードを指定しデータベース作成">&laquo; MySQLで文字コードを指定しデータベース作成</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/07/13/mysql-authority/" title="Next Post: MySQLでユーザーにDB、テーブルに対して権限付与するコマンド">MySQLでユーザーにDB、テーブルに対して権限付与するコマンド &raquo;</a>
       
     </p>
   </footer>
