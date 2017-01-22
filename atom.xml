@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2016-12-29T10:18:52+09:00</updated>
+  <updated>2017-01-22T09:49:51+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux タイムゾーンをJSTに設定する]]></title>
+    <link href="http://engineer-diary.click/blog/2017/01/22/linux-date-jst/"/>
+    <updated>2017-01-22T09:34:50+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/01/22/linux-date-jst</id>
+    <content type="html"><![CDATA[<h2>現在の時刻を確認</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ date
+</span><span class='line'>2017年  1月 22日 日曜日 00:39:55 UTC</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>タイムゾーンの設定を確認</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ls -l /etc/localtime*
+</span><span class='line'>lrwxrwxrwx. 1 root root 25 10月  3 13:47 /etc/localtime -&gt; ../usr/share/zoneinfo/UTC</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>現在の設定をバックアップ</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo cp /etc/localtime /etc/localtime.org
+</span><span class='line'>$ ls -l /etc/localtime*
+</span><span class='line'>lrwxrwxrwx. 1 root root  25 10月  3 13:47 /etc/localtime -&gt; ../usr/share/zoneinfo/UTC
+</span><span class='line'>-rw-r--r--  1 root root 118  1月 22 00:42 /etc/localtime.org</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>タイムゾーンをJSTにする</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+</span><span class='line'>$ ls -l /etc/localtime*
+</span><span class='line'>lrwxrwxrwx 1 root root  30  1月 22 09:43 /etc/localtime -&gt; /usr/share/zoneinfo/Asia/Tokyo
+</span><span class='line'>-rw-r--r-- 1 root root 118  1月 22 09:42 /etc/localtime.org</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>設定が変わったことを確認</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ date
+</span><span class='line'>2017年  1月 22日 日曜日 09:44:39 JST</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Laravel5 artisanコマンドでClass not found エラー]]></title>
@@ -992,73 +1047,6 @@ Tokenizer PHP Extension</p>
 
 <p>となり、コミット2のみのコミット内容が取り消され、コミットログに取り消しログが残る。<br/>
 ※取り消前の状態をpushしていても、コミット取り消後もpushはできる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Smartyで出来る便利だと思ったこと]]></title>
-    <link href="http://engineer-diary.click/blog/2016/05/21/php-smarty/"/>
-    <updated>2016-05-21T21:13:33+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/05/21/php-smarty</id>
-    <content type="html"><![CDATA[<h3>GETパラメータを取得</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.get.パラメータ名}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>POSTパラメータを取得</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.post.パラメータ名}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>クッキーを取得</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.cookie.クッキー名}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>セッション変数を取得</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.session.セッション変数名}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>PHPの定数にアクセス</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.const.定数名}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>現在時間を取得</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.now}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>出力文字をスケープ</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{$hoge|escape}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>タイムスタンプで日付を比較</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{if $hoge|strtotime &gt;= $fuga|strtotime}
-</span><span class='line'>  piyo
-</span><span class='line'>{/if}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>日付のフォーマットを整える</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{* YYYY/mm/dd *}
-</span><span class='line'>{$date|date_format|"%Y/%m/%d"}</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

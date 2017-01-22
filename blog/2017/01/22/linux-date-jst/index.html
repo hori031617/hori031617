@@ -5,15 +5,17 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Laravel5 artisanコマンドでClass not found エラー - エンジニア日記</title>
+  <title>Linux タイムゾーンをJSTに設定する - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="下記コマンドを実行、Class not found エラーが出力された。 1
+  <meta name="description" content="現在の時刻を確認 1
 2
-3
-4
-php artisan migrate:rollback [Symfony\Component\Debug\Exception\FatalThrowableError] Class 'クラス名' not &hellip;">
+$ date
+2017年 1月 22日 日曜日 00:39:55 UTC タイムゾーンの設定を確認 1
+2
+$ ls -l /etc/localtime*
+lrwxrwxrwx. 1 root root 25 10月 3 13:47 /etc/localtime -&gt &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +24,7 @@ php artisan migrate:rollback [Symfony\Component\Debug\Exception\FatalThrowableEr
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/12/29/laravel5-class-not-found/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2017/01/22/linux-date-jst/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +85,7 @@ php artisan migrate:rollback [Symfony\Component\Debug\Exception\FatalThrowableEr
   
   <header>
     
-      <h1 class="entry-title">Laravel5 artisanコマンドでClass Not Found エラー</h1>
+      <h1 class="entry-title">Linux タイムゾーンをJSTに設定する</h1>
     
     
       <p class="meta">
@@ -99,35 +101,60 @@ php artisan migrate:rollback [Symfony\Component\Debug\Exception\FatalThrowableEr
   
 
 
-<time datetime="2016-12-29T10:08:41+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-01-22T09:34:50+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>下記コマンドを実行、Class not found エラーが出力された。</p>
+<div class="entry-content"><h2>現在の時刻を確認</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ date
+</span><span class='line'>2017年  1月 22日 日曜日 00:39:55 UTC</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>タイムゾーンの設定を確認</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ls -l /etc/localtime*
+</span><span class='line'>lrwxrwxrwx. 1 root root 25 10月  3 13:47 /etc/localtime -&gt; ../usr/share/zoneinfo/UTC</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>現在の設定をバックアップ</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan migrate:rollback
-</span><span class='line'>
-</span><span class='line'>[Symfony\Component\Debug\Exception\FatalThrowableError]  
-</span><span class='line'>Class 'クラス名' not found</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo cp /etc/localtime /etc/localtime.org
+</span><span class='line'>$ ls -l /etc/localtime*
+</span><span class='line'>lrwxrwxrwx. 1 root root  25 10月  3 13:47 /etc/localtime -&gt; ../usr/share/zoneinfo/UTC
+</span><span class='line'>-rw-r--r--  1 root root 118  1月 22 00:42 /etc/localtime.org</span></code></pre></td></tr></table></div></figure>
 
 
-<p>これは、クラス名を急に変えたときなどに起こる。<br/>
-特に、tableをartisanで作り後からスペルミスなどでクラス名を変えた場合。<br/>
-LaravelはAutoLoaderがあり、composerがクラス管理をしており、composerの管轄外でクラス名等を変更すると発生するエラー。<br/>
-解決策としては下記コマンドでcomposerにクラス名を変更したと教える。</p>
+<h2>タイムゾーンをJSTにする</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>composer dump-autoload</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+</span><span class='line'>$ ls -l /etc/localtime*
+</span><span class='line'>lrwxrwxrwx 1 root root  30  1月 22 09:43 /etc/localtime -&gt; /usr/share/zoneinfo/Asia/Tokyo
+</span><span class='line'>-rw-r--r-- 1 root root 118  1月 22 09:42 /etc/localtime.org</span></code></pre></td></tr></table></div></figure>
 
 
-<p>再度、コマンドを実行しエラーが解消されました。</p>
+<h2>設定が変わったことを確認</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ date
+</span><span class='line'>2017年  1月 22日 日曜日 09:44:39 JST</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -150,7 +177,7 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
   
 
 
-<time datetime="2016-12-29T10:08:41+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-01-22T09:34:50+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -158,7 +185,7 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/12/29/laravel5-class-not-found/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/12/29/laravel5-class-not-found/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2017/01/22/linux-date-jst/" data-via="" data-counturl="http://engineer-diary.click/blog/2017/01/22/linux-date-jst/" >Tweet</a>
   
   
   
@@ -167,10 +194,8 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/12/25/git-auto-completion/" title="Previous Post: Macでgitのコマンドやブランチの補完をtabで出来るようにする">&laquo; Macでgitのコマンドやブランチの補完をtabで出来るようにする</a>
+        <a class="basic-alignment left" href="/blog/2016/12/29/laravel5-class-not-found/" title="Previous Post: Laravel5 artisanコマンドでClass not found エラー">&laquo; Laravel5 artisanコマンドでClass not found エラー</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2017/01/22/linux-date-jst/" title="Next Post: Linux タイムゾーンをJSTに設定する">Linux タイムゾーンをJSTに設定する &raquo;</a>
       
     </p>
   </footer>
