@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>MySQLで文字コードを指定しデータベース作成 - エンジニア日記</title>
+  <title>ELB(443) → EC2(80)のルートを通るときにLaravel5のroute()がhttpとなる問題 - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="文字コード utf8で作成 1
-CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8; 文字コード utf8mb4で作成 1
-CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8mb4; &hellip;">
+  <meta name="description" content="AWS環境にて。
+EC2にLaravel5で作成したプロジェクトがあり、テンプレートのリンク先をLaravelの関数であるroute()にて実装。
+EC2をELBにぶら下げ、ユーザーからのアクセスを ELB(443) → EC2(80) で処理するとき、route() &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@ CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8mb4; &hell
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/12/06/mysql-create-database/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2017/01/30/elb-ec2-laravel5/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +81,7 @@ CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8mb4; &hell
   
   <header>
     
-      <h1 class="entry-title">MySQLで文字コードを指定しデータベース作成</h1>
+      <h1 class="entry-title">ELB(443) → EC2(80)のルートを通るときにLaravel5のroute()がhttpとなる問題</h1>
     
     
       <p class="meta">
@@ -97,33 +97,41 @@ CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8mb4; &hell
   
 
 
-<time datetime="2016-12-06T22:30:53+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-01-30T22:02:58+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>文字コード utf8で作成</h2>
+<div class="entry-content"><p>AWS環境にて。<br/>
+EC2にLaravel5で作成したプロジェクトがあり、テンプレートのリンク先をLaravelの関数であるroute()にて実装。<br/>
+EC2をELBにぶら下げ、ユーザーからのアクセスを ELB(443) → EC2(80) で処理するとき、route()から出力されるプロトコルはhttpとなってしまう。<br/>
+これは、Laravelとしては80番でリクエストが来ているため上記の動作となってしまう。</p>
+
+<h2>対応方法</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8;</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>app/Providers/AppServiceProvider.php  
+</span><span class='line'>public function boot()
+</span><span class='line'>{
+</span><span class='line'>    // 環境がローカル環境でないとき
+</span><span class='line'>    if (!app()-&gt;environment('local')) {
+</span><span class='line'>        // すべてのリクエストをhttpsとする
+</span><span class='line'>        \URL::forceSchema('https');
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>文字コード utf8mb4で作成</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8mb4;</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>utf8mb4とは</h3>
-
-<ul>
-<li>文字コードの一種で、UTF8で4バイト文字を扱う事が出来るもの</li>
-<li>絵文字や中国漢字、日本語でも特殊漢字などは4バイトが含まれている</li>
-<li>MySQLでは5.5からこのutf8mb4に対応している</li>
-</ul>
-
+<p><strong>※ if文の条件は要調整</strong></p>
 </div>
 
 
@@ -146,7 +154,7 @@ CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8mb4; &hell
   
 
 
-<time datetime="2016-12-06T22:30:53+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-01-30T22:02:58+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -154,7 +162,7 @@ CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8mb4; &hell
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/12/06/mysql-create-database/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/12/06/mysql-create-database/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2017/01/30/elb-ec2-laravel5/" data-via="" data-counturl="http://engineer-diary.click/blog/2017/01/30/elb-ec2-laravel5/" >Tweet</a>
   
   
   
@@ -163,10 +171,8 @@ CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8mb4; &hell
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/12/04/mysql-create-account/" title="Previous Post: MySQLでアカウント作成とパスワード変更">&laquo; MySQLでアカウント作成とパスワード変更</a>
+        <a class="basic-alignment left" href="/blog/2017/01/22/linux-date-jst/" title="Previous Post: Linux タイムゾーンをJSTに設定する">&laquo; Linux タイムゾーンをJSTに設定する</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/12/25/git-auto-completion/" title="Next Post: Macでgitのコマンドやブランチの補完をtabで出来るようにする">Macでgitのコマンドやブランチの補完をtabで出来るようにする &raquo;</a>
       
     </p>
   </footer>
