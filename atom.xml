@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-02-26T10:09:29+09:00</updated>
+  <updated>2017-03-05T19:09:57+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel5で論理削除を実装する手順]]></title>
+    <link href="http://engineer-diary.click/blog/2017/03/05/laravel5-deleted-at/"/>
+    <updated>2017-03-05T18:57:44+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/03/05/laravel5-deleted-at</id>
+    <content type="html"><![CDATA[<h2>1. Migrateファイルを作成時、以下のカラムを記述</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$table-&gt;softDeletes();  // deleted_atカラムが追加される</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. Modelに以下を追加</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>use Illuminate\Database\Eloquent\SoftDeletes; // 追加する
+</span><span class='line'>
+</span><span class='line'>class Hoge extends Model
+</span><span class='line'>{
+</span><span class='line'>    // 論理削除を有効化
+</span><span class='line'>    use SoftDeletes;
+</span><span class='line'>    protected $dates = ['deleted_at'];</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上記1.2の設定で論理削除が有効になる。<br/>
+deleted_atに日付が登録されていれば、<br/>
+<strong>SELECT文にWHERE句などを記述しなくても、取得されない。</strong></p>
+
+<h2>3. Eloquentでdeleted_at に値を登録</h2>
+
+<h3>通常のdelete文から変更なし</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$fuga = Fuga::findOrFail($id);
+</span><span class='line'>$fuga-&gt;delete(); // deleted_at = now()が入って、delete文でカラムは削除されない。</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Laravel5にてjsonを返却するAPIを作成する]]></title>
@@ -891,20 +936,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 </span><span class='line'>mv $fname ${fname%.ttl}.txt;
 </span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[カレントディレクトリにあるファイルの文字列を一度に置換する]]></title>
-    <link href="http://engineer-diary.click/blog/2016/06/29/replace-string/"/>
-    <updated>2016-06-29T19:56:42+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/06/29/replace-string</id>
-    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>find ./ -type f | xargs sed -i 's/置き換え前/置き換え後/g'</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>※ 注意 ※</strong><br/>
-<strong>このコマンドはファイルのバックアップは作成されないので、実行前にバックアップは取っておいたほうがいいです。</strong></p>
 ]]></content>
   </entry>
   
