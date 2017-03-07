@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-03-07T20:36:42+09:00</updated>
+  <updated>2017-03-07T20:38:04+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Macでツールを使わずzipコマンドでディレクトリを圧縮する]]></title>
+    <title type="html"><![CDATA[Macでツールを使わずzipコマンドでディレクトリを圧縮し、解凍パスワードを付与する]]></title>
     <link href="http://engineer-diary.click/blog/2017/03/07/mac-zip-cmd/"/>
     <updated>2017-03-07T20:30:10+09:00</updated>
     <id>http://engineer-diary.click/blog/2017/03/07/mac-zip-cmd</id>
