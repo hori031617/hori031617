@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://engineer-diary.click/blog/2017/03/15/curl-post/</loc>
+<lastmod>2017-03-15T20:38:37+09:00</lastmod>
+</url>
+<url>
 <loc>http://engineer-diary.click/blog/2017/03/07/mac-zip-cmd/</loc>
 <lastmod>2017-03-07T20:30:10+09:00</lastmod>
 </url>
@@ -153,5 +157,14 @@
 </url>
 <url>
 <loc>http://engineer-diary.click/</loc>
+</url>
+<url>
+<loc>http://engineer-diary.click/posts/2/</loc>
+</url>
+<url>
+<loc>http://engineer-diary.click/posts/3/</loc>
+</url>
+<url>
+<loc>http://engineer-diary.click/posts/4/</loc>
 </url>
 </urlset>

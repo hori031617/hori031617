@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-03-07T20:38:04+09:00</updated>
+  <updated>2017-03-15T20:43:18+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[curlコマンドでアクセストークンを付与し、APIをPOST送信する]]></title>
+    <link href="http://engineer-diary.click/blog/2017/03/15/curl-post/"/>
+    <updated>2017-03-15T20:38:37+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/03/15/curl-post</id>
+    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Cache-Control: no-cache" -H "Authorization: OAuth [AccessToken]" -d 'hoge=12345&fuga=abcde' "https://example.com/api/v1/sample"</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Macでツールを使わずzipコマンドでディレクトリを圧縮し、解凍パスワードを付与する]]></title>
@@ -894,49 +905,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 </span><span class='line'>&lt;/form&gt;
 </span><span class='line'>
 </span><span class='line'>document.frm.hoge.value</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MySQLでユーザーにDB、テーブルに対して権限付与するコマンド]]></title>
-    <link href="http://engineer-diary.click/blog/2016/07/13/mysql-authority/"/>
-    <updated>2016-07-13T22:51:12+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/07/13/mysql-authority</id>
-    <content type="html"><![CDATA[<h3>MySQL DBに移動</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>USE mysql</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>登録されているユーザーを確認</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>SELECT user, host FROM user;</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>ユーザーに付与されている権限を確認</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>SHOW GRANTS FOR 'ユーザ名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>すべての操作権限を指定テーブルに付与</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT ALL PRIVILEGES ON `DB名`.テーブル TO 'ユーザ名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>すべての操作権限を対象DBのすべてのテーブルに付与</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT ALL PRIVILEGES ON `DB名`.* TO 'ユーザー名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>SELECT、UPDATE、INSERT、DELETE権限指定テーブルに付与</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT SELECT,UPDATE,INSERT,DELETE ON `DB名`.テーブル TO 'ユーザ名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
