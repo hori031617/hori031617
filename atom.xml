@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-03-15T20:43:18+09:00</updated>
+  <updated>2017-03-20T15:04:57+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[クリックしたらJavascriptでフォームを作成し、POST送信する]]></title>
+    <link href="http://engineer-diary.click/blog/2017/03/20/js-form-post-send/"/>
+    <updated>2017-03-20T15:01:37+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/03/20/js-form-post-send</id>
+    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;script&gt;
+</span><span class='line'>  function post_form(post_url){
+</span><span class='line'>      var form = document.createElement('form');
+</span><span class='line'>      document.body.appendChild(form);
+</span><span class='line'>
+</span><span class='line'>      var hoge_value = document.createElement('input');
+</span><span class='line'>      hoge_value.setAttribute('type', 'hidden' );
+</span><span class='line'>      hoge_value.setAttribute('name', 'hoge' );
+</span><span class='line'>      hoge_value.setAttribute('value' , 123);
+</span><span class='line'>      form.appendChild(hoge_value);
+</span><span class='line'>
+</span><span class='line'>      var fuga_value = document.createElement('input');
+</span><span class='line'>      fuga_value.setAttribute('type', 'hidden' );
+</span><span class='line'>      fuga_value.setAttribute('name', 'fuga' );
+</span><span class='line'>      fuga_value.setAttribute('value' , 'abcde');
+</span><span class='line'>      form.appendChild(fuga_value);
+</span><span class='line'>
+</span><span class='line'>      form.setAttribute('method', 'post');
+</span><span class='line'>      form.setAttribute('action', post_url);
+</span><span class='line'>      form.submit();
+</span><span class='line'>  }
+</span><span class='line'>&lt;/script&gt;
+</span><span class='line'>&lt;a href="javascript:void();" onclick="post_form('http://example.com/test'); return false;"&gt;送信&lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[curlコマンドでアクセストークンを付与し、APIをPOST送信する]]></title>
@@ -868,43 +923,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 </tr>
 </tbody>
 </table>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[javascriptでselectボックスの値を取得する]]></title>
-    <link href="http://engineer-diary.click/blog/2016/08/16/javascript-select-value/"/>
-    <updated>2016-08-16T20:21:02+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/08/16/javascript-select-value</id>
-    <content type="html"><![CDATA[<p>よく忘れるのでメモ。</p>
-
-<h3>取得方法</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>document.フォーム名.セレクト名.value</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>例)</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;form name="frm"&gt;
-</span><span class='line'>  &lt;select name="hoge"&gt;
-</span><span class='line'>    &lt;option value="a"&gt;A&lt;/option&gt;
-</span><span class='line'>    &lt;option value="b"&gt;B&lt;/option&gt;
-</span><span class='line'>    &lt;option value="c"&gt;C&lt;/option&gt;
-</span><span class='line'>  &lt;/select&gt;
-</span><span class='line'>&lt;/form&gt;
-</span><span class='line'>
-</span><span class='line'>document.frm.hoge.value</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>

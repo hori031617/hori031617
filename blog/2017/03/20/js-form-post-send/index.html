@@ -5,13 +5,34 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>MySQLでアカウント作成とパスワード変更 - エンジニア日記</title>
+  <title>クリックしたらJavascriptでフォームを作成し、POST送信する - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="アカウント作成 1
-CREATE USER 'アカウント名'@'localhost' IDENTIFIED BY 'パスワード'; パスワード変更 1
-SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード'); ">
+  <meta name="description" content="1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+&lt;script&gt; function post_form(post_url){ var form = document.createElement('form'); &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +41,7 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/12/04/mysql-create-account/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2017/03/20/js-form-post-send/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +102,7 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
   
   <header>
     
-      <h1 class="entry-title">MySQLでアカウント作成とパスワード変更</h1>
+      <h1 class="entry-title">クリックしたらJavascriptでフォームを作成し、POST送信する</h1>
     
     
       <p class="meta">
@@ -97,23 +118,59 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
   
 
 
-<time datetime="2016-12-04T16:44:57+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-03-20T15:01:37+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3>アカウント作成</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE USER 'アカウント名'@'localhost' IDENTIFIED BY 'パスワード';</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>パスワード変更</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード');</span></code></pre></td></tr></table></div></figure>
+<div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;script&gt;
+</span><span class='line'>  function post_form(post_url){
+</span><span class='line'>      var form = document.createElement('form');
+</span><span class='line'>      document.body.appendChild(form);
+</span><span class='line'>
+</span><span class='line'>      var hoge_value = document.createElement('input');
+</span><span class='line'>      hoge_value.setAttribute('type', 'hidden' );
+</span><span class='line'>      hoge_value.setAttribute('name', 'hoge' );
+</span><span class='line'>      hoge_value.setAttribute('value' , 123);
+</span><span class='line'>      form.appendChild(hoge_value);
+</span><span class='line'>
+</span><span class='line'>      var fuga_value = document.createElement('input');
+</span><span class='line'>      fuga_value.setAttribute('type', 'hidden' );
+</span><span class='line'>      fuga_value.setAttribute('name', 'fuga' );
+</span><span class='line'>      fuga_value.setAttribute('value' , 'abcde');
+</span><span class='line'>      form.appendChild(fuga_value);
+</span><span class='line'>
+</span><span class='line'>      form.setAttribute('method', 'post');
+</span><span class='line'>      form.setAttribute('action', post_url);
+</span><span class='line'>      form.submit();
+</span><span class='line'>  }
+</span><span class='line'>&lt;/script&gt;
+</span><span class='line'>&lt;a href="javascript:void();" onclick="post_form('http://example.com/test'); return false;"&gt;送信&lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -137,7 +194,7 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
   
 
 
-<time datetime="2016-12-04T16:44:57+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-03-20T15:01:37+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -145,7 +202,7 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/12/04/mysql-create-account/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/12/04/mysql-create-account/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2017/03/20/js-form-post-send/" data-via="" data-counturl="http://engineer-diary.click/blog/2017/03/20/js-form-post-send/" >Tweet</a>
   
   
   
@@ -154,10 +211,8 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/11/12/cloudwatch-events/" title="Previous Post: CloudWatch Events cronのタイムゾーン">&laquo; CloudWatch Events cronのタイムゾーン</a>
+        <a class="basic-alignment left" href="/blog/2017/03/15/curl-post/" title="Previous Post: curlコマンドでアクセストークンを付与し、APIをPOST送信する">&laquo; curlコマンドでアクセストークンを付与し、APIをPOST送信する</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/12/06/mysql-create-database/" title="Next Post: MySQLで文字コードを指定しデータベース作成">MySQLで文字コードを指定しデータベース作成 &raquo;</a>
       
     </p>
   </footer>
