@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-04-03T22:15:38+09:00</updated>
+  <updated>2017-05-01T19:00:17+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ターミナルでfind、xargs、grepコマンドを使用し対象ディレクトリ内のファイル一覧から文字列を検索する]]></title>
+    <link href="http://engineer-diary.click/blog/2017/05/01/find-grep-xargs/"/>
+    <updated>2017-05-01T18:51:40+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/05/01/find-grep-xargs</id>
+    <content type="html"><![CDATA[<h2>構文</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>find 【検索ディレクトリ】 -type f | xargs grep 【検索文字列】</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[.htaccess Permission denied エラー]]></title>
@@ -819,104 +832,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 
 <p>セッション資料<br/>
 <a href="https://speakerdeck.com/localdisk/about-laravel-5-dot-3">https://speakerdeck.com/localdisk/about-laravel-5-dot-3</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Laravel Meetup Tokyo Vol.8に行ってきました 1/2]]></title>
-    <link href="http://engineer-diary.click/blog/2016/09/12/laravel-meetup-tokyo-vol8/"/>
-    <updated>2016-09-12T22:49:10+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/09/12/laravel-meetup-tokyo-vol8</id>
-    <content type="html"><![CDATA[<p>本日、「Laravel Meetup Tokyo Vol.8」に行ってきました。<br/>
-セッションは2つあり、それぞれ内容を2回に分けて簡単にまとめます。<br/>
-以下は１つ目のセッションです。<br/>
-モジュール、DBのバックアップの大切さ、やり方についてのセッションでした。</p>
-
-<p><br></p>
-
-<h2>Backing up with Laravel</h2>
-
-<p>ある日、いきなりサーバーが壊れた時にバックアップを同じサーバーに置いていると、<br/>
-バックアップファイルにアクセスできずに痛い目を見る。<br/>
-バックアップの方法は色々ある。</p>
-
-<ul>
-<li>bash script
-
-<ul>
-<li>自分で実装</li>
-</ul>
-</li>
-<li>Ottomatik.io
-
-<ul>
-<li>Backups as a Service</li>
-<li>有償</li>
-</ul>
-</li>
-<li>BackupPC
-
-<ul>
-<li>無償</li>
-<li>設定がやや難しい</li>
-</ul>
-</li>
-</ul>
-
-
-<h3>Laravelを使うならオススメのプラグイン</h3>
-
-<h4>Laravel Backup</h4>
-
-<p>特徴</p>
-
-<ul>
-<li>PHPモジュール(ファイル)、DBのダンプファイルをzipに圧縮して他サーバーやS3に保存できる</li>
-<li>バックアップファイルが古いものを削除することができる(Cleanup old backups)</li>
-<li>バックアップ失敗、バックアップファイルが随分古い、容量が大きいなどの時に通知を送ることができる(Send Notification)</li>
-<li>インストールや設定が簡単</li>
-</ul>
-
-
-<p>ドキュメント<br/>
-<a href="https://docs.spatie.be/laravel-backup/v3/introduction">https://docs.spatie.be/laravel-backup/v3/introduction</a></p>
-
-<p>セッション資料<br/>
-<a href="https://speakerdeck.com/freekmurze/backing-up-with-laravel-tokyo">https://speakerdeck.com/freekmurze/backing-up-with-laravel-tokyo</a></p>
-
-<p><br></p>
-
-<h2>その他</h2>
-
-<p>その他紹介があったプラグイン</p>
-
-<ul>
-<li>Laravel Permission
-
-<ul>
-<li>ユーザーに権限や許可を簡単に付与することができる</li>
-</ul>
-</li>
-<li>Laravel Analytics
-
-<ul>
-<li>Google Analyticsの情報を取得できる</li>
-</ul>
-</li>
-<li>Laravel Responsecache
-
-<ul>
-<li>同じリクエストをキャッシュし、レスポンスを早くする</li>
-</ul>
-</li>
-<li>Laravel Medialibrary
-
-<ul>
-<li>画像ファイルなどの情報取得にEloquent Modelの記述形式で情報を取得できるようになる</li>
-</ul>
-</li>
-</ul>
-
 ]]></content>
   </entry>
   
