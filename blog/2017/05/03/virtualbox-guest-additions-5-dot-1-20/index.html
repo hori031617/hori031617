@@ -5,17 +5,18 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>カレントディレクトリ配下のファイルの拡張子を変更する - エンジニア日記</title>
+  <title>Virtualbox Guest Additions 5.1.20 でマウントエラー - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="ttlファイルをtxtファイルにするために拡張子の変更をコマンドで行う。
-だが、以下の方法ではダメだった。 1
-mv *.ttl *.txt 一括でファイルを変更するにはfor文で行う。 1
+  <meta name="description" content="下記エラーが出力されるようになった 1
 2
 3
-for fname in *.ttl; do
-mv $fname ${fname%.ttl}. &hellip;">
+4
+5
+6
+Vagrant was unable to mount VirtualBox shared folders. This is usually
+because the filesystem "vboxsf" is not available &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,7 +25,7 @@ mv $fname ${fname%.ttl}. &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/06/30/ext-change/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2017/05/03/virtualbox-guest-additions-5-dot-1-20/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -85,7 +86,7 @@ mv $fname ${fname%.ttl}. &hellip;">
   
   <header>
     
-      <h1 class="entry-title">カレントディレクトリ配下のファイルの拡張子を変更する</h1>
+      <h1 class="entry-title">Virtualbox Guest Additions 5.1.20 でマウントエラー</h1>
     
     
       <p class="meta">
@@ -101,30 +102,63 @@ mv $fname ${fname%.ttl}. &hellip;">
   
 
 
-<time datetime="2016-06-30T21:13:04+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-05-03T20:44:04+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>ttlファイルをtxtファイルにするために拡張子の変更をコマンドで行う。<br/>
-だが、以下の方法ではダメだった。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mv *.ttl *.txt</span></code></pre></td></tr></table></div></figure>
-
-
-<p><br>
-一括でファイルを変更するにはfor文で行う。</p>
+<div class="entry-content"><h2>下記エラーが出力されるようになった</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>for fname in *.ttl; do
-</span><span class='line'>mv $fname ${fname%.ttl}.txt;
-</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Vagrant was unable to mount VirtualBox shared folders. This is usually
+</span><span class='line'>because the filesystem "vboxsf" is not available. This filesystem is
+</span><span class='line'>made available via the VirtualBox Guest Additions and kernel module.
+</span><span class='line'>Please verify that these guest additions are properly installed in the
+</span><span class='line'>guest. This is not a bug in Vagrant and is usually caused by a faulty
+</span><span class='line'>Vagrant box. For context, the command attempted was:</span></code></pre></td></tr></table></div></figure>
 
+
+<h2>やったこと</h2>
+
+<h3>カーネルのアップデート</h3>
+
+<p>下記コマンドでカーネルをアップデート</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant ssh
+</span><span class='line'>sudo yum update kernel*
+</span><span class='line'>
+</span><span class='line'>vagrant reload</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>シンボリックリンクの張り替え</h3>
+
+<p>Virtualbox Guest Additions 5.1.20にはバグがあるとのこと
+<a href="https://www.virtualbox.org/ticket/16670">https://www.virtualbox.org/ticket/16670</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant ssh
+</span><span class='line'>ls -lh /sbin/mount.vboxsf
+</span><span class='line'>sudo ln -sf /opt/VBoxGuestAdditions-5.1.20/lib/VBoxGuestAdditions/mount.vboxsf /sbin/mount.vboxsf
+</span><span class='line'>
+</span><span class='line'>vagrant reload</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解決しました。</p>
 </div>
 
 
@@ -147,7 +181,7 @@ mv $fname ${fname%.ttl}. &hellip;">
   
 
 
-<time datetime="2016-06-30T21:13:04+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-05-03T20:44:04+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -155,7 +189,7 @@ mv $fname ${fname%.ttl}. &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/06/30/ext-change/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/06/30/ext-change/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2017/05/03/virtualbox-guest-additions-5-dot-1-20/" data-via="" data-counturl="http://engineer-diary.click/blog/2017/05/03/virtualbox-guest-additions-5-dot-1-20/" >Tweet</a>
   
   
   
@@ -164,10 +198,8 @@ mv $fname ${fname%.ttl}. &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/06/29/replace-string/" title="Previous Post: カレントディレクトリにあるファイルの文字列を一度に置換する">&laquo; カレントディレクトリにあるファイルの文字列を一度に置換する</a>
+        <a class="basic-alignment left" href="/blog/2017/05/01/find-grep-xargs/" title="Previous Post: ターミナルでfind、xargs、grepコマンドを使用し対象ディレクトリ内のファイル一覧から文字列を検索する">&laquo; ターミナルでfind、xargs、grepコマンドを使用し対象ディレクトリ内のファイル一覧から文字列を検索する</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/07/13/mysql-authority/" title="Next Post: MySQLでユーザーにDB、テーブルに対して権限付与するコマンド">MySQLでユーザーにDB、テーブルに対して権限付与するコマンド &raquo;</a>
       
     </p>
   </footer>

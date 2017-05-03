@@ -9,11 +9,13 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="下記コマンドを実行、Class not found エラーが出力された。 1
+  <meta name="description" content="現在の時刻を確認 1
 2
-3
-4
-php artisan migrate:rollback [Symfony\Component\Debug\Exception\FatalThrowableError] Class 'クラス名' not &hellip;">
+$ date
+2017年 1月 22日 日曜日 00:39:55 UTC タイムゾーンの設定を確認 1
+2
+$ ls -l /etc/localtime*
+lrwxrwxrwx. 1 root root 25 10月 3 13:47 /etc/localtime -&gt &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +82,88 @@ php artisan migrate:rollback [Symfony\Component\Debug\Exception\FatalThrowableEr
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/01/22/linux-date-jst/">Linux タイムゾーンをJSTに設定する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-01-22T09:34:50+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>現在の時刻を確認</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ date
+</span><span class='line'>2017年  1月 22日 日曜日 00:39:55 UTC</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>タイムゾーンの設定を確認</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ls -l /etc/localtime*
+</span><span class='line'>lrwxrwxrwx. 1 root root 25 10月  3 13:47 /etc/localtime -&gt; ../usr/share/zoneinfo/UTC</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>現在の設定をバックアップ</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo cp /etc/localtime /etc/localtime.org
+</span><span class='line'>$ ls -l /etc/localtime*
+</span><span class='line'>lrwxrwxrwx. 1 root root  25 10月  3 13:47 /etc/localtime -&gt; ../usr/share/zoneinfo/UTC
+</span><span class='line'>-rw-r--r--  1 root root 118  1月 22 00:42 /etc/localtime.org</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>タイムゾーンをJSTにする</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+</span><span class='line'>$ ls -l /etc/localtime*
+</span><span class='line'>lrwxrwxrwx 1 root root  30  1月 22 09:43 /etc/localtime -&gt; /usr/share/zoneinfo/Asia/Tokyo
+</span><span class='line'>-rw-r--r-- 1 root root 118  1月 22 09:42 /etc/localtime.org</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>設定が変わったことを確認</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ date
+</span><span class='line'>2017年  1月 22日 日曜日 09:44:39 JST</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -665,86 +749,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/09/15/laravel-5-3/">Laravel Meetup Tokyo Vol.8に行ってきました 2/2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-09-15T06:32:32+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>2つ目のセッションの内容はLaravel5.3に搭載された新機能のうち、<br/>
-2つを紹介してくれました。</p>
-
-<h1>1. Simple Pagination</h1>
-
-<p>Blade側で指定できるようになり、Paginationに使用する関数を読んであげるだけで良くなった。<br/>
-※ 今までは自分でカスタマイズする必要があった.</p>
-
-<h2>Paginnation で使うメソッド</h2>
-
-<ul>
-<li>hasPages (ページがあるか？)</li>
-<li>onfirstPage (最初のページ)</li>
-<li>previousPageUrl (前のページ)</li>
-<li>nextPageUrl (次のページ)</li>
-<li>hasMorePages (次のページがあるか?)</li>
-</ul>
-
-
-<h1>2. Notification</h1>
-
-<p>通知を行う処理が楽に実装できるようになった。  <br/>
-※ 今まではEventを作って自分で実装する必要があった.<br/>
-イベント通知の処理は</p>
-
-<ul>
-<li>ユーザーが登録された</li>
-<li>お問い合わせがあった</li>
-</ul>
-
-
-<p>など</p>
-
-<h2>標準で用意されている通知方法</h2>
-
-<ul>
-<li>Mail</li>
-<li>Databaase</li>
-<li>SMS</li>
-<li>Slack</li>
-</ul>
-
-
-<p>セッション資料<br/>
-<a href="https://speakerdeck.com/localdisk/about-laravel-5-dot-3">https://speakerdeck.com/localdisk/about-laravel-5-dot-3</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/3">&larr; Older</a>
@@ -776,6 +780,10 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/05/03/virtualbox-guest-additions-5-dot-1-20/">Virtualbox Guest Additions 5.1.20 でマウントエラー</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/05/01/find-grep-xargs/">ターミナルでfind、xargs、grepコマンドを使用し対象ディレクトリ内のファイル一覧から文字列を検索する</a>
       </li>
     
@@ -789,10 +797,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
     
       <li class="post">
         <a href="/blog/2017/03/15/curl-post/">curlコマンドでアクセストークンを付与し、APIをPOST送信する</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/03/07/mac-zip-cmd/">Macでツールを使わずzipコマンドでディレクトリを圧縮し、解凍パスワードを付与する</a>
       </li>
     
   </ul>
