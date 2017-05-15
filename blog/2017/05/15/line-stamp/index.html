@@ -5,17 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>カレントディレクトリ配下のファイルの拡張子を変更する - エンジニア日記</title>
+  <title>Lineスタンプを作ってみた - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="ttlファイルをtxtファイルにするために拡張子の変更をコマンドで行う。
-だが、以下の方法ではダメだった。 1
-mv *.ttl *.txt 一括でファイルを変更するにはfor文で行う。 1
-2
-3
-for fname in *.ttl; do
-mv $fname ${fname%.ttl}. &hellip;">
+  <meta name="description" content="Androidアプリ「スケッチ」で絵を書く
+https://play.google.com/store/apps/details?id=com.sonymobile.sketch&amp;hl=ja
+MACアプリ「GIMP」で画像の余白削除、背景画像透過、リサイズ処理
+https:// &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,7 +21,7 @@ mv $fname ${fname%.ttl}. &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/06/30/ext-change/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2017/05/15/line-stamp/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -85,7 +82,7 @@ mv $fname ${fname%.ttl}. &hellip;">
   
   <header>
     
-      <h1 class="entry-title">カレントディレクトリ配下のファイルの拡張子を変更する</h1>
+      <h1 class="entry-title">Lineスタンプを作ってみた</h1>
     
     
       <p class="meta">
@@ -101,30 +98,32 @@ mv $fname ${fname%.ttl}. &hellip;">
   
 
 
-<time datetime="2016-06-30T21:13:04+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-05-15T20:19:54+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>ttlファイルをtxtファイルにするために拡張子の変更をコマンドで行う。<br/>
-だが、以下の方法ではダメだった。</p>
+<div class="entry-content"><ol>
+<li><p>Androidアプリ「スケッチ」で絵を書く
+<a href="https://play.google.com/store/apps/details?id=com.sonymobile.sketch&amp;hl=ja">https://play.google.com/store/apps/details?id=com.sonymobile.sketch&amp;hl=ja</a></p></li>
+<li><p>MACアプリ「GIMP」で画像の余白削除、背景画像透過、リサイズ処理
+<a href="https://matome.naver.jp/odai/2141144615158584001">https://matome.naver.jp/odai/2141144615158584001</a></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mv *.ttl *.txt</span></code></pre></td></tr></table></div></figure>
+<blockquote><p>＜手順＞
+GIMPで画像を開くと、大抵の場合以下のような形で無駄に余白があったりする。
+そのため、無駄な余白の削除、画像サイズの変更、背景透明化、PNG形式への変換を行う。
+上記、操作方法を参考。</p></blockquote></li>
+<li><p>ファイル名を変更<br/>
+スタンプ画像   ：01.png～40.png（01から40までの連番）<br/>
+メイン画像１枚 ：main.png<br/>
+タブ画像１枚   ：tab.png</p></li>
+</ol>
 
 
-<p><br>
-一括でファイルを変更するにはfor文で行う。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>for fname in *.ttl; do
-</span><span class='line'>mv $fname ${fname%.ttl}.txt;
-</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
-
+<p>以上、スタンプの素材が完成。<br/>
+あとはLINE Creators Marketより申請。</p>
 </div>
 
 
@@ -147,7 +146,7 @@ mv $fname ${fname%.ttl}. &hellip;">
   
 
 
-<time datetime="2016-06-30T21:13:04+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-05-15T20:19:54+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -155,7 +154,7 @@ mv $fname ${fname%.ttl}. &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/06/30/ext-change/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/06/30/ext-change/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2017/05/15/line-stamp/" data-via="" data-counturl="http://engineer-diary.click/blog/2017/05/15/line-stamp/" >Tweet</a>
   
   
   
@@ -164,10 +163,8 @@ mv $fname ${fname%.ttl}. &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/06/29/replace-string/" title="Previous Post: カレントディレクトリにあるファイルの文字列を一度に置換する">&laquo; カレントディレクトリにあるファイルの文字列を一度に置換する</a>
+        <a class="basic-alignment left" href="/blog/2017/05/03/virtualbox-guest-additions-5-dot-1-20/" title="Previous Post: Virtualbox Guest Additions 5.1.20 でマウントエラー">&laquo; Virtualbox Guest Additions 5.1.20 でマウントエラー</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/07/13/mysql-authority/" title="Next Post: MySQLでユーザーにDB、テーブルに対して権限付与するコマンド">MySQLでユーザーにDB、テーブルに対して権限付与するコマンド &raquo;</a>
       
     </p>
   </footer>

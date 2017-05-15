@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-05-03T20:52:12+09:00</updated>
+  <updated>2017-05-15T20:37:37+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Lineスタンプを作ってみた]]></title>
+    <link href="http://engineer-diary.click/blog/2017/05/15/line-stamp/"/>
+    <updated>2017-05-15T20:19:54+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/05/15/line-stamp</id>
+    <content type="html"><![CDATA[<ol>
+<li><p>Androidアプリ「スケッチ」で絵を書く
+<a href="https://play.google.com/store/apps/details?id=com.sonymobile.sketch&amp;hl=ja">https://play.google.com/store/apps/details?id=com.sonymobile.sketch&amp;hl=ja</a></p></li>
+<li><p>MACアプリ「GIMP」で画像の余白削除、背景画像透過、リサイズ処理
+<a href="https://matome.naver.jp/odai/2141144615158584001">https://matome.naver.jp/odai/2141144615158584001</a></p>
+
+<blockquote><p>＜手順＞
+GIMPで画像を開くと、大抵の場合以下のような形で無駄に余白があったりする。
+そのため、無駄な余白の削除、画像サイズの変更、背景透明化、PNG形式への変換を行う。
+上記、操作方法を参考。</p></blockquote></li>
+<li><p>ファイル名を変更<br/>
+スタンプ画像   ：01.png～40.png（01から40までの連番）<br/>
+メイン画像１枚 ：main.png<br/>
+タブ画像１枚   ：tab.png</p></li>
+</ol>
+
+
+<p>以上、スタンプの素材が完成。<br/>
+あとはLINE Creators Marketより申請。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Virtualbox Guest Additions 5.1.20 でマウントエラー]]></title>
@@ -804,39 +831,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>php artisan list</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AndroidアプリにRealmを使用するため、インストールを行う]]></title>
-    <link href="http://engineer-diary.click/blog/2016/09/25/android-realm/"/>
-    <updated>2016-09-25T16:36:26+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/09/25/android-realm</id>
-    <content type="html"><![CDATA[<h1>Realmとは？</h1>
-
-<p>NoSQL データベースの1つ<br/>
-その他に「MongoDB」「Redis」などがある<br/>
-モバイル向けのデータベース</p>
-
-<h1>Android Studioからインストールする</h1>
-
-<p>gradleというjavaのパッケージ管理システムを使用する</p>
-
-<h2>インストール手順</h2>
-
-<ul>
-<li><a href="https://realm.io/" title="公式サイト">公式サイト</a>より「Java」をクリック</li>
-<li>「Getting Started」セクションに記述されている内容を行う
-
-<ul>
-<li>Android Studioの左カラム「Gradle Scripts」より ProjectレベルとApplicationレベルのbuild.gradleファイルにRealmをインストールするパスを記述</li>
-</ul>
-</li>
-<li>ツールバーより「Sync Project with Gradle File」を押下</li>
-</ul>
-
-
-<p>エラーがなければイベントログに「Gradle build finished」となる</p>
 ]]></content>
   </entry>
   
