@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://engineer-diary.click/blog/2017/05/28/ssh-config/</loc>
+<lastmod>2017-05-28T20:46:02+09:00</lastmod>
+</url>
+<url>
 <loc>http://engineer-diary.click/blog/2017/05/15/line-stamp/</loc>
 <lastmod>2017-05-15T20:19:54+09:00</lastmod>
 </url>
@@ -177,5 +181,17 @@
 </url>
 <url>
 <loc>http://engineer-diary.click/</loc>
+</url>
+<url>
+<loc>http://engineer-diary.click/posts/2/</loc>
+</url>
+<url>
+<loc>http://engineer-diary.click/posts/3/</loc>
+</url>
+<url>
+<loc>http://engineer-diary.click/posts/4/</loc>
+</url>
+<url>
+<loc>http://engineer-diary.click/posts/5/</loc>
 </url>
 </urlset>

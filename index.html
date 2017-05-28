@@ -9,10 +9,18 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="Androidアプリ「スケッチ」で絵を書く
-https://play.google.com/store/apps/details?id=com.sonymobile.sketch&amp;hl=ja
-MACアプリ「GIMP」で画像の余白削除、背景画像透過、リサイズ処理
-https:// &hellip;">
+  <meta name="description" content="~/.ssh/config 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+Host abc_step_server HostName XX.XXX.XXX.XXX User hogehoge Port 12345 # ポートを指定 IdentityFile ~/.ssh/key/private. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +87,76 @@ https:// &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/05/28/ssh-config/">.ssh/config ファイルにサーバーの接続情報を記述し、管理する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-05-28T20:46:02+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>~/.ssh/config</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Host abc_step_server
+</span><span class='line'>  HostName XX.XXX.XXX.XXX
+</span><span class='line'>  User hogehoge
+</span><span class='line'>  Port 12345   # ポートを指定
+</span><span class='line'>  IdentityFile ~/.ssh/key/private.key   # 秘密鍵を指定
+</span><span class='line'>
+</span><span class='line'>Host xyz_web_server
+</span><span class='line'>  HostName XX.XXX.XXX.XXX
+</span><span class='line'>  User fugafuga
+</span><span class='line'>  IdentityFile ~/.ssh/key/private.key
+</span><span class='line'>  ProxyCommand ssh -W %h:%p abc_step_server   # abc_step_serverを経由</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これで、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ssh abc_step_server
+</span><span class='line'>ssh xyz_web_server</span></code></pre></td></tr></table></div></figure>
+
+
+<p>と打てば、各サーバーにログインできる。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -730,48 +808,6 @@ deleted_atに日付が登録されていれば、<br/>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/02/20/iframe-parent/">jQueryでiframeのフレーム内からフレーム外の要素を扱う</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-02-20T20:04:58+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>セレクタの第２引数に <strong>parent.document</strong> を指定する</p>
-
-<p>例)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$('#parent_id', parent.document).show();</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/2">&larr; Older</a>
@@ -799,6 +835,10 @@ deleted_atに日付が登録されていれば、<br/>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/05/28/ssh-config/">.ssh/config ファイルにサーバーの接続情報を記述し、管理する</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/05/15/line-stamp/">Lineスタンプを作ってみた</a>
       </li>
     
@@ -812,10 +852,6 @@ deleted_atに日付が登録されていれば、<br/>
     
       <li class="post">
         <a href="/blog/2017/04/03/htaccess-permission-denied/">.htaccess Permission denied エラー</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/03/20/js-form-post-send/">クリックしたらJavascriptでフォームを作成し、POST送信する</a>
       </li>
     
   </ul>

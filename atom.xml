@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-05-15T20:37:37+09:00</updated>
+  <updated>2017-05-28T21:04:48+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[.ssh/config ファイルにサーバーの接続情報を記述し、管理する]]></title>
+    <link href="http://engineer-diary.click/blog/2017/05/28/ssh-config/"/>
+    <updated>2017-05-28T20:46:02+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/05/28/ssh-config</id>
+    <content type="html"><![CDATA[<p>~/.ssh/config</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Host abc_step_server
+</span><span class='line'>  HostName XX.XXX.XXX.XXX
+</span><span class='line'>  User hogehoge
+</span><span class='line'>  Port 12345   # ポートを指定
+</span><span class='line'>  IdentityFile ~/.ssh/key/private.key   # 秘密鍵を指定
+</span><span class='line'>
+</span><span class='line'>Host xyz_web_server
+</span><span class='line'>  HostName XX.XXX.XXX.XXX
+</span><span class='line'>  User fugafuga
+</span><span class='line'>  IdentityFile ~/.ssh/key/private.key
+</span><span class='line'>  ProxyCommand ssh -W %h:%p abc_step_server   # abc_step_serverを経由</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これで、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ssh abc_step_server
+</span><span class='line'>ssh xyz_web_server</span></code></pre></td></tr></table></div></figure>
+
+
+<p>と打てば、各サーバーにログインできる。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Lineスタンプを作ってみた]]></title>
@@ -754,83 +797,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 
 
 <p>無事にboxを追加できました。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[よく使用するartisanコマンド]]></title>
-    <link href="http://engineer-diary.click/blog/2016/10/17/laravel-artisan-command/"/>
-    <updated>2016-10-17T19:11:46+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/10/17/laravel-artisan-command</id>
-    <content type="html"><![CDATA[<h3>コントローラーの雛形を作成</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:controller HogeController</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>モデルの雛形を作成</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:model Fuga</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>バッチクラスとコマンドを作成</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:console PiyoCommand --command="piyo_cmd"</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>バッチコマンドを実行</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>app/Console/Kernel.php に
-</span><span class='line'>
-</span><span class='line'>protected $commands = [
-</span><span class='line'>    'App\Console\Commands\InspireCommand',
-</span><span class='line'>    'App\Console\Commands\PiyoCommand' // 追加
-</span><span class='line'>];
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>php artisan piyo_cmd</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>テーブルを作成</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:migration create_hoge_table --create=hoge</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>カラムを追加</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:migration add_piyo_fuga_table --table=fuga</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>マイグレーションを実行</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan migrate</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>実行したマイグレーションをロールバック</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan migrate:rollback</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>コマンド一覧確認</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan list</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   
