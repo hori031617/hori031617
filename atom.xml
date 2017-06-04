@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-05-28T21:04:48+09:00</updated>
+  <updated>2017-06-04T21:30:14+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,123 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React Native Template]]></title>
+    <link href="http://engineer-diary.click/blog/2017/06/04/react-native-template/"/>
+    <updated>2017-06-04T21:19:29+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/06/04/react-native-template</id>
+    <content type="html"><![CDATA[<h2>MyApp.js</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// ライブラリ 読み込み処理
+</span><span class='line'>import React from 'react';
+</span><span class='line'>import {
+</span><span class='line'>    StyleSheet,
+</span><span class='line'>    Text,
+</span><span class='line'>    View
+</span><span class='line'>} from 'react-native';
+</span><span class='line'>
+</span><span class='line'>// 実行されるクラス
+</span><span class='line'>export default class MyApp extends React.Component {
+</span><span class='line'>
+</span><span class='line'>    // コンストラクタ
+</span><span class='line'>    constructor(props) {
+</span><span class='line'>        super(props);
+</span><span class='line'>        this.state = {
+</span><span class='line'>            hogehoge: "",
+</span><span class='line'>            fugafuga: ""
+</span><span class='line'>        };
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    // 関数を定義
+</span><span class='line'>    doSomething(value) {
+</span><span class='line'>        this.setState({hogehoge: value});
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    // 表示処理
+</span><span class='line'>    render() {
+</span><span class='line'>        // navigation のオプジェクト
+</span><span class='line'>        const {navigate} = this.props.navigation;
+</span><span class='line'>
+</span><span class='line'>        // 表示処理
+</span><span class='line'>        return (
+</span><span class='line'>            &lt;View style={styles.container}&gt;
+</span><span class='line'>                &lt;Text&gt;
+</span><span class='line'>                    Hello World
+</span><span class='line'>                &lt;/Text&gt;
+</span><span class='line'>            &lt;/View&gt;
+</span><span class='line'>        );
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>// スタイル定義
+</span><span class='line'>const styles = StyleSheet.create({
+</span><span class='line'>    container: {
+</span><span class='line'>        flex: 1,
+</span><span class='line'>        padding: 20
+</span><span class='line'>    },
+</span><span class='line'>    container2: {
+</span><span class='line'>      color: "black",
+</span><span class='line'>      backgroundColor: "black",
+</span><span class='line'>    }
+</span><span class='line'>});</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[.ssh/config ファイルにサーバーの接続情報を記述し、管理する]]></title>
@@ -752,51 +869,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 
 
 <p>解決しました。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[vagrant box add で transfer closed]]></title>
-    <link href="http://engineer-diary.click/blog/2016/11/02/vagrant-box-add-error/"/>
-    <updated>2016-11-02T20:37:22+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/11/02/vagrant-box-add-error</id>
-    <content type="html"><![CDATA[<h2>下記コマンドでboxを追加</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant box add {name} {url}
-</span><span class='line'>
-</span><span class='line'>vagrant box add centos/7 https://atlas.hashicorp.com/centos/boxes/7</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>エラーが発生</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>An error occurred while downloading the remote file. The error
-</span><span class='line'>message, if any, is reproduced below. Please fix this error and try
-</span><span class='line'>again.
-</span><span class='line'>
-</span><span class='line'>transfer closed with 386379308 bytes remaining to read</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>解決方法</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/.vagrant.d/tmp/
-</span><span class='line'>rm *
-</span><span class='line'>
-</span><span class='line'>再度 vagrant box add 〜 を実行</span></code></pre></td></tr></table></div></figure>
-
-
-<p>無事にboxを追加できました。</p>
 ]]></content>
   </entry>
   

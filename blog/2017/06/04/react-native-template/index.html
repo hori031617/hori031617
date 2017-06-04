@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Laravel5にてjsonを返却するAPIを作成する - エンジニア日記</title>
+  <title>React Native Template - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="サンプルコード php artisan make:controller HogeController で雛形を作成したものに処理を追加 1
+  <meta name="description" content="MyApp.js 1
 2
 3
 4
@@ -38,7 +38,27 @@
 27
 28
 29
-30 &hellip;">
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -47,7 +67,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2017/02/26/laravel-api/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2017/06/04/react-native-template/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -108,7 +128,7 @@
   
   <header>
     
-      <h1 class="entry-title">Laravel5にてjsonを返却するAPIを作成する</h1>
+      <h1 class="entry-title">React Native Template</h1>
     
     
       <p class="meta">
@@ -124,16 +144,14 @@
   
 
 
-<time datetime="2017-02-26T09:53:18+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-06-04T21:19:29+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>サンプルコード</h2>
-
-<h3>php artisan make:controller HogeController で雛形を作成したものに処理を追加</h3>
+<div class="entry-content"><h2>MyApp.js</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -173,56 +191,74 @@
 <span class='line-number'>36</span>
 <span class='line-number'>37</span>
 <span class='line-number'>38</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// ライブラリ 読み込み処理
+</span><span class='line'>import React from 'react';
+</span><span class='line'>import {
+</span><span class='line'>    StyleSheet,
+</span><span class='line'>    Text,
+</span><span class='line'>    View
+</span><span class='line'>} from 'react-native';
 </span><span class='line'>
-</span><span class='line'>namespace App\Http\Controllers;
+</span><span class='line'>// 実行されるクラス
+</span><span class='line'>export default class MyApp extends React.Component {
 </span><span class='line'>
-</span><span class='line'>use Illuminate\Http\Request;
-</span><span class='line'>use App\Http\Requests;
-</span><span class='line'>
-</span><span class='line'>use App\Model\Fuga;
-</span><span class='line'>use Response;    // 追加
-</span><span class='line'>use Validator;   // 追加
-</span><span class='line'>
-</span><span class='line'>class HogeController extends Controller
-</span><span class='line'>{
-</span><span class='line'>    public function getPiyo($id){
-</span><span class='line'>
-</span><span class='line'>        // 受け取った引数のバリデーションルールを作成
-</span><span class='line'>        $validator = Validator::make(['id' =&gt; $id],
-</span><span class='line'>                                     ['id' =&gt; 'required|integer']);
-</span><span class='line'>
-</span><span class='line'>        // バリデーションエラー
-</span><span class='line'>        if($validator-&gt;fails()){
-</span><span class='line'>            return Response::json([
-</span><span class='line'>                                'status' =&gt; 'NG',
-</span><span class='line'>                                'message' =&gt; '値が不正です'
-</span><span class='line'>                            ]);
-</span><span class='line'>        }
-</span><span class='line'>
-</span><span class='line'>        // DBから値を取得
-</span><span class='line'>        $fuga = new Fuga();
-</span><span class='line'>        $piyo = $fuga::find($id);
-</span><span class='line'>
-</span><span class='line'>        // jsonで返却
-</span><span class='line'>        return Response::json([
-</span><span class='line'>                            'status' =&gt; 'OK',
-</span><span class='line'>                            'piyo' =&gt; $piyo
-</span><span class='line'>                        ]);
+</span><span class='line'>    // コンストラクタ
+</span><span class='line'>    constructor(props) {
+</span><span class='line'>        super(props);
+</span><span class='line'>        this.state = {
+</span><span class='line'>            hogehoge: "",
+</span><span class='line'>            fugafuga: ""
+</span><span class='line'>        };
 </span><span class='line'>    }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>ルーティングを設定</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Route::get('get_piyo/{id}', [
-</span><span class='line'>  'as'    =&gt; 'get_piyo',
-</span><span class='line'>  'uses'  =&gt; 'HogeController@getPiyo'
-</span><span class='line'>]);</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>
+</span><span class='line'>    // 関数を定義
+</span><span class='line'>    doSomething(value) {
+</span><span class='line'>        this.setState({hogehoge: value});
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    // 表示処理
+</span><span class='line'>    render() {
+</span><span class='line'>        // navigation のオプジェクト
+</span><span class='line'>        const {navigate} = this.props.navigation;
+</span><span class='line'>
+</span><span class='line'>        // 表示処理
+</span><span class='line'>        return (
+</span><span class='line'>            &lt;View style={styles.container}&gt;
+</span><span class='line'>                &lt;Text&gt;
+</span><span class='line'>                    Hello World
+</span><span class='line'>                &lt;/Text&gt;
+</span><span class='line'>            &lt;/View&gt;
+</span><span class='line'>        );
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>// スタイル定義
+</span><span class='line'>const styles = StyleSheet.create({
+</span><span class='line'>    container: {
+</span><span class='line'>        flex: 1,
+</span><span class='line'>        padding: 20
+</span><span class='line'>    },
+</span><span class='line'>    container2: {
+</span><span class='line'>      color: "black",
+</span><span class='line'>      backgroundColor: "black",
+</span><span class='line'>    }
+</span><span class='line'>});</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -246,7 +282,7 @@
   
 
 
-<time datetime="2017-02-26T09:53:18+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-06-04T21:19:29+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -254,7 +290,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2017/02/26/laravel-api/" data-via="" data-counturl="http://engineer-diary.click/blog/2017/02/26/laravel-api/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2017/06/04/react-native-template/" data-via="" data-counturl="http://engineer-diary.click/blog/2017/06/04/react-native-template/" >Tweet</a>
   
   
   
@@ -263,10 +299,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2017/02/20/iframe-parent/" title="Previous Post: jQueryでiframeのフレーム内からフレーム外の要素を扱う">&laquo; jQueryでiframeのフレーム内からフレーム外の要素を扱う</a>
+        <a class="basic-alignment left" href="/blog/2017/05/28/ssh-config/" title="Previous Post: .ssh/config ファイルにサーバーの接続情報を記述し、管理する">&laquo; .ssh/config ファイルにサーバーの接続情報を記述し、管理する</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2017/03/05/laravel5-deleted-at/" title="Next Post: Laravel5で論理削除を実装する手順">Laravel5で論理削除を実装する手順 &raquo;</a>
       
     </p>
   </footer>
