@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-06-04T21:30:14+09:00</updated>
+  <updated>2017-06-28T21:49:03+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React Nativeのバージョンを指定してプロジェクトを作成する]]></title>
+    <link href="http://engineer-diary.click/blog/2017/06/28/react-native-version/"/>
+    <updated>2017-06-28T21:45:41+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/06/28/react-native-version</id>
+    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>react-native init --version="X.XX.X" myApp</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React Native Template]]></title>
@@ -812,63 +823,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 <blockquote><p>ScheduleExpressions は UTC です。UTC タイムゾーンで自己トリガーするルールのスケジュールが設定されていることを確認します。</p></blockquote>
 
 <p>とあり、タイムゾーンをUTCで設定する必要があった。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ローカルホストとリモートホストをマウント時にエラー]]></title>
-    <link href="http://engineer-diary.click/blog/2016/11/03/vagrant-shared-folder-error/"/>
-    <updated>2016-11-03T17:29:16+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/11/03/vagrant-shared-folder-error</id>
-    <content type="html"><![CDATA[<h2>下記エラーが出力された</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Vagrant was unable to mount VirtualBox shared folders. This is usually
-</span><span class='line'>because the filesystem "vboxsf" is not available.</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>解決方法</h2>
-
-<h3>まず、vagrant up時に自動的に新しいバージョンのGuest Additionsに更新してくれる「vagrant-vbguest」というプラグインをインストール</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant plugin install vagrant-vbguest</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Vagrantが起動している状態でマウント失敗している仮想マシンの状態確認</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest --status
-</span><span class='line'>
-</span><span class='line'>[default] No installation found.</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Guest Additionsを更新</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>再度仮想マシンの状態確認</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest --status
-</span><span class='line'>
-</span><span class='line'>[default] GuestAdditions 5.1.8 running --- OK.</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>仮想マシンを再起動</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant reload</span></code></pre></td></tr></table></div></figure>
-
-
-<p>解決しました。</p>
 ]]></content>
   </entry>
   
