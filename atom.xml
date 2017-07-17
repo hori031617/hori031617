@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-06-28T21:49:03+09:00</updated>
+  <updated>2017-07-17T11:42:09+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[adbコマンドでapkファイルを実機にインストールする]]></title>
+    <link href="http://engineer-diary.click/blog/2017/07/17/apk-install/"/>
+    <updated>2017-07-17T11:38:23+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/07/17/apk-install</id>
+    <content type="html"><![CDATA[<p>例)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb install -r ./android.apk</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[React Nativeのバージョンを指定してプロジェクトを作成する]]></title>
@@ -808,21 +821,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード');</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CloudWatch Events cronのタイムゾーン]]></title>
-    <link href="http://engineer-diary.click/blog/2016/11/12/cloudwatch-events/"/>
-    <updated>2016-11-12T19:35:25+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/11/12/cloudwatch-events</id>
-    <content type="html"><![CDATA[<p>AWS Lambda で関数を作成し、その関数をCloudWatch Eventsで定期的に実行しようとして、cronを設定したが時間どおりに動作しなかった。</p>
-
-<p>CloudWatch Eventsのトラブルシューティングページを確認すると</p>
-
-<blockquote><p>ScheduleExpressions は UTC です。UTC タイムゾーンで自己トリガーするルールのスケジュールが設定されていることを確認します。</p></blockquote>
-
-<p>とあり、タイムゾーンをUTCで設定する必要があった。</p>
 ]]></content>
   </entry>
   

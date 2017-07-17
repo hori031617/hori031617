@@ -9,9 +9,11 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="GitHub PagesとOctopressを利用し、独自ドメインを設定するときにはまったのでメモ。
-独自ドメイン取得の流れと設定方法は下記 お名前.comで独自ドメイン取得
-取得したドメインにAレコードを2つ追加し、それぞれGithubのDNSサーバーのIPアドレス(2016/05/10 時点で &hellip;">
+  <meta name="description" content="表題の実装を行った。
+APIを1つだけしか呼ばない場合だと問題は表面化しなかったのだが、
+２つ以上を呼び出すと先に呼び出したAPIの処理が終わってから次のAPIが実行されるという
+処理動作になっていた。
+そのため、画面表示に少し時間がかかる。 原因 APIでは session_start() &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +80,69 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/05/12/session-write-close/">PHPでAPIを作成し、画面が表示されるときに非同期で２つ以上のAPIを呼ぶ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-12T07:24:11+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>表題の実装を行った。<br/>
+APIを1つだけしか呼ばない場合だと問題は表面化しなかったのだが、<br/>
+２つ以上を呼び出すと先に呼び出したAPIの処理が終わってから次のAPIが実行されるという<br/>
+処理動作になっていた。<br/>
+そのため、画面表示に少し時間がかかる。</p>
+
+<h3>原因</h3>
+
+<p>APIでは <strong>session_start()</strong> 処理が記述されていた。<br/>
+session_start() 処理が走るとセッションに排他ロックがかかるため<br/>
+次のAPIが書き込み待ちになり実行が遅れるというものだった。</p>
+
+<h3>対応策</h3>
+
+<p>セッションへの書き込みが完了したら（セッションに対する処理が終われば）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>session_write_close()</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+を呼び出し、排他ロックを解除する。</p>
+
+<h3>参考URL</h3>
+
+<p><a href="http://unsolublesugar.com/20121103/113321/">http://unsolublesugar.com/20121103/113321/</a>
+<a href="http://www.objective-php.net/blog/detail/20110813">http://www.objective-php.net/blog/detail/20110813</a>
+<a href="http://blog2.elephantech.net/php/%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%97%E3%81%A6%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E7%B5%82%E4%BA%86%E3%81%99/">http://blog2.elephantech.net/php/%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%97%E3%81%A6%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E7%B5%82%E4%BA%86%E3%81%99/</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -598,6 +663,10 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/07/17/apk-install/">adbコマンドでapkファイルを実機にインストールする</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/06/28/react-native-version/">React Nativeのバージョンを指定してプロジェクトを作成する</a>
       </li>
     
@@ -611,10 +680,6 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
     
       <li class="post">
         <a href="/blog/2017/05/15/line-stamp/">Lineスタンプを作ってみた</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/05/03/virtualbox-guest-additions-5-dot-1-20/">Virtualbox Guest Additions 5.1.20 でマウントエラー</a>
       </li>
     
   </ul>
