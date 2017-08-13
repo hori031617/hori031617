@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-07-17T11:42:09+09:00</updated>
+  <updated>2017-08-13T09:44:44+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[gitで大文字小文字のファイル名を変更する時]]></title>
+    <link href="http://engineer-diary.click/blog/2017/08/13/git-rename-mv/"/>
+    <updated>2017-08-13T09:38:15+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/08/13/git-rename-mv</id>
+    <content type="html"><![CDATA[<p>単純にリネームしても、<code>git status</code>で変更と認識されない。<br/>
+下記コマンドで対応する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git mv Hoge.txt hoge.txt</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[adbコマンドでapkファイルを実機にインストールする]]></title>
@@ -801,25 +815,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 <li>絵文字や中国漢字、日本語でも特殊漢字などは4バイトが含まれている</li>
 <li>MySQLでは5.5からこのutf8mb4に対応している</li>
 </ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MySQLでアカウント作成とパスワード変更]]></title>
-    <link href="http://engineer-diary.click/blog/2016/12/04/mysql-create-account/"/>
-    <updated>2016-12-04T16:44:57+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/12/04/mysql-create-account</id>
-    <content type="html"><![CDATA[<h3>アカウント作成</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE USER 'アカウント名'@'localhost' IDENTIFIED BY 'パスワード';</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>パスワード変更</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード');</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
