@@ -9,11 +9,17 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="MySQL DBに移動 1
-USE mysql 登録されているユーザーを確認 1
-SELECT user, host FROM user; ユーザーに付与されている権限を確認 1
-SHOW GRANTS FOR 'ユーザ名'@'ホスト名'; すべての操作権限を指定テーブルに付与 1
-GRANT &hellip;">
+  <meta name="description" content="よく忘れるのでメモ。 取得方法 1
+document.フォーム名.セレクト名.value 例) 1
+2
+3
+4
+5
+6
+7
+8
+9
+&lt;form name="frm"&gt; &lt;select name="hoge"&gt; &lt;option value="a"&gt;A&lt;/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +86,70 @@ GRANT &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/08/16/javascript-select-value/">Javascriptでselectボックスの値を取得する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-08-16T20:21:02+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>よく忘れるのでメモ。</p>
+
+<h3>取得方法</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>document.フォーム名.セレクト名.value</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>例)</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;form name="frm"&gt;
+</span><span class='line'>  &lt;select name="hoge"&gt;
+</span><span class='line'>    &lt;option value="a"&gt;A&lt;/option&gt;
+</span><span class='line'>    &lt;option value="b"&gt;B&lt;/option&gt;
+</span><span class='line'>    &lt;option value="c"&gt;C&lt;/option&gt;
+</span><span class='line'>  &lt;/select&gt;
+</span><span class='line'>&lt;/form&gt;
+</span><span class='line'>
+</span><span class='line'>document.frm.hoge.value</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1100,134 +1170,6 @@ file, err := ioutil.ReadFile(root_path+&ldquo;twitter_post/config.json&rdquo;)<b
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/05/15/go-lang-hello-world/">MacにGoをインストールしHello Worldをやってみた</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-05-15T00:02:34+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>Goのインストール</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo brew install go</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Goの開発ディレクトリ元となる GOPATH 環境変数を設定</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>export GOPATH=$HOME/github/go
-</span><span class='line'>export PATH=$PATH:$GOPATH/bin
-</span><span class='line'>echo 'export GOPATH=$HOME/github/go' &gt;&gt; ~/.bash_profile
-</span><span class='line'>echo 'export PATH=$PATH:$GOPATH/bin' &gt;&gt; ~/.bash_profile</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>開発元ディレクトリに移動し、src/{プロジェクト名}ディレクトリを作成</h3>
-
-<p>Goではsrcディレクトリの下にどんどんプロジェクトを作成していくイメージ</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd ${GOPATH}
-</span><span class='line'>mkdir -p src/helloworld/</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Hello Worldを出力するモジュールを作成</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vi src/helloworld/helloworld.go
-</span><span class='line'>
-</span><span class='line'>package main
-</span><span class='line'>
-</span><span class='line'>import (
-</span><span class='line'>    "fmt"
-</span><span class='line'>)
-</span><span class='line'>
-</span><span class='line'>func main(){
-</span><span class='line'>    fmt.Println("Hello, World!")
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>プロジェクト名を指定し、コンパイル</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd ${GOPATH}/src
-</span><span class='line'>go install helloworld/</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>コンパイルが成功すると、srcディレクトリと同じ階層にbinディレクトリが作成され、その中にバイナリファイルが作成される</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd ${GOPATH}
-</span><span class='line'>tree
-</span><span class='line'>.
-</span><span class='line'>├── bin
-</span><span class='line'>│   └── helloworld
-</span><span class='line'>└── src
-</span><span class='line'>    └── helloworld
-</span><span class='line'>    └── helloworld.go</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>実行</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd ${GOPATH}/bin
-</span><span class='line'>./helloworld
-</span><span class='line'>
-</span><span class='line'>Hello, World!</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/5">&larr; Older</a>
@@ -1259,6 +1201,10 @@ file, err := ioutil.ReadFile(root_path+&ldquo;twitter_post/config.json&rdquo;)<b
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/08/17/git-checkout-file/">gitでファイルをあるコミット履歴の状態に戻す</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/08/13/git-rename-mv/">gitで大文字小文字のファイル名を変更する時</a>
       </li>
     
@@ -1272,10 +1218,6 @@ file, err := ioutil.ReadFile(root_path+&ldquo;twitter_post/config.json&rdquo;)<b
     
       <li class="post">
         <a href="/blog/2017/06/04/react-native-template/">React Native Template</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/05/28/ssh-config/">.ssh/config ファイルにサーバーの接続情報を記述し、管理する</a>
       </li>
     
   </ul>
