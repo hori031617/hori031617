@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-08-17T21:30:17+09:00</updated>
+  <updated>2017-09-03T10:23:53+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[S3にCSSファイルをアップロードしたら、読み込みエラー]]></title>
+    <link href="http://engineer-diary.click/blog/2017/09/03/s3-css-read-error/"/>
+    <updated>2017-09-03T10:15:45+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/09/03/s3-css-read-error</id>
+    <content type="html"><![CDATA[<p>S3にCSSファイルをアップロードし、上書き更新を行ったら突然下記読み込みエラーに遭遇。<br/>
+CSSが読み込まれなくなった。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Resource interpreted as Stylesheet but transferred with MIME type binary/octet-stream</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以下の手順でファイルのヘッダー情報を修正し、対応</p>
+
+<ol>
+<li>S3 consoleへ移動</li>
+<li>対象のCSSファイルを選択</li>
+<li>「さらに」をクリックし、メタデータを選択</li>
+<li>Content-Typeのvalueをbinary/octet-streamから「text/css」に変更</li>
+</ol>
+
+
+<p>エラーが解消されました。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[gitでファイルをあるコミット履歴の状態に戻す]]></title>
@@ -770,43 +796,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 
 
 <p>再度、コマンドを実行しエラーが解消されました。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Macでgitのコマンドやブランチの補完をtabで出来るようにする]]></title>
-    <link href="http://engineer-diary.click/blog/2016/12/25/git-auto-completion/"/>
-    <updated>2016-12-25T12:29:52+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/12/25/git-auto-completion</id>
-    <content type="html"><![CDATA[<h2>brewで「bash-completion」をインストール</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo brew install bash-completion</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>.bashrc に下記を追加し、再読み込み</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd
-</span><span class='line'>
-</span><span class='line'>vi .bashrc
-</span><span class='line'>
-</span><span class='line'>if [ -f $(brew --prefix)/etc/bash_completion ]; then
-</span><span class='line'>  . $(brew --prefix)/etc/bash_completion
-</span><span class='line'>fi
-</span><span class='line'>
-</span><span class='line'>source .bashrc</span></code></pre></td></tr></table></div></figure>
-
-
-<p>tabキーで補完が出来るようになりました。</p>
 ]]></content>
   </entry>
   

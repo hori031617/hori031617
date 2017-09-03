@@ -9,30 +9,8 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-&lt;script&gt; function post_form(post_url){ var form = document.createElement('form'); &hellip;">
+  <meta name="description" content="VagrantでCentOS7をインストールし、Apacheをいれてページを表示させようとすると下記エラーがApacheのエラーログに出力され、ページが表示できない問題に遭遇 1
+[Mon Apr 03 08:46:41.995046 2017] [core:crit] [pid 28125] ( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +77,103 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/04/03/htaccess-permission-denied/">.htaccess Permission Denied エラー</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-04-03T21:45:47+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>VagrantでCentOS7をインストールし、Apacheをいれてページを表示させようとすると下記エラーがApacheのエラーログに出力され、ページが表示できない問題に遭遇</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[Mon Apr 03 08:46:41.995046 2017] [core:crit] [pid 28125] (13)Permission denied: [client 10.0.2.2:65506] AH00529: /var/www/html/.htaccess pcfg_openfile: unable to check htaccess file, ensure it is readable and that '/var/www/html/' is executable</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>やったこと</h2>
+
+<h3>SELinuxを無効にしたところページが表示された</h3>
+
+<h4>SELinuxの設定状況を確認</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># getenforce
+</span><span class='line'>Enforcing</span></code></pre></td></tr></table></div></figure>
+
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">設定値</th>
+<th style="text-align:left;">意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">enforcing</td>
+<td style="text-align:left;">SELinux機能、アクセス制御が有効</td>
+</tr>
+<tr>
+<td style="text-align:left;">permissive</td>
+<td style="text-align:left;">SELinuxは警告を出力するが、アクセス制限は無効</td>
+</tr>
+<tr>
+<td style="text-align:left;">disabled</td>
+<td style="text-align:left;">SELinux機能、アクセス制御が無効</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br></p>
+
+<h4>SElinuxを無効にする</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># setenforce 0</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>SElinuxの設定ファイルを編集し、再起動時を行った際にもSELinuxを無効にする</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi /etc/selinux/config
+</span><span class='line'>SELINUX=disabled</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>SELinuxとは？</h3>
+
+<p>セキュリティ管理をしてくれるモジュール。<br/>
+今回はローカル環境なので無効としても問題なしと判断。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -718,70 +793,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/12/25/git-auto-completion/">Macでgitのコマンドやブランチの補完をtabで出来るようにする</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-12-25T12:29:52+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>brewで「bash-completion」をインストール</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo brew install bash-completion</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>.bashrc に下記を追加し、再読み込み</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd
-</span><span class='line'>
-</span><span class='line'>vi .bashrc
-</span><span class='line'>
-</span><span class='line'>if [ -f $(brew --prefix)/etc/bash_completion ]; then
-</span><span class='line'>  . $(brew --prefix)/etc/bash_completion
-</span><span class='line'>fi
-</span><span class='line'>
-</span><span class='line'>source .bashrc</span></code></pre></td></tr></table></div></figure>
-
-
-<p>tabキーで補完が出来るようになりました。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/3">&larr; Older</a>
@@ -813,6 +824,10 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/09/03/s3-css-read-error/">S3にCSSファイルをアップロードしたら、読み込みエラー</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/08/17/git-checkout-file/">gitでファイルをあるコミット履歴の状態に戻す</a>
       </li>
     
@@ -826,10 +841,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
     
       <li class="post">
         <a href="/blog/2017/06/28/react-native-version/">React Nativeのバージョンを指定してプロジェクトを作成する</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/06/04/react-native-template/">React Native Template</a>
       </li>
     
   </ul>
