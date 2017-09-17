@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://engineer-diary.click/blog/2017/09/17/sequelpro-vagrant-mysql/</loc>
+<lastmod>2017-09-17T11:10:05+09:00</lastmod>
+</url>
+<url>
 <loc>http://engineer-diary.click/blog/2017/09/03/s3-css-read-error/</loc>
 <lastmod>2017-09-03T10:15:45+09:00</lastmod>
 </url>

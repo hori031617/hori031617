@@ -5,13 +5,26 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>MySQLでアカウント作成とパスワード変更 - エンジニア日記</title>
+  <title>Sequel ProでVagrantのMySQLに接続 - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="アカウント作成 1
-CREATE USER 'アカウント名'@'localhost' IDENTIFIED BY 'パスワード'; パスワード変更 1
-SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード'); ">
+  <meta name="description" content="1.接続するホスト情報をvagrant ssh-configで確認。 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+cd vagrant_project vagrant ssh-config
+Host hoge HostName 127.0.0.1 User vagrant &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +33,7 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/12/04/mysql-create-account/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2017/09/17/sequelpro-vagrant-mysql/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +94,7 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
   
   <header>
     
-      <h1 class="entry-title">MySQLでアカウント作成とパスワード変更</h1>
+      <h1 class="entry-title">Sequel ProでVagrantのMySQLに接続</h1>
     
     
       <p class="meta">
@@ -97,24 +110,96 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
   
 
 
-<time datetime="2016-12-04T16:44:57+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-09-17T11:10:05+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3>アカウント作成</h3>
+<div class="entry-content"><p>1.接続するホスト情報を<code>vagrant ssh-config</code>で確認。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE USER 'アカウント名'@'localhost' IDENTIFIED BY 'パスワード';</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd vagrant_project
+</span><span class='line'>
+</span><span class='line'>vagrant ssh-config
+</span><span class='line'>Host hoge
+</span><span class='line'>  HostName 127.0.0.1
+</span><span class='line'>  User vagrant
+</span><span class='line'>  Port 2222
+</span><span class='line'>  UserKnownHostsFile /dev/null
+</span><span class='line'>  StrictHostKeyChecking no
+</span><span class='line'>  PasswordAuthentication no
+</span><span class='line'>  IdentityFile /Users/hoge/vagrant_project/.vagrant/machines/vh/virtualbox/private_key
+</span><span class='line'>  IdentitiesOnly yes
+</span><span class='line'>  LogLevel FATAL
+</span><span class='line'>  ForwardAgent yes</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>パスワード変更</h3>
+<p>2.Sequel Proの設定画面にてSSHタブを選択し、</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード');</span></code></pre></td></tr></table></div></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">設定名</th>
+<th style="text-align:left;">値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">MySQLホスト</td>
+<td style="text-align:left;">127.0.0.1</td>
+</tr>
+<tr>
+<td style="text-align:left;">ユーザー</td>
+<td style="text-align:left;">root</td>
+</tr>
+<tr>
+<td style="text-align:left;">パスワード</td>
+<td style="text-align:left;">rootユーザー パスワード</td>
+</tr>
+<tr>
+<td style="text-align:left;">データベーズ</td>
+<td style="text-align:left;">接続するデータベース名</td>
+</tr>
+<tr>
+<td style="text-align:left;">SSHホスト</td>
+<td style="text-align:left;">127.0.0.1</td>
+</tr>
+<tr>
+<td style="text-align:left;">SSHユーザー</td>
+<td style="text-align:left;">vagrant</td>
+</tr>
+<tr>
+<td style="text-align:left;">SSH鍵</td>
+<td style="text-align:left;">/Users/hoge/vagrant_project/.vagrant/machines/vh/virtualbox/private_key</td>
+</tr>
+<tr>
+<td style="text-align:left;">SSHポート</td>
+<td style="text-align:left;">2222</td>
+</tr>
+</tbody>
+</table>
 
+
+<p><br></p>
+
+<p><img src="/images/sequel_setting.png" alt="設定キャプチャ" /></p>
+
+<p>接続できました。</p>
 </div>
 
 
@@ -137,7 +222,7 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
   
 
 
-<time datetime="2016-12-04T16:44:57+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-09-17T11:10:05+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -145,7 +230,7 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/12/04/mysql-create-account/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/12/04/mysql-create-account/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2017/09/17/sequelpro-vagrant-mysql/" data-via="" data-counturl="http://engineer-diary.click/blog/2017/09/17/sequelpro-vagrant-mysql/" >Tweet</a>
   
   
   
@@ -154,10 +239,8 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/11/12/cloudwatch-events/" title="Previous Post: CloudWatch Events cronのタイムゾーン">&laquo; CloudWatch Events cronのタイムゾーン</a>
+        <a class="basic-alignment left" href="/blog/2017/09/03/s3-css-read-error/" title="Previous Post: S3にCSSファイルをアップロードしたら、読み込みエラー">&laquo; S3にCSSファイルをアップロードしたら、読み込みエラー</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/12/06/mysql-create-database/" title="Next Post: MySQLで文字コードを指定しデータベース作成">MySQLで文字コードを指定しデータベース作成 &raquo;</a>
       
     </p>
   </footer>

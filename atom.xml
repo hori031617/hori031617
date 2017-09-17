@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-09-03T10:23:53+09:00</updated>
+  <updated>2017-09-17T11:30:50+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,97 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Sequel ProでVagrantのMySQLに接続]]></title>
+    <link href="http://engineer-diary.click/blog/2017/09/17/sequelpro-vagrant-mysql/"/>
+    <updated>2017-09-17T11:10:05+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/09/17/sequelpro-vagrant-mysql</id>
+    <content type="html"><![CDATA[<p>1.接続するホスト情報を<code>vagrant ssh-config</code>で確認。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd vagrant_project
+</span><span class='line'>
+</span><span class='line'>vagrant ssh-config
+</span><span class='line'>Host hoge
+</span><span class='line'>  HostName 127.0.0.1
+</span><span class='line'>  User vagrant
+</span><span class='line'>  Port 2222
+</span><span class='line'>  UserKnownHostsFile /dev/null
+</span><span class='line'>  StrictHostKeyChecking no
+</span><span class='line'>  PasswordAuthentication no
+</span><span class='line'>  IdentityFile /Users/hoge/vagrant_project/.vagrant/machines/vh/virtualbox/private_key
+</span><span class='line'>  IdentitiesOnly yes
+</span><span class='line'>  LogLevel FATAL
+</span><span class='line'>  ForwardAgent yes</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.Sequel Proの設定画面にてSSHタブを選択し、</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">設定名</th>
+<th style="text-align:left;">値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">MySQLホスト</td>
+<td style="text-align:left;">127.0.0.1</td>
+</tr>
+<tr>
+<td style="text-align:left;">ユーザー</td>
+<td style="text-align:left;">root</td>
+</tr>
+<tr>
+<td style="text-align:left;">パスワード</td>
+<td style="text-align:left;">rootユーザー パスワード</td>
+</tr>
+<tr>
+<td style="text-align:left;">データベーズ</td>
+<td style="text-align:left;">接続するデータベース名</td>
+</tr>
+<tr>
+<td style="text-align:left;">SSHホスト</td>
+<td style="text-align:left;">127.0.0.1</td>
+</tr>
+<tr>
+<td style="text-align:left;">SSHユーザー</td>
+<td style="text-align:left;">vagrant</td>
+</tr>
+<tr>
+<td style="text-align:left;">SSH鍵</td>
+<td style="text-align:left;">/Users/hoge/vagrant_project/.vagrant/machines/vh/virtualbox/private_key</td>
+</tr>
+<tr>
+<td style="text-align:left;">SSHポート</td>
+<td style="text-align:left;">2222</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br></p>
+
+<p><img src="http://engineer-diary.click/images/sequel_setting.png" alt="設定キャプチャ" /></p>
+
+<p>接続できました。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[S3にCSSファイルをアップロードしたら、読み込みエラー]]></title>
@@ -766,36 +857,6 @@ EC2をELBにぶら下げ、ユーザーからのアクセスを ELB(443) → EC2
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ date
 </span><span class='line'>2017年  1月 22日 日曜日 09:44:39 JST</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Laravel5 artisanコマンドでClass not found エラー]]></title>
-    <link href="http://engineer-diary.click/blog/2016/12/29/laravel5-class-not-found/"/>
-    <updated>2016-12-29T10:08:41+09:00</updated>
-    <id>http://engineer-diary.click/blog/2016/12/29/laravel5-class-not-found</id>
-    <content type="html"><![CDATA[<p>下記コマンドを実行、Class not found エラーが出力された。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan migrate:rollback
-</span><span class='line'>
-</span><span class='line'>[Symfony\Component\Debug\Exception\FatalThrowableError]  
-</span><span class='line'>Class 'クラス名' not found</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これは、クラス名を急に変えたときなどに起こる。<br/>
-特に、tableをartisanで作り後からスペルミスなどでクラス名を変えた場合。<br/>
-LaravelはAutoLoaderがあり、composerがクラス管理をしており、composerの管轄外でクラス名等を変更すると発生するエラー。<br/>
-解決策としては下記コマンドでcomposerにクラス名を変更したと教える。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>composer dump-autoload</span></code></pre></td></tr></table></div></figure>
-
-
-<p>再度、コマンドを実行しエラーが解消されました。</p>
 ]]></content>
   </entry>
   

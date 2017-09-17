@@ -9,9 +9,22 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="S3にCSSファイルをアップロードし、上書き更新を行ったら突然下記読み込みエラーに遭遇。
-CSSが読み込まれなくなった。 1
-Resource interpreted as Stylesheet but transferred with MIME type binary/octet-stream &hellip;">
+  <meta name="description" content="1.接続するホスト情報をvagrant ssh-configで確認。 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+cd vagrant_project vagrant ssh-config
+Host hoge HostName 127.0.0.1 User vagrant &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +91,124 @@ Resource interpreted as Stylesheet but transferred with MIME type binary/octet-s
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/09/17/sequelpro-vagrant-mysql/">Sequel ProでVagrantのMySQLに接続</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-09-17T11:10:05+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>1.接続するホスト情報を<code>vagrant ssh-config</code>で確認。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd vagrant_project
+</span><span class='line'>
+</span><span class='line'>vagrant ssh-config
+</span><span class='line'>Host hoge
+</span><span class='line'>  HostName 127.0.0.1
+</span><span class='line'>  User vagrant
+</span><span class='line'>  Port 2222
+</span><span class='line'>  UserKnownHostsFile /dev/null
+</span><span class='line'>  StrictHostKeyChecking no
+</span><span class='line'>  PasswordAuthentication no
+</span><span class='line'>  IdentityFile /Users/hoge/vagrant_project/.vagrant/machines/vh/virtualbox/private_key
+</span><span class='line'>  IdentitiesOnly yes
+</span><span class='line'>  LogLevel FATAL
+</span><span class='line'>  ForwardAgent yes</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.Sequel Proの設定画面にてSSHタブを選択し、</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">設定名</th>
+<th style="text-align:left;">値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">MySQLホスト</td>
+<td style="text-align:left;">127.0.0.1</td>
+</tr>
+<tr>
+<td style="text-align:left;">ユーザー</td>
+<td style="text-align:left;">root</td>
+</tr>
+<tr>
+<td style="text-align:left;">パスワード</td>
+<td style="text-align:left;">rootユーザー パスワード</td>
+</tr>
+<tr>
+<td style="text-align:left;">データベーズ</td>
+<td style="text-align:left;">接続するデータベース名</td>
+</tr>
+<tr>
+<td style="text-align:left;">SSHホスト</td>
+<td style="text-align:left;">127.0.0.1</td>
+</tr>
+<tr>
+<td style="text-align:left;">SSHユーザー</td>
+<td style="text-align:left;">vagrant</td>
+</tr>
+<tr>
+<td style="text-align:left;">SSH鍵</td>
+<td style="text-align:left;">/Users/hoge/vagrant_project/.vagrant/machines/vh/virtualbox/private_key</td>
+</tr>
+<tr>
+<td style="text-align:left;">SSHポート</td>
+<td style="text-align:left;">2222</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br></p>
+
+<p><img src="/images/sequel_setting.png" alt="設定キャプチャ" /></p>
+
+<p>接続できました。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -650,46 +781,6 @@ GIMPで画像を開くと、大抵の場合以下のような形で無駄に余�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/05/01/find-grep-xargs/">ターミナルでfind、xargs、grepコマンドを使用し対象ディレクトリ内のファイル一覧から文字列を検索する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-05-01T18:51:40+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>構文</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>find 【検索ディレクトリ】 -type f | xargs grep 【検索文字列】</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/2">&larr; Older</a>
@@ -717,6 +808,10 @@ GIMPで画像を開くと、大抵の場合以下のような形で無駄に余�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/09/17/sequelpro-vagrant-mysql/">Sequel ProでVagrantのMySQLに接続</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/09/03/s3-css-read-error/">S3にCSSファイルをアップロードしたら、読み込みエラー</a>
       </li>
     
@@ -730,10 +825,6 @@ GIMPで画像を開くと、大抵の場合以下のような形で無駄に余�
     
       <li class="post">
         <a href="/blog/2017/07/17/apk-install/">adbコマンドでapkファイルを実機にインストールする</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/06/28/react-native-version/">React Nativeのバージョンを指定してプロジェクトを作成する</a>
       </li>
     
   </ul>
