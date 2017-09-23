@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-09-17T14:45:40+09:00</updated>
+  <updated>2017-09-23T16:32:10+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,124 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Let’s EncryptのSSL証明書を取得し、Apacheに設定する]]></title>
+    <link href="http://engineer-diary.click/blog/2017/09/23/apache-ssl/"/>
+    <updated>2017-09-23T16:07:14+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/09/23/apache-ssl</id>
+    <content type="html"><![CDATA[<h2>certbot-auto のセットアップ</h2>
+
+<p>(「certbot-auto」は Let’s Encrypt が提供しているツール)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># curl https://dl.eff.org/certbot-auto -o /usr/bin/certbot-auto
+</span><span class='line'>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+</span><span class='line'>                                 Dload  Upload   Total   Spent    Left  Speed
+</span><span class='line'>100 57175  100 57175    0     0   162k      0 --:--:-- --:--:-- --:--:--  163k
+</span><span class='line'>
+</span><span class='line'># chmod 700 /usr/bin/certbot-auto
+</span><span class='line'>
+</span><span class='line'># ls -l /usr/bin/certbot-auto
+</span><span class='line'>-rwx------. 1 root root 57175 Sep 23 06:27 /usr/bin/certbot-auto</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>certbot-auto コマンドを実行し、証明書を作成</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># certbot-auto certonly
+</span><span class='line'>Saving debug log to /var/log/letsencrypt/letsencrypt.log
+</span><span class='line'>
+</span><span class='line'>How would you like to authenticate with the ACME CA?
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>1: Apache Web Server plugin - Beta (apache)
+</span><span class='line'>2: Spin up a temporary webserver (standalone)
+</span><span class='line'>3: Place files in webroot directory (webroot)
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>Select the appropriate number [1-3] then [enter] (press 'c' to cancel): 3  # 既存のWEBサーバを使うモードを選択
+</span><span class='line'>Plugins selected: Authenticator webroot, Installer None
+</span><span class='line'>Please enter in your domain name(s) (comma and/or space separated)  (Enter 'c'
+</span><span class='line'>to cancel): 【your-domain.com】  # 取得したドメイン
+</span><span class='line'>Obtaining a new certificate
+</span><span class='line'>Performing the following challenges:
+</span><span class='line'>http-01 challenge for 【your-domain.com】
+</span><span class='line'>
+</span><span class='line'>Select the webroot for 【your-domain.com】:
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>1: Enter a new webroot
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>Press 1 [enter] to confirm the selection (press 'c' to cancel): 1   # 指示に従い1を押下する
+</span><span class='line'>Input the webroot for 【your-domain.com】: (Enter 'c' to cancel): 【/var/www/your-document-root】  # ドキュメントルート
+</span><span class='line'>Waiting for verification...
+</span><span class='line'>Cleaning up challenges
+</span><span class='line'>
+</span><span class='line'>IMPORTANT NOTES:
+</span><span class='line'> - Congratulations! Your certificate and chain have been saved at:
+</span><span class='line'>
+</span><span class='line'>・・・・・
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>/etc/letsencrypt/live/【your-domain.com】配下に証明書が自動生成される</p>
+
+<h2>Apacheに設定</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi /etc/httpd/conf.d/ssl.conf
+</span><span class='line'>
+</span><span class='line'>以下の項目を設定する。
+</span><span class='line'>
+</span><span class='line'>SSLCertificateFile /etc/letsencrypt/live/【your-domain.com】/cert.pem
+</span><span class='line'>SSLCertificateKeyFile /etc/letsencrypt/live/【your-domain.com】/privkey.pem
+</span><span class='line'>SSLCertificateChainFile /etc/letsencrypt/live/【your-domain.com】/chain.pem</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Apacheを再起動すると、httpsで安全な接続が出来るようになりました</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Sequel ProでVagrantのMySQLに接続]]></title>
@@ -802,61 +920,6 @@ EC2をELBにぶら下げ、ユーザーからのアクセスを ELB(443) → EC2
 
 
 <p><strong>※ if文の条件は要調整</strong></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linux タイムゾーンをJSTに設定する]]></title>
-    <link href="http://engineer-diary.click/blog/2017/01/22/linux-date-jst/"/>
-    <updated>2017-01-22T09:34:50+09:00</updated>
-    <id>http://engineer-diary.click/blog/2017/01/22/linux-date-jst</id>
-    <content type="html"><![CDATA[<h2>現在の時刻を確認</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ date
-</span><span class='line'>2017年  1月 22日 日曜日 00:39:55 UTC</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>タイムゾーンの設定を確認</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ls -l /etc/localtime*
-</span><span class='line'>lrwxrwxrwx. 1 root root 25 10月  3 13:47 /etc/localtime -&gt; ../usr/share/zoneinfo/UTC</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>現在の設定をバックアップ</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo cp /etc/localtime /etc/localtime.org
-</span><span class='line'>$ ls -l /etc/localtime*
-</span><span class='line'>lrwxrwxrwx. 1 root root  25 10月  3 13:47 /etc/localtime -&gt; ../usr/share/zoneinfo/UTC
-</span><span class='line'>-rw-r--r--  1 root root 118  1月 22 00:42 /etc/localtime.org</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>タイムゾーンをJSTにする</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-</span><span class='line'>$ ls -l /etc/localtime*
-</span><span class='line'>lrwxrwxrwx 1 root root  30  1月 22 09:43 /etc/localtime -&gt; /usr/share/zoneinfo/Asia/Tokyo
-</span><span class='line'>-rw-r--r-- 1 root root 118  1月 22 09:42 /etc/localtime.org</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>設定が変わったことを確認</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ date
-</span><span class='line'>2017年  1月 22日 日曜日 09:44:39 JST</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

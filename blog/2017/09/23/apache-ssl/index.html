@@ -5,18 +5,20 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>MacにGoをインストールしHello Worldをやってみた - エンジニア日記</title>
+  <title>Let’s EncryptのSSL証明書を取得し、Apacheに設定する - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="Goのインストール 1
-sudo brew install go Goの開発ディレクトリ元となる GOPATH 環境変数を設定 1
+  <meta name="description" content="certbot-auto のセットアップ (「certbot-auto」は Let’s Encrypt が提供しているツール) 1
 2
 3
 4
-export GOPATH=$HOME/github/go
-export PATH=$PATH:$GOPATH/bin
-echo 'export &hellip;">
+5
+6
+7
+8
+9
+# curl https://dl.eff.org/certbot-auto -o /usr/bin/certbot-auto % &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -25,7 +27,7 @@ echo 'export &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/05/15/go-lang-hello-world/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2017/09/23/apache-ssl/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -86,7 +88,7 @@ echo 'export &hellip;">
   
   <header>
     
-      <h1 class="entry-title">MacにGoをインストールしHello Worldをやってみた</h1>
+      <h1 class="entry-title">Let’s EncryptのSSL証明書を取得し、Apacheに設定する</h1>
     
     
       <p class="meta">
@@ -102,42 +104,38 @@ echo 'export &hellip;">
   
 
 
-<time datetime="2016-05-15T00:02:34+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-09-23T16:07:14+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3>Goのインストール</h3>
+<div class="entry-content"><h2>certbot-auto のセットアップ</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo brew install go</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Goの開発ディレクトリ元となる GOPATH 環境変数を設定</h3>
+<p>(「certbot-auto」は Let’s Encrypt が提供しているツール)</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>export GOPATH=$HOME/github/go
-</span><span class='line'>export PATH=$PATH:$GOPATH/bin
-</span><span class='line'>echo 'export GOPATH=$HOME/github/go' &gt;&gt; ~/.bash_profile
-</span><span class='line'>echo 'export PATH=$PATH:$GOPATH/bin' &gt;&gt; ~/.bash_profile</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># curl https://dl.eff.org/certbot-auto -o /usr/bin/certbot-auto
+</span><span class='line'>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+</span><span class='line'>                                 Dload  Upload   Total   Spent    Left  Speed
+</span><span class='line'>100 57175  100 57175    0     0   162k      0 --:--:-- --:--:-- --:--:--  163k
+</span><span class='line'>
+</span><span class='line'># chmod 700 /usr/bin/certbot-auto
+</span><span class='line'>
+</span><span class='line'># ls -l /usr/bin/certbot-auto
+</span><span class='line'>-rwx------. 1 root root 57175 Sep 23 06:27 /usr/bin/certbot-auto</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>開発元ディレクトリに移動し、src/{プロジェクト名}ディレクトリを作成</h3>
-
-<p>Goではsrcディレクトリの下にどんどんプロジェクトを作成していくイメージ</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd ${GOPATH}
-</span><span class='line'>mkdir -p src/helloworld/</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Hello Worldを出力するモジュールを作成</h3>
+<h2>certbot-auto コマンドを実行し、証明書を作成</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -150,28 +148,61 @@ echo 'export &hellip;">
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vi src/helloworld/helloworld.go
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># certbot-auto certonly
+</span><span class='line'>Saving debug log to /var/log/letsencrypt/letsencrypt.log
 </span><span class='line'>
-</span><span class='line'>package main
+</span><span class='line'>How would you like to authenticate with the ACME CA?
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>1: Apache Web Server plugin - Beta (apache)
+</span><span class='line'>2: Spin up a temporary webserver (standalone)
+</span><span class='line'>3: Place files in webroot directory (webroot)
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>Select the appropriate number [1-3] then [enter] (press 'c' to cancel): 3  # 既存のWEBサーバを使うモードを選択
+</span><span class='line'>Plugins selected: Authenticator webroot, Installer None
+</span><span class='line'>Please enter in your domain name(s) (comma and/or space separated)  (Enter 'c'
+</span><span class='line'>to cancel): 【your-domain.com】  # 取得したドメイン
+</span><span class='line'>Obtaining a new certificate
+</span><span class='line'>Performing the following challenges:
+</span><span class='line'>http-01 challenge for 【your-domain.com】
 </span><span class='line'>
-</span><span class='line'>import (
-</span><span class='line'>    "fmt"
-</span><span class='line'>)
+</span><span class='line'>Select the webroot for 【your-domain.com】:
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>1: Enter a new webroot
+</span><span class='line'>-------------------------------------------------------------------------------
+</span><span class='line'>Press 1 [enter] to confirm the selection (press 'c' to cancel): 1   # 指示に従い1を押下する
+</span><span class='line'>Input the webroot for 【your-domain.com】: (Enter 'c' to cancel): 【/var/www/your-document-root】  # ドキュメントルート
+</span><span class='line'>Waiting for verification...
+</span><span class='line'>Cleaning up challenges
 </span><span class='line'>
-</span><span class='line'>func main(){
-</span><span class='line'>    fmt.Println("Hello, World!")
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>IMPORTANT NOTES:
+</span><span class='line'> - Congratulations! Your certificate and chain have been saved at:
+</span><span class='line'>
+</span><span class='line'>・・・・・
+</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>プロジェクト名を指定し、コンパイル</h3>
+<p>/etc/letsencrypt/live/【your-domain.com】配下に証明書が自動生成される</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd ${GOPATH}/src
-</span><span class='line'>go install helloworld/</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>コンパイルが成功すると、srcディレクトリと同じ階層にbinディレクトリが作成され、その中にバイナリファイルが作成される</h3>
+<h2>Apacheに設定</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -180,28 +211,16 @@ echo 'export &hellip;">
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd ${GOPATH}
-</span><span class='line'>tree
-</span><span class='line'>.
-</span><span class='line'>├── bin
-</span><span class='line'>│   └── helloworld
-</span><span class='line'>└── src
-</span><span class='line'>    └── helloworld
-</span><span class='line'>    └── helloworld.go</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>実行</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd ${GOPATH}/bin
-</span><span class='line'>./helloworld
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi /etc/httpd/conf.d/ssl.conf
 </span><span class='line'>
-</span><span class='line'>Hello, World!</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>以下の項目を設定する。
+</span><span class='line'>
+</span><span class='line'>SSLCertificateFile /etc/letsencrypt/live/【your-domain.com】/cert.pem
+</span><span class='line'>SSLCertificateKeyFile /etc/letsencrypt/live/【your-domain.com】/privkey.pem
+</span><span class='line'>SSLCertificateChainFile /etc/letsencrypt/live/【your-domain.com】/chain.pem</span></code></pre></td></tr></table></div></figure>
 
+
+<p>Apacheを再起動すると、httpsで安全な接続が出来るようになりました</p>
 </div>
 
 
@@ -224,7 +243,7 @@ echo 'export &hellip;">
   
 
 
-<time datetime="2016-05-15T00:02:34+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-09-23T16:07:14+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -232,7 +251,7 @@ echo 'export &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/05/15/go-lang-hello-world/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/05/15/go-lang-hello-world/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2017/09/23/apache-ssl/" data-via="" data-counturl="http://engineer-diary.click/blog/2017/09/23/apache-ssl/" >Tweet</a>
   
   
   
@@ -241,10 +260,8 @@ echo 'export &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/05/14/postgresql-sequence/" title="Previous Post: PostgreSQLでのAUTO_INCREMENTのしくみ">&laquo; PostgreSQLでのAUTO_INCREMENTのしくみ</a>
+        <a class="basic-alignment left" href="/blog/2017/09/17/sequelpro-vagrant-mysql/" title="Previous Post: Sequel ProでVagrantのMySQLに接続">&laquo; Sequel ProでVagrantのMySQLに接続</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/05/16/go-jsonfile-read/" title="Next Post: GoでJSONファイルを読み込み内容を構造体に詰め込むときにはまったのでメモ">GoでJSONファイルを読み込み内容を構造体に詰め込むときにはまったのでメモ &raquo;</a>
       
     </p>
   </footer>
