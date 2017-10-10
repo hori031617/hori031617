@@ -9,14 +9,10 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="下記エラーが出力されるようになった 1
-2
-3
-4
-5
-6
-Vagrant was unable to mount VirtualBox shared folders. This is usually
-because the filesystem "vboxsf" is not available &hellip;">
+  <meta name="description" content="Androidアプリ「スケッチ」で絵を書く
+https://play.google.com/store/apps/details?id=com.sonymobile.sketch&amp;hl=ja
+MACアプリ「GIMP」で画像の余白削除、背景画像透過、リサイズ処理
+https:// &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +79,60 @@ because the filesystem "vboxsf" is not available &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/05/15/line-stamp/">Lineスタンプを作ってみた</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-05-15T20:19:54+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ol>
+<li><p>Androidアプリ「スケッチ」で絵を書く
+<a href="https://play.google.com/store/apps/details?id=com.sonymobile.sketch&amp;hl=ja">https://play.google.com/store/apps/details?id=com.sonymobile.sketch&amp;hl=ja</a></p></li>
+<li><p>MACアプリ「GIMP」で画像の余白削除、背景画像透過、リサイズ処理
+<a href="https://matome.naver.jp/odai/2141144615158584001">https://matome.naver.jp/odai/2141144615158584001</a></p>
+
+<blockquote><p>＜手順＞
+GIMPで画像を開くと、大抵の場合以下のような形で無駄に余白があったりする。
+そのため、無駄な余白の削除、画像サイズの変更、背景透明化、PNG形式への変換を行う。
+上記、操作方法を参考。</p></blockquote></li>
+<li><p>ファイル名を変更<br/>
+スタンプ画像   ：01.png～40.png（01から40までの連番）<br/>
+メイン画像１枚 ：main.png<br/>
+タブ画像１枚   ：tab.png</p></li>
+</ol>
+
+
+<p>以上、スタンプの素材が完成。<br/>
+あとはLINE Creators Marketより申請。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -722,69 +772,6 @@ deleted_atに日付が登録されていれば、<br/>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/01/30/elb-ec2-laravel5/">ELB(443) → EC2(80)のルートを通るときにLaravel5のroute()がhttpとなる問題</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-01-30T22:02:58+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>AWS環境にて。<br/>
-EC2にLaravel5で作成したプロジェクトがあり、テンプレートのリンク先をLaravelの関数であるroute()にて実装。<br/>
-EC2をELBにぶら下げ、ユーザーからのアクセスを ELB(443) → EC2(80) で処理するとき、route()から出力されるプロトコルはhttpとなってしまう。<br/>
-これは、Laravelとしては80番でリクエストが来ているため上記の動作となってしまう。</p>
-
-<h2>対応方法</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>app/Providers/AppServiceProvider.php  
-</span><span class='line'>public function boot()
-</span><span class='line'>{
-</span><span class='line'>    // 環境がローカル環境でないとき
-</span><span class='line'>    if (!app()-&gt;environment('local')) {
-</span><span class='line'>        // すべてのリクエストをhttpsとする
-</span><span class='line'>        \URL::forceSchema('https');
-</span><span class='line'>    }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>※ if文の条件は要調整</strong></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/3">&larr; Older</a>
@@ -816,6 +803,10 @@ EC2をELBにぶら下げ、ユーザーからのアクセスを ELB(443) → EC2
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/10/10/intellij-remote-debug/">Vagrant + PHP + IntelliJ IDEA でリモートデバッグを設定</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/09/23/apache-ssl/">Let’s EncryptのSSL証明書を取得し、Apacheに設定する</a>
       </li>
     
@@ -829,10 +820,6 @@ EC2をELBにぶら下げ、ユーザーからのアクセスを ELB(443) → EC2
     
       <li class="post">
         <a href="/blog/2017/08/17/git-checkout-file/">gitでファイルをあるコミット履歴の状態に戻す</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/08/13/git-rename-mv/">gitで大文字小文字のファイル名を変更する時</a>
       </li>
     
   </ul>

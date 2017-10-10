@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-09-23T16:32:10+09:00</updated>
+  <updated>2017-10-10T23:20:47+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,128 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Vagrant + PHP + IntelliJ IDEA でリモートデバッグを設定]]></title>
+    <link href="http://engineer-diary.click/blog/2017/10/10/intellij-remote-debug/"/>
+    <updated>2017-10-10T22:50:48+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/10/10/intellij-remote-debug</id>
+    <content type="html"><![CDATA[<h1>Vagrant側の設定</h1>
+
+<h2>サーバーにログイン</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant ssh</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>peclコマンドをインストール</h2>
+
+<p>(php7の場合、pearのバージョンは1.10.0以降でないと上手く動かない)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo yum --enablerepo=remi-php70 install php-pear
+</span><span class='line'>
+</span><span class='line'>pear -V
+</span><span class='line'>PEAR Version: 1.10.5
+</span><span class='line'>PHP Version: 7.0.11
+</span><span class='line'>Zend Engine Version: 3.0.0</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>xdebug インストール</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pecl install xdebug</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You should add &ldquo;zend_extension=/usr/lib64/php/modules/xdebug.so&rdquo; to php.ini<br/>
+インストールに成功すると最後に出力される</p>
+
+<h2>php.iniにパラメータを設定</h2>
+
+<p>zend_extension=xdebug.so          ← Apacheの場合はフルパス指定「/usr/lib64/php/modules/xdebug.so」<br/>
+xdebug.remote_enable = On<br/>
+xdebug.remote_connect_back = On<br/>
+xdebug.remote_autostart = On<br/>
+xdebug.remote_host = 192.168.33.1  ← echo $_SERVER[&ldquo;REMOTE_ADDR&rdquo;]; の値<br/>
+xdebug.remote_port = 9001          ← ローカルPCにて lsof -i :9001 コマンドを使用し、使用されていないポートか確認<br/>
+xdebug.idekey=&ldquo;HOGEhoge&rdquo;           ← IDE側の設定で使用する</p>
+
+<h2>環境変数PHP_IDE_CONFIGを設定</h2>
+
+<h3>Apache</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SetEnv PHP_IDE_CONFIG serverName=FUGAfuga</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>nginx</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>fastcgi_param PHP_IDE_CONFIG serverName=FUGAfuga;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>cliで実行する場合</h3>
+
+<p>vagrantユーザーの~/.bashrc に設定</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PHP_IDE_CONFIG="serverName=FUGAfuga"
+</span><span class='line'>source .bashrc</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>サーバー再起動</h2>
+
+<h3>nginx</h3>
+
+<p>sudo service nginx restart
+sudo service php-fpm restart</p>
+
+<h3>Apache</h3>
+
+<p>sudo service httpd restart</p>
+
+<h2>設定を確認</h2>
+
+<p>php -i | grep xdebug</p>
+
+<h1>IDE側の設定</h1>
+
+<h2>接続するリモートホストを設定する</h2>
+
+<ol>
+<li>RUN → Edit Configurations を選択</li>
+<li>ダイアログ左上にある「+」を押下し、PHP Remote Debugを選択
+<img src="http://engineer-diary.click/images/Edit_Configurations.png" alt="Edit Configurations" />
+<img src="http://engineer-diary.click/images/php_remote_debug.png" alt="php_remote_debug" /></li>
+<li>Serversの「&hellip;」を押下し、Serversダイアログを表示<br/>
+<img src="http://engineer-diary.click/images/Servers1.png" alt="Servers1" /></li>
+<li>Serversを設定<br/>
+Name : PHP_IDE_CONFIG serverName=で指定した値(FUGAfuga)<br/>
+Host、Port : vagrant ssh-config で確認<br/>
+Debugger : Xdebug<br/>
+Use Path mappings をチェックし、ローカルとリモートホストでシンクしているディレクトリを設定<br/>
+<img src="http://engineer-diary.click/images/Servers2.png" alt="Servers2" />
+Preferences → PHP → Debug よりXdebugのポートを設定<br/>
+<img src="http://engineer-diary.click/images/Preference.png" alt="Preference" />
+Ide keyを設定(HOGEhoge)
+Name を設定 (わかりやすいサービス名、Vagrant)
+<img src="http://engineer-diary.click/images/Servers_%E8%A8%AD%E5%AE%9A.png" alt="Servers_設定" /></li>
+<li>RUN → Break at first line in PHP scripts にチェック<br/>
+(デバッグが動作するとき、必ず最初の1行目でブレークポイントが走る)<br/>
+<br></li>
+<li>RUN → Start Listening for PHP Debug Connections をチェック<br/>
+<br>
+ブレークポイントをはり、処理の途中でデバッグができるようになりました。</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Let’s EncryptのSSL証明書を取得し、Apacheに設定する]]></title>
@@ -884,42 +1006,6 @@ deleted_atに日付が登録されていれば、<br/>
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$('#parent_id', parent.document).show();</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ELB(443) → EC2(80)のルートを通るときにLaravel5のroute()がhttpとなる問題]]></title>
-    <link href="http://engineer-diary.click/blog/2017/01/30/elb-ec2-laravel5/"/>
-    <updated>2017-01-30T22:02:58+09:00</updated>
-    <id>http://engineer-diary.click/blog/2017/01/30/elb-ec2-laravel5</id>
-    <content type="html"><![CDATA[<p>AWS環境にて。<br/>
-EC2にLaravel5で作成したプロジェクトがあり、テンプレートのリンク先をLaravelの関数であるroute()にて実装。<br/>
-EC2をELBにぶら下げ、ユーザーからのアクセスを ELB(443) → EC2(80) で処理するとき、route()から出力されるプロトコルはhttpとなってしまう。<br/>
-これは、Laravelとしては80番でリクエストが来ているため上記の動作となってしまう。</p>
-
-<h2>対応方法</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>app/Providers/AppServiceProvider.php  
-</span><span class='line'>public function boot()
-</span><span class='line'>{
-</span><span class='line'>    // 環境がローカル環境でないとき
-</span><span class='line'>    if (!app()-&gt;environment('local')) {
-</span><span class='line'>        // すべてのリクエストをhttpsとする
-</span><span class='line'>        \URL::forceSchema('https');
-</span><span class='line'>    }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>※ if文の条件は要調整</strong></p>
 ]]></content>
   </entry>
   

@@ -5,16 +5,18 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>エクセルの列、行に関するショートカットキーまとめ(Windows) - エンジニア日記</title>
+  <title>Vagrant + PHP + IntelliJ IDEA でリモートデバッグを設定 - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="選択範囲を行全体に広げる 1
-shift + space 選択範囲を列全体に広げる 1
-ctrl + space 行や列を挿入するショートカットキー 1
-ctrl + shift +「+」 行を1行削除する 1
-ctrl + 「-」 行を1行非表示にする 1
-ctrl + 9 行を再表示させる 1 &hellip;">
+  <meta name="description" content="Vagrant側の設定 サーバーにログイン 1
+vagrant ssh peclコマンドをインストール (php7の場合、pearのバージョンは1.10.0以降でないと上手く動かない) 1
+2
+3
+4
+5
+6
+sudo yum --enablerepo=remi-php70 install php &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -23,7 +25,7 @@ ctrl + 9 行を再表示させる 1 &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/05/25/excel-win/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2017/10/10/intellij-remote-debug/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -84,7 +86,7 @@ ctrl + 9 行を再表示させる 1 &hellip;">
   
   <header>
     
-      <h1 class="entry-title">エクセルの列、行に関するショートカットキーまとめ(Windows)</h1>
+      <h1 class="entry-title">Vagrant + PHP + IntelliJ IDEA でリモートデバッグを設定</h1>
     
     
       <p class="meta">
@@ -100,59 +102,126 @@ ctrl + 9 行を再表示させる 1 &hellip;">
   
 
 
-<time datetime="2016-05-25T23:07:50+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-10-10T22:50:48+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3>選択範囲を行全体に広げる</h3>
+<div class="entry-content"><h1>Vagrant側の設定</h1>
+
+<h2>サーバーにログイン</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>shift + space</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant ssh</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>選択範囲を列全体に広げる</h3>
+<h2>peclコマンドをインストール</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + space</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>行や列を挿入するショートカットキー</h3>
+<p>(php7の場合、pearのバージョンは1.10.0以降でないと上手く動かない)</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + shift +「+」</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo yum --enablerepo=remi-php70 install php-pear
+</span><span class='line'>
+</span><span class='line'>pear -V
+</span><span class='line'>PEAR Version: 1.10.5
+</span><span class='line'>PHP Version: 7.0.11
+</span><span class='line'>Zend Engine Version: 3.0.0</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>行を1行削除する</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + 「-」</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>行を1行非表示にする</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + 9</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>行を再表示させる</h3>
+<h2>xdebug インストール</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + shift + 9</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pecl install xdebug</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>列を1列非表示にする</h3>
+<p>You should add &ldquo;zend_extension=/usr/lib64/php/modules/xdebug.so&rdquo; to php.ini<br/>
+インストールに成功すると最後に出力される</p>
+
+<h2>php.iniにパラメータを設定</h2>
+
+<p>zend_extension=xdebug.so          ← Apacheの場合はフルパス指定「/usr/lib64/php/modules/xdebug.so」<br/>
+xdebug.remote_enable = On<br/>
+xdebug.remote_connect_back = On<br/>
+xdebug.remote_autostart = On<br/>
+xdebug.remote_host = 192.168.33.1  ← echo $_SERVER[&ldquo;REMOTE_ADDR&rdquo;]; の値<br/>
+xdebug.remote_port = 9001          ← ローカルPCにて lsof -i :9001 コマンドを使用し、使用されていないポートか確認<br/>
+xdebug.idekey=&ldquo;HOGEhoge&rdquo;           ← IDE側の設定で使用する</p>
+
+<h2>環境変数PHP_IDE_CONFIGを設定</h2>
+
+<h3>Apache</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + 0</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SetEnv PHP_IDE_CONFIG serverName=FUGAfuga</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>列を再表示させる</h3>
+<h3>nginx</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + shift + 0</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>fastcgi_param PHP_IDE_CONFIG serverName=FUGAfuga;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>cliで実行する場合</h3>
+
+<p>vagrantユーザーの~/.bashrc に設定</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PHP_IDE_CONFIG="serverName=FUGAfuga"
+</span><span class='line'>source .bashrc</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>サーバー再起動</h2>
+
+<h3>nginx</h3>
+
+<p>sudo service nginx restart
+sudo service php-fpm restart</p>
+
+<h3>Apache</h3>
+
+<p>sudo service httpd restart</p>
+
+<h2>設定を確認</h2>
+
+<p>php -i | grep xdebug</p>
+
+<h1>IDE側の設定</h1>
+
+<h2>接続するリモートホストを設定する</h2>
+
+<ol>
+<li>RUN → Edit Configurations を選択</li>
+<li>ダイアログ左上にある「+」を押下し、PHP Remote Debugを選択
+<img src="/images/Edit_Configurations.png" alt="Edit Configurations" />
+<img src="/images/php_remote_debug.png" alt="php_remote_debug" /></li>
+<li>Serversの「&hellip;」を押下し、Serversダイアログを表示<br/>
+<img src="/images/Servers1.png" alt="Servers1" /></li>
+<li>Serversを設定<br/>
+Name : PHP_IDE_CONFIG serverName=で指定した値(FUGAfuga)<br/>
+Host、Port : vagrant ssh-config で確認<br/>
+Debugger : Xdebug<br/>
+Use Path mappings をチェックし、ローカルとリモートホストでシンクしているディレクトリを設定<br/>
+<img src="/images/Servers2.png" alt="Servers2" />
+Preferences → PHP → Debug よりXdebugのポートを設定<br/>
+<img src="/images/Preference.png" alt="Preference" />
+Ide keyを設定(HOGEhoge)
+Name を設定 (わかりやすいサービス名、Vagrant)
+<img src="/images/Servers_%E8%A8%AD%E5%AE%9A.png" alt="Servers_設定" /></li>
+<li>RUN → Break at first line in PHP scripts にチェック<br/>
+(デバッグが動作するとき、必ず最初の1行目でブレークポイントが走る)<br/>
+<br></li>
+<li>RUN → Start Listening for PHP Debug Connections をチェック<br/>
+<br>
+ブレークポイントをはり、処理の途中でデバッグができるようになりました。</li>
+</ol>
 
 </div>
 
@@ -176,7 +245,7 @@ ctrl + 9 行を再表示させる 1 &hellip;">
   
 
 
-<time datetime="2016-05-25T23:07:50+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-10-10T22:50:48+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -184,7 +253,7 @@ ctrl + 9 行を再表示させる 1 &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/05/25/excel-win/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/05/25/excel-win/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2017/10/10/intellij-remote-debug/" data-via="" data-counturl="http://engineer-diary.click/blog/2017/10/10/intellij-remote-debug/" >Tweet</a>
   
   
   
@@ -193,10 +262,8 @@ ctrl + 9 行を再表示させる 1 &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/05/23/git-reset-revert/" title="Previous Post: git reset と git revertの違い">&laquo; git reset と git revertの違い</a>
+        <a class="basic-alignment left" href="/blog/2017/09/23/apache-ssl/" title="Previous Post: Let’s EncryptのSSL証明書を取得し、Apacheに設定する">&laquo; Let’s EncryptのSSL証明書を取得し、Apacheに設定する</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/06/11/laravel-install/" title="Next Post: macにlaravel5をインストールする">macにlaravel5をインストールする &raquo;</a>
       
     </p>
   </footer>
