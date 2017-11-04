@@ -182,16 +182,23 @@ xdebug.idekey=&ldquo;HOGEhoge&rdquo;           ← IDE側の設定で使用す�
 
 <h3>nginx</h3>
 
-<p>sudo service nginx restart
-sudo service php-fpm restart</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo service nginx restart
+</span><span class='line'>sudo service php-fpm restart</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Apache</h3>
 
-<p>sudo service httpd restart</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo service httpd restart</span></code></pre></td></tr></table></div></figure>
+
 
 <h2>設定を確認</h2>
 
-<p>php -i | grep xdebug</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php -i | grep xdebug</span></code></pre></td></tr></table></div></figure>
+
 
 <h1>IDE側の設定</h1>
 
@@ -206,15 +213,15 @@ sudo service php-fpm restart</p>
 <img src="/images/Servers1.png" alt="Servers1" /></li>
 <li>Serversを設定<br/>
 Name : PHP_IDE_CONFIG serverName=で指定した値(FUGAfuga)<br/>
-Host、Port : vagrant ssh-config で確認<br/>
+Host、Port : vagrant ssh-config コマンドで確認<br/>
 Debugger : Xdebug<br/>
 Use Path mappings をチェックし、ローカルとリモートホストでシンクしているディレクトリを設定<br/>
-<img src="/images/Servers2.png" alt="Servers2" />
+<img src="/images/Servers_%E8%A8%AD%E5%AE%9A.png" alt="Servers_設定" />
 Preferences → PHP → Debug よりXdebugのポートを設定<br/>
 <img src="/images/Preference.png" alt="Preference" />
-Ide keyを設定(HOGEhoge)
+Ide keyを設定(HOGEhoge)<br/>
 Name を設定 (わかりやすいサービス名、Vagrant)
-<img src="/images/Servers_%E8%A8%AD%E5%AE%9A.png" alt="Servers_設定" /></li>
+<img src="/images/Servers2.png" alt="Servers2" /></li>
 <li>RUN → Break at first line in PHP scripts にチェック<br/>
 (デバッグが動作するとき、必ず最初の1行目でブレークポイントが走る)<br/>
 <br></li>
@@ -265,6 +272,8 @@ Name を設定 (わかりやすいサービス名、Vagrant)
         <a class="basic-alignment left" href="/blog/2017/09/23/apache-ssl/" title="Previous Post: Let’s EncryptのSSL証明書を取得し、Apacheに設定する">&laquo; Let’s EncryptのSSL証明書を取得し、Apacheに設定する</a>
       
       
+        <a class="basic-alignment right" href="/blog/2017/11/04/react-native-life-cycle/" title="Next Post: react native life cycle">react native life cycle &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -290,6 +299,10 @@ Name を設定 (わかりやすいサービス名、Vagrant)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/11/04/react-native-life-cycle/">react native life cycle</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/10/10/intellij-remote-debug/">Vagrant + PHP + IntelliJ IDEA でリモートデバッグを設定</a>
       </li>
     
@@ -303,10 +316,6 @@ Name を設定 (わかりやすいサービス名、Vagrant)
     
       <li class="post">
         <a href="/blog/2017/09/03/s3-css-read-error/">S3にCSSファイルをアップロードしたら、読み込みエラー</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/08/17/git-checkout-file/">gitでファイルをあるコミット履歴の状態に戻す</a>
       </li>
     
   </ul>

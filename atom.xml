@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-10-10T23:20:47+09:00</updated>
+  <updated>2017-11-04T11:27:03+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,189 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[react native life cycle]]></title>
+    <link href="http://engineer-diary.click/blog/2017/11/04/react-native-life-cycle/"/>
+    <updated>2017-11-04T11:07:09+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/11/04/react-native-life-cycle</id>
+    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/**
+</span><span class='line'> * Sample React Native App
+</span><span class='line'> * https://github.com/facebook/react-native
+</span><span class='line'> */
+</span><span class='line'>
+</span><span class='line'>import React, { Component } from 'react';
+</span><span class='line'>import {
+</span><span class='line'>    AppRegistry,
+</span><span class='line'>} from 'react-native';
+</span><span class='line'>
+</span><span class='line'>export default class sampleClass extends Component {
+</span><span class='line'>
+</span><span class='line'>    // コンストラクタ
+</span><span class='line'>    constructor(props) {
+</span><span class='line'>        super(props);
+</span><span class='line'>
+</span><span class='line'>        this.state = {
+</span><span class='line'>            hoge: null
+</span><span class='line'>        };
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    // マウント時マウントされるときに1度だけ実行され、
+</span><span class='line'>    // 以降は実行されない
+</span><span class='line'>    componentWillMount(){
+</span><span class='line'>        // render()直前の処理。
+</span><span class='line'>        // setStateを行うとrenderは更新されたstateを
+</span><span class='line'>        // 参照する。
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    // 描画処理
+</span><span class='line'>    render() {
+</span><span class='line'>        return (
+</span><span class='line'>            &lt;View&gt;&lt;/View&gt;
+</span><span class='line'>        );
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    // マウント時マウントされるときに1度だけ実行され、
+</span><span class='line'>    // 以降は実行されない
+</span><span class='line'>    componentDidMount(){
+</span><span class='line'>        // render()直後の処理。
+</span><span class='line'>        // setStateを行うとrenderが再実行されるので、
+</span><span class='line'>        // 行わない方がいい。
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    // ------------------------------------------
+</span><span class='line'>    // 更新時ライフサイクルメソッド ここから
+</span><span class='line'>    // ------------------------------------------
+</span><span class='line'>
+</span><span class='line'>    // 新しいpropsを受け取ると実行
+</span><span class='line'>    // 引数に受け取る
+</span><span class='line'>    componentWillReceiveProps(nextProps){
+</span><span class='line'>        // 更新時ライフサイクルメソッドでsetState()を
+</span><span class='line'>        // 実行できるのはここだけ。
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    // stateが更新されると実行
+</span><span class='line'>    shouldComponentUpdate(nextProps, nextState){
+</span><span class='line'>        // パフォーマンス・チューニング時は特に意識する。
+</span><span class='line'>        // falseを返すと、以降のcomponentWillUpdate(), render(), componentDidMount()の処理が
+</span><span class='line'>        // スキップされる。
+</span><span class='line'>
+</span><span class='line'>        return true;
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    componentWillUpdate(nextProps, nextState){
+</span><span class='line'>        // 再render()直前の処理。
+</span><span class='line'>        // 変更前後のprops、stateを参照し処理を行える。
+</span><span class='line'>        // render()処理に移る直前にprops、stateの値が更新される。
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    componentDidUpdate(prevProps, prevState){
+</span><span class='line'>        // 再render()直後の処理。
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    // ------------------------------------------
+</span><span class='line'>    // 更新時ライフサイクルメソッド ここまで
+</span><span class='line'>    // ------------------------------------------
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    // アンマウント時に実行
+</span><span class='line'>    componentWillUnmount(){
+</span><span class='line'>        // タイマー停止などの後始末処理を記述する。
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>AppRegistry.registerComponent('sampleClass', () =&gt; sampleClass);</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Vagrant + PHP + IntelliJ IDEA でリモートデバッグを設定]]></title>
@@ -91,16 +274,23 @@ xdebug.idekey=&ldquo;HOGEhoge&rdquo;           ← IDE側の設定で使用す�
 
 <h3>nginx</h3>
 
-<p>sudo service nginx restart
-sudo service php-fpm restart</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo service nginx restart
+</span><span class='line'>sudo service php-fpm restart</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Apache</h3>
 
-<p>sudo service httpd restart</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo service httpd restart</span></code></pre></td></tr></table></div></figure>
+
 
 <h2>設定を確認</h2>
 
-<p>php -i | grep xdebug</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php -i | grep xdebug</span></code></pre></td></tr></table></div></figure>
+
 
 <h1>IDE側の設定</h1>
 
@@ -115,15 +305,15 @@ sudo service php-fpm restart</p>
 <img src="http://engineer-diary.click/images/Servers1.png" alt="Servers1" /></li>
 <li>Serversを設定<br/>
 Name : PHP_IDE_CONFIG serverName=で指定した値(FUGAfuga)<br/>
-Host、Port : vagrant ssh-config で確認<br/>
+Host、Port : vagrant ssh-config コマンドで確認<br/>
 Debugger : Xdebug<br/>
 Use Path mappings をチェックし、ローカルとリモートホストでシンクしているディレクトリを設定<br/>
-<img src="http://engineer-diary.click/images/Servers2.png" alt="Servers2" />
+<img src="http://engineer-diary.click/images/Servers_%E8%A8%AD%E5%AE%9A.png" alt="Servers_設定" />
 Preferences → PHP → Debug よりXdebugのポートを設定<br/>
 <img src="http://engineer-diary.click/images/Preference.png" alt="Preference" />
-Ide keyを設定(HOGEhoge)
+Ide keyを設定(HOGEhoge)<br/>
 Name を設定 (わかりやすいサービス名、Vagrant)
-<img src="http://engineer-diary.click/images/Servers_%E8%A8%AD%E5%AE%9A.png" alt="Servers_設定" /></li>
+<img src="http://engineer-diary.click/images/Servers2.png" alt="Servers2" /></li>
 <li>RUN → Break at first line in PHP scripts にチェック<br/>
 (デバッグが動作するとき、必ず最初の1行目でブレークポイントが走る)<br/>
 <br></li>
@@ -990,21 +1180,6 @@ deleted_atに日付が登録されていれば、<br/>
 </span><span class='line'>  'as'    =&gt; 'get_piyo',
 </span><span class='line'>  'uses'  =&gt; 'HogeController@getPiyo'
 </span><span class='line'>]);</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[jQueryでiframeのフレーム内からフレーム外の要素を扱う]]></title>
-    <link href="http://engineer-diary.click/blog/2017/02/20/iframe-parent/"/>
-    <updated>2017-02-20T20:04:58+09:00</updated>
-    <id>http://engineer-diary.click/blog/2017/02/20/iframe-parent</id>
-    <content type="html"><![CDATA[<p>セレクタの第２引数に <strong>parent.document</strong> を指定する</p>
-
-<p>例)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$('#parent_id', parent.document).show();</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>

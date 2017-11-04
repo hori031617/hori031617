@@ -9,16 +9,12 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="どちらもコミットしたものを取り消すコマンドだが、取り消され方や、取り消されるコミットの範囲の違いをまとめる。 git reset &ndash;haed コミットID 指定したコミットIDから以降のコミットをなかったことにする。
-コミットログからも抹消される。
-例) 1
-2
-3
-4
-5
-6
-7
-8 &hellip;">
+  <meta name="description" content="選択範囲を行全体に広げる 1
+shift + space 選択範囲を列全体に広げる 1
+ctrl + space 行や列を挿入するショートカットキー 1
+ctrl + shift +「+」 行を1行削除する 1
+ctrl + 「-」 行を1行非表示にする 1
+ctrl + 9 行を再表示させる 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +81,88 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/05/25/excel-win/">エクセルの列、行に関するショートカットキーまとめ(Windows)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-25T23:07:50+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>選択範囲を行全体に広げる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>shift + space</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>選択範囲を列全体に広げる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + space</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>行や列を挿入するショートカットキー</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + shift +「+」</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>行を1行削除する</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + 「-」</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>行を1行非表示にする</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + 9</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>行を再表示させる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + shift + 9</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>列を1列非表示にする</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + 0</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>列を再表示させる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctrl + shift + 0</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1264,92 +1342,6 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/05/05/angular-js-get-ajax/">Angular JS で、APIを非同期でGET呼び出しし、返却されたデータを表示する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-05-05T08:14:21+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li>APIはJSONデータを返却する</li>
-<li>JSONデータにはあるグループのグループ名、コメント、登録日が格納されている</li>
-<li>返却されたJSONデータを <em>ng-repeat(ループ)</em> で表示する</li>
-</ul>
-
-
-<pre><code>&lt;!doctype html&gt;
-  &lt;html lang="ja"&gt;
-    &lt;body ng-app="group" ng-cloak&gt;
-      &lt;div ng-controller="GroupController"&gt;
-        &lt;table&gt;
-          &lt;thead&gt;
-            &lt;tr&gt;
-              &lt;th&gt;グループ名&lt;/th&gt;
-              &lt;th&gt;コメント&lt;/th&gt;
-              &lt;th&gt;登録日&lt;/th&gt;
-            &lt;/tr&gt;
-          &lt;/thead&gt;
-          &lt;tbody&gt;
-            &lt;tr ng-repeat="group in data.group_list"&gt;
-              &lt;td&gt;{group.group_name}&lt;/td&gt;
-              &lt;td&gt;{group.comment}&lt;/td&gt;
-              &lt;td&gt;{group.regist_date}&lt;/td&gt;
-            &lt;/tr&gt;
-          &lt;/tbody&gt;
-        &lt;/table&gt;
-      &lt;/div&gt;
-   &lt;!-- Anguler JS 読み込み ここから --&gt;
-      &lt;script src="angular.js"&gt;&lt;/script&gt;
-      &lt;script src="angular-resource.js"&gt;&lt;/script&gt;
-   &lt;!-- Anguler JS 読み込み ここまで --&gt;
-      &lt;script&gt;
-        var GroupController = function($scope, $resource){
-
-        // GETパラーメータ
-        var parameter = {hoge: 'fuga'};
-
-        var group_api = $resource(" APIパス ");
-
-        // 非同期でGET通信
-        group_api.get(parameter, function(data){
-            $scope.data = data;
-        });
-
-        var appModule = angular.module('group', ['ngResource']);
-        appModule.controller('GroupController', GroupController);
-      &lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/6">&larr; Older</a>
@@ -1381,6 +1373,10 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/11/04/react-native-life-cycle/">react native life cycle</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/10/10/intellij-remote-debug/">Vagrant + PHP + IntelliJ IDEA でリモートデバッグを設定</a>
       </li>
     
@@ -1394,10 +1390,6 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
     
       <li class="post">
         <a href="/blog/2017/09/03/s3-css-read-error/">S3にCSSファイルをアップロードしたら、読み込みエラー</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/08/17/git-checkout-file/">gitでファイルをあるコミット履歴の状態に戻す</a>
       </li>
     
   </ul>
