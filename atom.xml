@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-11-04T11:27:03+09:00</updated>
+  <updated>2017-11-13T23:05:36+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ESLintでJavaScriptのコードスタイルを統一]]></title>
+    <link href="http://engineer-diary.click/blog/2017/11/11/setting-eslint/"/>
+    <updated>2017-11-11T14:27:29+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/11/11/setting-eslint</id>
+    <content type="html"><![CDATA[<h2>ESLintとは？</h2>
+
+<ul>
+<li>特定のスタイルガイドライン(検証ルール)に準拠していない、問題のあるパターンやコードを見つけるための静的検証ツール。</li>
+<li>検証ルールの追加や、有効or無効化、検出レベル(ワーニング、エラーなど) が自由に設定できる。</li>
+</ul>
+
+
+<h2>ESLintのインストール</h2>
+
+<p>プロジェクトルートに移動し、下記コマンドを実行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ npm install eslint --save-dev
+</span><span class='line'>
+</span><span class='line'>$ ./node_modules/.bin/eslint -v
+</span><span class='line'>v4.9.0</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>コーディングスタイルのルールを記述するファイル(json形式ならば.eslintrc.json)を下記コマンドで生成</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./node_modules/.bin/eslint --init
+</span><span class='line'>? How would you like to configure ESLint? (Use arrow keys)
+</span><span class='line'>❯ Answer questions about your style  (対話形式で作る)
+</span><span class='line'>  Use a popular style guide          (人気のスタイルガイドから作る)
+</span><span class='line'>  Inspect your JavaScript file(s)    (JavaScriptファイルから作る)
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>コーディングスタイルをチェック</h2>
+
+<p>プロジェクトルートに生成された、.eslintrc.jsonに記述されているルールに従ってチェックしてくれる</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./node_modules/.bin/eslint index.js
+</span><span class='line'>/index.js
+</span><span class='line'>   46:10  error    'hoge' is defined but never used                     no-unused-vars
+</span><span class='line'>   83:13  warning  Unexpected console statement                   no-console
+</span><span class='line'>   85:37  error    Empty block statement                                    no-empty
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>常にコーディングスタイルをチェックするように、IntelliJに設定する</h2>
+
+<p>設定より、</p>
+
+<ol>
+<li>Languages &amp; Frameworks</li>
+<li>JavaScript</li>
+<li>Code Quality Tools</li>
+<li>ESLint</li>
+<li>Enableにチェック</li>
+<li>ESLint package にeslintモジュールのパスを設定</li>
+</ol>
+
+
+<p><img src="http://engineer-diary.click/images/eslint.png" alt="ESLint" /></p>
+
+<h2>コーディングスタイル ルール一覧</h2>
+
+<h3>公式サイト</h3>
+
+<ul>
+<li><a href="https://eslint.org/docs/rules/">https://eslint.org/docs/rules/</a></li>
+</ul>
+
+
+<h3>qiita</h3>
+
+<h4>ESLintのエラールール。</h4>
+
+<ul>
+<li><a href="https://qiita.com/M-ISO/items/113ddd448bdc496af783">https://qiita.com/M-ISO/items/113ddd448bdc496af783</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[react native life cycle]]></title>
@@ -1079,107 +1174,6 @@ deleted_atに日付が登録されていれば、<br/>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$fuga = Fuga::findOrFail($id);
 </span><span class='line'>$fuga-&gt;delete(); // deleted_at = now()が入って、delete文でカラムは削除されない。</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Laravel5にてjsonを返却するAPIを作成する]]></title>
-    <link href="http://engineer-diary.click/blog/2017/02/26/laravel-api/"/>
-    <updated>2017-02-26T09:53:18+09:00</updated>
-    <id>http://engineer-diary.click/blog/2017/02/26/laravel-api</id>
-    <content type="html"><![CDATA[<h2>サンプルコード</h2>
-
-<h3>php artisan make:controller HogeController で雛形を作成したものに処理を追加</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
-</span><span class='line'>
-</span><span class='line'>namespace App\Http\Controllers;
-</span><span class='line'>
-</span><span class='line'>use Illuminate\Http\Request;
-</span><span class='line'>use App\Http\Requests;
-</span><span class='line'>
-</span><span class='line'>use App\Model\Fuga;
-</span><span class='line'>use Response;    // 追加
-</span><span class='line'>use Validator;   // 追加
-</span><span class='line'>
-</span><span class='line'>class HogeController extends Controller
-</span><span class='line'>{
-</span><span class='line'>    public function getPiyo($id){
-</span><span class='line'>
-</span><span class='line'>        // 受け取った引数のバリデーションルールを作成
-</span><span class='line'>        $validator = Validator::make(['id' =&gt; $id],
-</span><span class='line'>                                     ['id' =&gt; 'required|integer']);
-</span><span class='line'>
-</span><span class='line'>        // バリデーションエラー
-</span><span class='line'>        if($validator-&gt;fails()){
-</span><span class='line'>            return Response::json([
-</span><span class='line'>                                'status' =&gt; 'NG',
-</span><span class='line'>                                'message' =&gt; '値が不正です'
-</span><span class='line'>                            ]);
-</span><span class='line'>        }
-</span><span class='line'>
-</span><span class='line'>        // DBから値を取得
-</span><span class='line'>        $fuga = new Fuga();
-</span><span class='line'>        $piyo = $fuga::find($id);
-</span><span class='line'>
-</span><span class='line'>        // jsonで返却
-</span><span class='line'>        return Response::json([
-</span><span class='line'>                            'status' =&gt; 'OK',
-</span><span class='line'>                            'piyo' =&gt; $piyo
-</span><span class='line'>                        ]);
-</span><span class='line'>    }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>ルーティングを設定</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Route::get('get_piyo/{id}', [
-</span><span class='line'>  'as'    =&gt; 'get_piyo',
-</span><span class='line'>  'uses'  =&gt; 'HogeController@getPiyo'
-</span><span class='line'>]);</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>

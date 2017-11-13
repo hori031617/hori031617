@@ -5,17 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>カレントディレクトリ配下のファイルの拡張子を変更する - エンジニア日記</title>
+  <title>ESLintでJavaScriptのコードスタイルを統一 - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="ttlファイルをtxtファイルにするために拡張子の変更をコマンドで行う。
-だが、以下の方法ではダメだった。 1
-mv *.ttl *.txt 一括でファイルを変更するにはfor文で行う。 1
-2
-3
-for fname in *.ttl; do
-mv $fname ${fname%.ttl}. &hellip;">
+  <meta name="description" content="ESLintとは？ 特定のスタイルガイドライン(検証ルール)に準拠していない、問題のあるパターンやコードを見つけるための静的検証ツール。
+検証ルールの追加や、有効or無効化、検出レベル(ワーニング、エラーなど) が自由に設定できる。 ESLintのインストール プロジェクトルートに移動し、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,7 +19,7 @@ mv $fname ${fname%.ttl}. &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/06/30/ext-change/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2017/11/11/setting-eslint/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -85,7 +80,7 @@ mv $fname ${fname%.ttl}. &hellip;">
   
   <header>
     
-      <h1 class="entry-title">カレントディレクトリ配下のファイルの拡張子を変更する</h1>
+      <h1 class="entry-title">ESLintでJavaScriptのコードスタイルを統一</h1>
     
     
       <p class="meta">
@@ -101,29 +96,99 @@ mv $fname ${fname%.ttl}. &hellip;">
   
 
 
-<time datetime="2016-06-30T21:13:04+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-11-11T14:27:29+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>ttlファイルをtxtファイルにするために拡張子の変更をコマンドで行う。<br/>
-だが、以下の方法ではダメだった。</p>
+<div class="entry-content"><h2>ESLintとは？</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mv *.ttl *.txt</span></code></pre></td></tr></table></div></figure>
+<ul>
+<li>特定のスタイルガイドライン(検証ルール)に準拠していない、問題のあるパターンやコードを見つけるための静的検証ツール。</li>
+<li>検証ルールの追加や、有効or無効化、検出レベル(ワーニング、エラーなど) が自由に設定できる。</li>
+</ul>
 
 
-<p><br>
-一括でファイルを変更するにはfor文で行う。</p>
+<h2>ESLintのインストール</h2>
+
+<p>プロジェクトルートに移動し、下記コマンドを実行</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>for fname in *.ttl; do
-</span><span class='line'>mv $fname ${fname%.ttl}.txt;
-</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ npm install eslint --save-dev
+</span><span class='line'>
+</span><span class='line'>$ ./node_modules/.bin/eslint -v
+</span><span class='line'>v4.9.0</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>コーディングスタイルのルールを記述するファイル(json形式ならば.eslintrc.json)を下記コマンドで生成</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./node_modules/.bin/eslint --init
+</span><span class='line'>? How would you like to configure ESLint? (Use arrow keys)
+</span><span class='line'>❯ Answer questions about your style  (対話形式で作る)
+</span><span class='line'>  Use a popular style guide          (人気のスタイルガイドから作る)
+</span><span class='line'>  Inspect your JavaScript file(s)    (JavaScriptファイルから作る)
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>コーディングスタイルをチェック</h2>
+
+<p>プロジェクトルートに生成された、.eslintrc.jsonに記述されているルールに従ってチェックしてくれる</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./node_modules/.bin/eslint index.js
+</span><span class='line'>/index.js
+</span><span class='line'>   46:10  error    'hoge' is defined but never used                     no-unused-vars
+</span><span class='line'>   83:13  warning  Unexpected console statement                   no-console
+</span><span class='line'>   85:37  error    Empty block statement                                    no-empty
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>常にコーディングスタイルをチェックするように、IntelliJに設定する</h2>
+
+<p>設定より、</p>
+
+<ol>
+<li>Languages &amp; Frameworks</li>
+<li>JavaScript</li>
+<li>Code Quality Tools</li>
+<li>ESLint</li>
+<li>Enableにチェック</li>
+<li>ESLint package にeslintモジュールのパスを設定</li>
+</ol>
+
+
+<p><img src="/images/eslint.png" alt="ESLint" /></p>
+
+<h2>コーディングスタイル ルール一覧</h2>
+
+<h3>公式サイト</h3>
+
+<ul>
+<li><a href="https://eslint.org/docs/rules/">https://eslint.org/docs/rules/</a></li>
+</ul>
+
+
+<h3>qiita</h3>
+
+<h4>ESLintのエラールール。</h4>
+
+<ul>
+<li><a href="https://qiita.com/M-ISO/items/113ddd448bdc496af783">https://qiita.com/M-ISO/items/113ddd448bdc496af783</a></li>
+</ul>
 
 </div>
 
@@ -147,7 +212,7 @@ mv $fname ${fname%.ttl}. &hellip;">
   
 
 
-<time datetime="2016-06-30T21:13:04+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-11-11T14:27:29+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -155,7 +220,7 @@ mv $fname ${fname%.ttl}. &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/06/30/ext-change/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/06/30/ext-change/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2017/11/11/setting-eslint/" data-via="" data-counturl="http://engineer-diary.click/blog/2017/11/11/setting-eslint/" >Tweet</a>
   
   
   
@@ -164,10 +229,8 @@ mv $fname ${fname%.ttl}. &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/06/29/replace-string/" title="Previous Post: カレントディレクトリにあるファイルの文字列を一度に置換する">&laquo; カレントディレクトリにあるファイルの文字列を一度に置換する</a>
+        <a class="basic-alignment left" href="/blog/2017/11/04/react-native-life-cycle/" title="Previous Post: react native life cycle">&laquo; react native life cycle</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/07/13/mysql-authority/" title="Next Post: MySQLでユーザーにDB、テーブルに対して権限付与するコマンド">MySQLでユーザーにDB、テーブルに対して権限付与するコマンド &raquo;</a>
       
     </p>
   </footer>
