@@ -9,36 +9,15 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="サンプルコード php artisan make:controller HogeController で雛形を作成したものに処理を追加 1
+  <meta name="description" content="1. Migrateファイルを作成時、以下のカラムを記述 1
+$table-&gt;softDeletes(); // deleted_atカラムが追加される 2. Modelに以下を追加 1
 2
 3
 4
 5
 6
 7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30 &hellip;">
+use Illuminate\Database\Eloquent\ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -105,6 +84,78 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/03/05/laravel5-deleted-at/">Laravel5で論理削除を実装する手順</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-03-05T18:57:44+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>1. Migrateファイルを作成時、以下のカラムを記述</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$table-&gt;softDeletes();  // deleted_atカラムが追加される</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. Modelに以下を追加</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>use Illuminate\Database\Eloquent\SoftDeletes; // 追加する
+</span><span class='line'>
+</span><span class='line'>class Hoge extends Model
+</span><span class='line'>{
+</span><span class='line'>    // 論理削除を有効化
+</span><span class='line'>    use SoftDeletes;
+</span><span class='line'>    protected $dates = ['deleted_at'];</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上記1.2の設定で論理削除が有効になる。<br/>
+deleted_atに日付が登録されていれば、<br/>
+<strong>SELECT文にWHERE句などを記述しなくても、取得されない。</strong></p>
+
+<h2>3. Eloquentでdeleted_at に値を登録</h2>
+
+<h3>通常のdelete文から変更なし</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$fuga = Fuga::findOrFail($id);
+</span><span class='line'>$fuga-&gt;delete(); // deleted_at = now()が入って、delete文でカラムは削除されない。</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -685,90 +736,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/03/vagrant-shared-folder-error/">ローカルホストとリモートホストをマウント時にエラー</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-11-03T17:29:16+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>下記エラーが出力された</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Vagrant was unable to mount VirtualBox shared folders. This is usually
-</span><span class='line'>because the filesystem "vboxsf" is not available.</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>解決方法</h2>
-
-<h3>まず、vagrant up時に自動的に新しいバージョンのGuest Additionsに更新してくれる「vagrant-vbguest」というプラグインをインストール</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant plugin install vagrant-vbguest</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Vagrantが起動している状態でマウント失敗している仮想マシンの状態確認</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest --status
-</span><span class='line'>
-</span><span class='line'>[default] No installation found.</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Guest Additionsを更新</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>再度仮想マシンの状態確認</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest --status
-</span><span class='line'>
-</span><span class='line'>[default] GuestAdditions 5.1.8 running --- OK.</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>仮想マシンを再起動</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant reload</span></code></pre></td></tr></table></div></figure>
-
-
-<p>解決しました。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/4">&larr; Older</a>
@@ -800,6 +767,10 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/11/16/sql-update/">MySQLにて同テーブル内で別データのカラムをコピーする</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/11/11/setting-eslint/">ESLintでJavaScriptのコードスタイルを統一</a>
       </li>
     
@@ -813,10 +784,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
     
       <li class="post">
         <a href="/blog/2017/09/23/apache-ssl/">Let’s EncryptのSSL証明書を取得し、Apacheに設定する</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/09/17/sequelpro-vagrant-mysql/">Sequel ProでVagrantのMySQLに接続</a>
       </li>
     
   </ul>

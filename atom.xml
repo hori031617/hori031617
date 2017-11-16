@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-11-13T23:05:36+09:00</updated>
+  <updated>2017-11-16T22:05:14+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MySQLにて同テーブル内で別データのカラムをコピーする]]></title>
+    <link href="http://engineer-diary.click/blog/2017/11/16/sql-update/"/>
+    <updated>2017-11-16T22:01:54+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/11/16/sql-update</id>
+    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>UPDATE hoge AS h1, hoge AS h2
+</span><span class='line'>SET h1.fuga = h2.fuga
+</span><span class='line'>WHERE h1.id = 111 AND h2.id = 222;</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ESLintでJavaScriptのコードスタイルを統一]]></title>
@@ -1129,51 +1144,6 @@ GIMPで画像を開くと、大抵の場合以下のような形で無駄に余�
 </span><span class='line'>Verify password:       ← 解凍パスワード確認
 </span><span class='line'>  adding: HOGE/ (stored 0%)
 </span><span class='line'>  adding: HOGE/fuga.pdf (deflated 5%)</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Laravel5で論理削除を実装する手順]]></title>
-    <link href="http://engineer-diary.click/blog/2017/03/05/laravel5-deleted-at/"/>
-    <updated>2017-03-05T18:57:44+09:00</updated>
-    <id>http://engineer-diary.click/blog/2017/03/05/laravel5-deleted-at</id>
-    <content type="html"><![CDATA[<h2>1. Migrateファイルを作成時、以下のカラムを記述</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$table-&gt;softDeletes();  // deleted_atカラムが追加される</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>2. Modelに以下を追加</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>use Illuminate\Database\Eloquent\SoftDeletes; // 追加する
-</span><span class='line'>
-</span><span class='line'>class Hoge extends Model
-</span><span class='line'>{
-</span><span class='line'>    // 論理削除を有効化
-</span><span class='line'>    use SoftDeletes;
-</span><span class='line'>    protected $dates = ['deleted_at'];</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上記1.2の設定で論理削除が有効になる。<br/>
-deleted_atに日付が登録されていれば、<br/>
-<strong>SELECT文にWHERE句などを記述しなくても、取得されない。</strong></p>
-
-<h2>3. Eloquentでdeleted_at に値を登録</h2>
-
-<h3>通常のdelete文から変更なし</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$fuga = Fuga::findOrFail($id);
-</span><span class='line'>$fuga-&gt;delete(); // deleted_at = now()が入って、delete文でカラムは削除されない。</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>

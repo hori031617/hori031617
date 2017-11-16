@@ -9,15 +9,10 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="下記コマンドでboxを追加 1
+  <meta name="description" content="下記エラーが出力された 1
 2
-3
-vagrant box add {name} {url} vagrant box add centos/7 https://atlas.hashicorp.com/centos/boxes/7 エラーが発生 1
-2
-3
-4
-5
-An error &hellip;">
+Vagrant was unable to mount VirtualBox shared folders. This is usually
+because the filesystem "vboxsf" is not available. 解決方法 まず、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +79,90 @@ An error &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/03/vagrant-shared-folder-error/">ローカルホストとリモートホストをマウント時にエラー</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-11-03T17:29:16+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>下記エラーが出力された</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Vagrant was unable to mount VirtualBox shared folders. This is usually
+</span><span class='line'>because the filesystem "vboxsf" is not available.</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>解決方法</h2>
+
+<h3>まず、vagrant up時に自動的に新しいバージョンのGuest Additionsに更新してくれる「vagrant-vbguest」というプラグインをインストール</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant plugin install vagrant-vbguest</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Vagrantが起動している状態でマウント失敗している仮想マシンの状態確認</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest --status
+</span><span class='line'>
+</span><span class='line'>[default] No installation found.</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Guest Additionsを更新</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>再度仮想マシンの状態確認</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest --status
+</span><span class='line'>
+</span><span class='line'>[default] GuestAdditions 5.1.8 running --- OK.</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>仮想マシンを再起動</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant reload</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解決しました。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -816,47 +895,6 @@ An error &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/06/29/replace-string/">カレントディレクトリにあるファイルの文字列を一度に置換する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-06-29T19:56:42+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>find ./ -type f | xargs sed -i 's/置き換え前/置き換え後/g'</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>※ 注意 ※</strong><br/>
-<strong>このコマンドはファイルのバックアップは作成されないので、実行前にバックアップは取っておいたほうがいいです。</strong></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/5">&larr; Older</a>
@@ -888,6 +926,10 @@ An error &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/11/16/sql-update/">MySQLにて同テーブル内で別データのカラムをコピーする</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/11/11/setting-eslint/">ESLintでJavaScriptのコードスタイルを統一</a>
       </li>
     
@@ -901,10 +943,6 @@ An error &hellip;">
     
       <li class="post">
         <a href="/blog/2017/09/23/apache-ssl/">Let’s EncryptのSSL証明書を取得し、Apacheに設定する</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/09/17/sequelpro-vagrant-mysql/">Sequel ProでVagrantのMySQLに接続</a>
       </li>
     
   </ul>

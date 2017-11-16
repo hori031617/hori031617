@@ -5,12 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>curlコマンドでアクセストークンを付与し、APIをPOST送信する - エンジニア日記</title>
+  <title>MySQLにて同テーブル内で別データのカラムをコピーする - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
   <meta name="description" content="1
-curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Cache-Control: no-cache" -H "Authorization: OAuth [AccessToken]" -d 'hoge= &hellip;">
+2
+3
+UPDATE hoge AS h1, hoge AS h2
+SET h1.fuga = h2.fuga
+WHERE h1.id = 111 AND h2.id = 222; ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +23,7 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Cache-Cont
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2017/03/15/curl-post/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2017/11/16/sql-update/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -80,7 +84,7 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Cache-Cont
   
   <header>
     
-      <h1 class="entry-title">curlコマンドでアクセストークンを付与し、APIをPOST送信する</h1>
+      <h1 class="entry-title">MySQLにて同テーブル内で別データのカラムをコピーする</h1>
     
     
       <p class="meta">
@@ -96,7 +100,7 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Cache-Cont
   
 
 
-<time datetime="2017-03-15T20:38:37+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-11-16T22:01:54+09:00" pubdate data-updated="true"></time>
         
       </p>
     
@@ -104,7 +108,11 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Cache-Cont
 
 
 <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Cache-Control: no-cache" -H "Authorization: OAuth [AccessToken]" -d 'hoge=12345&fuga=abcde' "https://example.com/api/v1/sample"</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>UPDATE hoge AS h1, hoge AS h2
+</span><span class='line'>SET h1.fuga = h2.fuga
+</span><span class='line'>WHERE h1.id = 111 AND h2.id = 222;</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -128,7 +136,7 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Cache-Cont
   
 
 
-<time datetime="2017-03-15T20:38:37+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-11-16T22:01:54+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -136,7 +144,7 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Cache-Cont
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2017/03/15/curl-post/" data-via="" data-counturl="http://engineer-diary.click/blog/2017/03/15/curl-post/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2017/11/16/sql-update/" data-via="" data-counturl="http://engineer-diary.click/blog/2017/11/16/sql-update/" >Tweet</a>
   
   
   
@@ -145,10 +153,8 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Cache-Cont
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2017/03/07/mac-zip-cmd/" title="Previous Post: Macでツールを使わずzipコマンドでディレクトリを圧縮し、解凍パスワードを付与する">&laquo; Macでツールを使わずzipコマンドでディレクトリを圧縮し、解凍パスワードを付与する</a>
+        <a class="basic-alignment left" href="/blog/2017/11/11/setting-eslint/" title="Previous Post: ESLintでJavaScriptのコードスタイルを統一">&laquo; ESLintでJavaScriptのコードスタイルを統一</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2017/03/20/js-form-post-send/" title="Next Post: クリックしたらJavascriptでフォームを作成し、POST送信する">クリックしたらJavascriptでフォームを作成し、POST送信する &raquo;</a>
       
     </p>
   </footer>
