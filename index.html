@@ -9,12 +9,11 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="1
+  <meta name="description" content="(必要であれば)Homebrewをアップデート 1
+brew update 次にHomebrew-Caskをインストール 1
+brew tap caskroom/cask もしインストール時、権限エラーになった際は下記コマンドを実行する 1
 2
-3
-UPDATE hoge AS h1, hoge AS h2
-SET h1.fuga = h2.fuga
-WHERE h1.id = 111 AND h2.id = 222; ">
+sudo chown -R $(whoami) / &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +80,76 @@ WHERE h1.id = 111 AND h2.id = 222; ">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/11/23/meld-install/">Macのdiffツール「meld」インストールメモ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-11-23T22:47:24+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>(必要であれば)Homebrewをアップデート</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew update</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>次にHomebrew-Caskをインストール</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew tap caskroom/cask</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>もしインストール時、権限エラーになった際は下記コマンドを実行する</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo chown -R $(whoami) /usr/local/Cellar
+</span><span class='line'>sudo chown -R $(whoami) /usr/local</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>meldインストール</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew install caskroom/cask/meld</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>medl を起動する</h2>
+
+<p>ターミナルで下記コマンドを実行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>meld</span></code></pre></td></tr></table></div></figure>
+
+
+<p>meldのウィンドウが立ち上がります。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1015,46 +1084,6 @@ CSSが読み込まれなくなった。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/07/17/apk-install/">Adbコマンドでapkファイルを実機にインストールする</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-07-17T11:38:23+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>例)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>adb install -r ./android.apk</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/2">&larr; Older</a>
@@ -1082,6 +1111,10 @@ CSSが読み込まれなくなった。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/11/23/meld-install/">Macのdiffツール「meld」インストールメモ</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/11/16/sql-update/">MySQLにて同テーブル内で別データのカラムをコピーする</a>
       </li>
     
@@ -1095,10 +1128,6 @@ CSSが読み込まれなくなった。</p>
     
       <li class="post">
         <a href="/blog/2017/10/10/intellij-remote-debug/">Vagrant + PHP + IntelliJ IDEA でリモートデバッグを設定</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/09/23/apache-ssl/">Let’s EncryptのSSL証明書を取得し、Apacheに設定する</a>
       </li>
     
   </ul>

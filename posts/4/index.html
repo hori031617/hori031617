@@ -9,10 +9,7 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="下記エラーが出力された 1
-2
-Vagrant was unable to mount VirtualBox shared folders. This is usually
-because the filesystem "vboxsf" is not available. 解決方法 まず、 &hellip;">
+  <meta name="description" content="AWS Lambda で関数を作成し、その関数をCloudWatch Eventsで定期的に実行しようとして、cronを設定したが時間どおりに動作しなかった。 CloudWatch Eventsのトラブルシューティングページを確認すると ScheduleExpressions は UTC です。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +76,48 @@ because the filesystem "vboxsf" is not available. 解決方法 まず、 &hellip
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/12/cloudwatch-events/">CloudWatch Events Cronのタイムゾーン</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-11-12T19:35:25+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>AWS Lambda で関数を作成し、その関数をCloudWatch Eventsで定期的に実行しようとして、cronを設定したが時間どおりに動作しなかった。</p>
+
+<p>CloudWatch Eventsのトラブルシューティングページを確認すると</p>
+
+<blockquote><p>ScheduleExpressions は UTC です。UTC タイムゾーンで自己トリガーするルールのスケジュールが設定されていることを確認します。</p></blockquote>
+
+<p>とあり、タイムゾーンをUTCで設定する必要があった。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -843,58 +882,6 @@ because the filesystem "vboxsf" is not available. 解決方法 まず、 &hellip
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/06/30/ext-change/">カレントディレクトリ配下のファイルの拡張子を変更する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-06-30T21:13:04+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>ttlファイルをtxtファイルにするために拡張子の変更をコマンドで行う。<br/>
-だが、以下の方法ではダメだった。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mv *.ttl *.txt</span></code></pre></td></tr></table></div></figure>
-
-
-<p><br>
-一括でファイルを変更するにはfor文で行う。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>for fname in *.ttl; do
-</span><span class='line'>mv $fname ${fname%.ttl}.txt;
-</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/5">&larr; Older</a>
@@ -926,6 +913,10 @@ because the filesystem "vboxsf" is not available. 解決方法 まず、 &hellip
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/11/23/meld-install/">Macのdiffツール「meld」インストールメモ</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/11/16/sql-update/">MySQLにて同テーブル内で別データのカラムをコピーする</a>
       </li>
     
@@ -939,10 +930,6 @@ because the filesystem "vboxsf" is not available. 解決方法 まず、 &hellip
     
       <li class="post">
         <a href="/blog/2017/10/10/intellij-remote-debug/">Vagrant + PHP + IntelliJ IDEA でリモートデバッグを設定</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/09/23/apache-ssl/">Let’s EncryptのSSL証明書を取得し、Apacheに設定する</a>
       </li>
     
   </ul>

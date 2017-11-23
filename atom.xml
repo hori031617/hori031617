@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-11-16T22:05:14+09:00</updated>
+  <updated>2017-11-23T23:04:50+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Macのdiffツール「meld」インストールメモ]]></title>
+    <link href="http://engineer-diary.click/blog/2017/11/23/meld-install/"/>
+    <updated>2017-11-23T22:47:24+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/11/23/meld-install</id>
+    <content type="html"><![CDATA[<h2>(必要であれば)Homebrewをアップデート</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew update</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>次にHomebrew-Caskをインストール</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew tap caskroom/cask</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>もしインストール時、権限エラーになった際は下記コマンドを実行する</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo chown -R $(whoami) /usr/local/Cellar
+</span><span class='line'>sudo chown -R $(whoami) /usr/local</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>meldインストール</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew install caskroom/cask/meld</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>medl を起動する</h2>
+
+<p>ターミナルで下記コマンドを実行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>meld</span></code></pre></td></tr></table></div></figure>
+
+
+<p>meldのウィンドウが立ち上がります。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MySQLにて同テーブル内で別データのカラムをコピーする]]></title>
@@ -1117,33 +1160,6 @@ GIMPで画像を開くと、大抵の場合以下のような形で無駄に余�
     <id>http://engineer-diary.click/blog/2017/03/15/curl-post</id>
     <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Cache-Control: no-cache" -H "Authorization: OAuth [AccessToken]" -d 'hoge=12345&fuga=abcde' "https://example.com/api/v1/sample"</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Macでツールを使わずzipコマンドでディレクトリを圧縮し、解凍パスワードを付与する]]></title>
-    <link href="http://engineer-diary.click/blog/2017/03/07/mac-zip-cmd/"/>
-    <updated>2017-03-07T20:30:10+09:00</updated>
-    <id>http://engineer-diary.click/blog/2017/03/07/mac-zip-cmd</id>
-    <content type="html"><![CDATA[<h2>書式</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>zip -e -r 【出力zipファイル名】.zip 【圧縮するディレクトリ】</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>実行例</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>zip -e -r HOGE.zip HOGE
-</span><span class='line'>Enter password:        ← 解凍パスワード入力
-</span><span class='line'>Verify password:       ← 解凍パスワード確認
-</span><span class='line'>  adding: HOGE/ (stored 0%)
-</span><span class='line'>  adding: HOGE/fuga.pdf (deflated 5%)</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>

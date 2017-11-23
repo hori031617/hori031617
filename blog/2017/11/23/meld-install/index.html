@@ -5,15 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>PHPでAPIを作成し、画面が表示されるときに非同期で２つ以上のAPIを呼ぶ - エンジニア日記</title>
+  <title>Macのdiffツール「meld」インストールメモ - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="表題の実装を行った。
-APIを1つだけしか呼ばない場合だと問題は表面化しなかったのだが、
-２つ以上を呼び出すと先に呼び出したAPIの処理が終わってから次のAPIが実行されるという
-処理動作になっていた。
-そのため、画面表示に少し時間がかかる。 原因 APIでは session_start() &hellip;">
+  <meta name="description" content="(必要であれば)Homebrewをアップデート 1
+brew update 次にHomebrew-Caskをインストール 1
+brew tap caskroom/cask もしインストール時、権限エラーになった際は下記コマンドを実行する 1
+2
+sudo chown -R $(whoami) / &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +22,7 @@ APIを1つだけしか呼ばない場合だと問題は表面化しなかった�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/05/12/session-write-close/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2017/11/23/meld-install/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,7 +83,7 @@ APIを1つだけしか呼ばない場合だと問題は表面化しなかった�
   
   <header>
     
-      <h1 class="entry-title">PHPでAPIを作成し、画面が表示されるときに非同期で２つ以上のAPIを呼ぶ</h1>
+      <h1 class="entry-title">Macのdiffツール「meld」インストールメモ</h1>
     
     
       <p class="meta">
@@ -99,41 +99,48 @@ APIを1つだけしか呼ばない場合だと問題は表面化しなかった�
   
 
 
-<time datetime="2016-05-12T07:24:11+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-11-23T22:47:24+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>表題の実装を行った。<br/>
-APIを1つだけしか呼ばない場合だと問題は表面化しなかったのだが、<br/>
-２つ以上を呼び出すと先に呼び出したAPIの処理が終わってから次のAPIが実行されるという<br/>
-処理動作になっていた。<br/>
-そのため、画面表示に少し時間がかかる。</p>
-
-<h3>原因</h3>
-
-<p>APIでは <strong>session_start()</strong> 処理が記述されていた。<br/>
-session_start() 処理が走るとセッションに排他ロックがかかるため<br/>
-次のAPIが書き込み待ちになり実行が遅れるというものだった。</p>
-
-<h3>対応策</h3>
-
-<p>セッションへの書き込みが完了したら（セッションに対する処理が終われば）</p>
+<div class="entry-content"><h2>(必要であれば)Homebrewをアップデート</h2>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>session_write_close()</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew update</span></code></pre></td></tr></table></div></figure>
 
 
-<p>
-を呼び出し、排他ロックを解除する。</p>
+<h2>次にHomebrew-Caskをインストール</h2>
 
-<h3>参考URL</h3>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew tap caskroom/cask</span></code></pre></td></tr></table></div></figure>
 
-<p><a href="http://unsolublesugar.com/20121103/113321/">http://unsolublesugar.com/20121103/113321/</a>
-<a href="http://www.objective-php.net/blog/detail/20110813">http://www.objective-php.net/blog/detail/20110813</a>
-<a href="http://blog2.elephantech.net/php/%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%97%E3%81%A6%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E7%B5%82%E4%BA%86%E3%81%99/">http://blog2.elephantech.net/php/%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%97%E3%81%A6%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E7%B5%82%E4%BA%86%E3%81%99/</a></p>
+
+<h4>もしインストール時、権限エラーになった際は下記コマンドを実行する</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo chown -R $(whoami) /usr/local/Cellar
+</span><span class='line'>sudo chown -R $(whoami) /usr/local</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>meldインストール</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew install caskroom/cask/meld</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>medl を起動する</h2>
+
+<p>ターミナルで下記コマンドを実行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>meld</span></code></pre></td></tr></table></div></figure>
+
+
+<p>meldのウィンドウが立ち上がります。</p>
 </div>
 
 
@@ -156,7 +163,7 @@ session_start() 処理が走るとセッションに排他ロックがかかる�
   
 
 
-<time datetime="2016-05-12T07:24:11+09:00" pubdate data-updated="true"></time>
+<time datetime="2017-11-23T22:47:24+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -164,7 +171,7 @@ session_start() 処理が走るとセッションに排他ロックがかかる�
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/05/12/session-write-close/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/05/12/session-write-close/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2017/11/23/meld-install/" data-via="" data-counturl="http://engineer-diary.click/blog/2017/11/23/meld-install/" >Tweet</a>
   
   
   
@@ -173,10 +180,8 @@ session_start() 処理が走るとセッションに排他ロックがかかる�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/05/10/github-pages-octopress-original-domain/" title="Previous Post: Github Pages、Octopressで独自ドメイン設定">&laquo; Github Pages、Octopressで独自ドメイン設定</a>
+        <a class="basic-alignment left" href="/blog/2017/11/16/sql-update/" title="Previous Post: MySQLにて同テーブル内で別データのカラムをコピーする">&laquo; MySQLにて同テーブル内で別データのカラムをコピーする</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/05/14/postgresql-sequence/" title="Next Post: PostgreSQLでのAUTO_INCREMENTのしくみ">PostgreSQLでのAUTO_INCREMENTのしくみ &raquo;</a>
       
     </p>
   </footer>
