@@ -9,8 +9,9 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="例) 1
-adb install -r ./android.apk ">
+  <meta name="description" content="単純にリネームしても、git statusで変更と認識されない。
+下記コマンドで対応する。 1
+git mv Hoge.txt hoge.txt ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +78,47 @@ adb install -r ./android.apk ">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/08/13/git-rename-mv/">Gitで大文字小文字のファイル名を変更する時</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-08-13T09:38:15+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>単純にリネームしても、<code>git status</code>で変更と認識されない。<br/>
+下記コマンドで対応する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git mv Hoge.txt hoge.txt</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -728,44 +770,6 @@ GIMPで画像を開くと、大抵の場合以下のような形で無駄に余�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/03/15/curl-post/">curlコマンドでアクセストークンを付与し、APIをPOST送信する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-03-15T20:38:37+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Cache-Control: no-cache" -H "Authorization: OAuth [AccessToken]" -d 'hoge=12345&fuga=abcde' "https://example.com/api/v1/sample"</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/3">&larr; Older</a>
@@ -797,6 +801,10 @@ GIMPで画像を開くと、大抵の場合以下のような形で無駄に余�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/12/27/git-untraking/">gitで管理されているファイルを管理対象から外す</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/11/23/meld-install/">Macのdiffツール「meld」インストールメモ</a>
       </li>
     
@@ -810,10 +818,6 @@ GIMPで画像を開くと、大抵の場合以下のような形で無駄に余�
     
       <li class="post">
         <a href="/blog/2017/11/04/react-native-life-cycle/">react native life cycle</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/10/10/intellij-remote-debug/">Vagrant + PHP + IntelliJ IDEA でリモートデバッグを設定</a>
       </li>
     
   </ul>

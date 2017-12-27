@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2017-11-23T23:04:50+09:00</updated>
+  <updated>2017-12-27T22:49:10+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[gitで管理されているファイルを管理対象から外す]]></title>
+    <link href="http://engineer-diary.click/blog/2017/12/27/git-untraking/"/>
+    <updated>2017-12-27T22:40:01+09:00</updated>
+    <id>http://engineer-diary.click/blog/2017/12/27/git-untraking</id>
+    <content type="html"><![CDATA[<p>ローカルで、あるファイルが長期的に編集状態にあり、かつ間違ってコミット対象としない時などに便利。</p>
+
+<h2>管理対象から外す</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git update-index --skip-worktree【ファイル名】</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>管理対象外のファイルを確認</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git ls-files -v | grep ^S</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>管理対象に戻す</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git update-index --no-skip-worktree【ファイル名】</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Macのdiffツール「meld」インストールメモ]]></title>
@@ -1149,17 +1176,6 @@ GIMPで画像を開くと、大抵の場合以下のような形で無駄に余�
 </span><span class='line'>  }
 </span><span class='line'>&lt;/script&gt;
 </span><span class='line'>&lt;a href="javascript:void();" onclick="post_form('http://example.com/test'); return false;"&gt;送信&lt;/a&gt;</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[curlコマンドでアクセストークンを付与し、APIをPOST送信する]]></title>
-    <link href="http://engineer-diary.click/blog/2017/03/15/curl-post/"/>
-    <updated>2017-03-15T20:38:37+09:00</updated>
-    <id>http://engineer-diary.click/blog/2017/03/15/curl-post</id>
-    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Cache-Control: no-cache" -H "Authorization: OAuth [AccessToken]" -d 'hoge=12345&fuga=abcde' "https://example.com/api/v1/sample"</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
