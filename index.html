@@ -9,9 +9,11 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="ローカルで、あるファイルが長期的に編集状態にあり、かつ間違ってコミット対象としない時などに便利。 管理対象から外す 1
-git update-index --skip-worktree【ファイル名】 管理対象外のファイルを確認 1
-git ls-files -v | grep ^S 管理対象に戻す &hellip;">
+  <meta name="description" content="よく忘れるので、メモ 1
+$ret = implode('【区切り文字】', $array); 例) カンマ区切りに変換 1
+2
+$array = ['hoge', 'fuga', 'piyo'];
+$ret = implode(',', $array); ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +80,57 @@ git ls-files -v | grep ^S 管理対象に戻す &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/01/22/php-array-string/">PHPで配列を、任意の文字列区切りに変換</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-01-22T22:16:26+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>よく忘れるので、メモ</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ret = implode('【区切り文字】', $array);
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>例)</h2>
+
+<h3>カンマ区切りに変換</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$array = ['hoge', 'fuga', 'piyo'];
+</span><span class='line'>$ret = implode(',', $array);</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1049,52 +1102,6 @@ CSSが読み込まれなくなった。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/08/17/git-checkout-file/">Gitでファイルをあるコミット履歴の状態に戻す</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-08-17T21:25:52+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>よく忘れてしまうのでメモ</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git checkout コミットハッシュ値 ファイルパス</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>例</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git checkout abcdefghijklmnopqrstuvwxyz hoge/fuga.txt</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/2">&larr; Older</a>
@@ -1122,6 +1129,10 @@ CSSが読み込まれなくなった。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/01/22/php-array-string/">PHPで配列を、任意の文字列区切りに変換</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/12/27/git-untraking/">gitで管理されているファイルを管理対象から外す</a>
       </li>
     
@@ -1137,10 +1148,6 @@ CSSが読み込まれなくなった。</p>
         <a href="/blog/2017/11/11/setting-eslint/">ESLintでJavaScriptのコードスタイルを統一</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2017/11/04/react-native-life-cycle/">react native life cycle</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -1154,7 +1161,7 @@ CSSが読み込まれなくなった。</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2017 - Masahiro Hori -
+  Copyright &copy; 2018 - Masahiro Hori -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a>. Background image by <a href="http://www.flickr.com/photos/joeshlabotnik/">Josh Shlabotnik</a></span>
 </p>
 

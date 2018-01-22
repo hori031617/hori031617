@@ -9,9 +9,9 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="アカウント作成 1
-CREATE USER 'アカウント名'@'localhost' IDENTIFIED BY 'パスワード'; パスワード変更 1
-SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード'); ">
+  <meta name="description" content="文字コード utf8で作成 1
+CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8; 文字コード utf8mb4で作成 1
+CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8mb4; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,61 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/06/mysql-create-database/">MySQLで文字コードを指定しデータベース作成</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-12-06T22:30:53+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>文字コード utf8で作成</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>文字コード utf8mb4で作成</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE DATABASE 【データベース名】 DEFAULT CHARACTER SET utf8mb4;</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>utf8mb4とは</h3>
+
+<ul>
+<li>文字コードの一種で、UTF8で4バイト文字を扱う事が出来るもの</li>
+<li>絵文字や中国漢字、日本語でも特殊漢字などは4バイトが含まれている</li>
+<li>MySQLでは5.5からこのutf8mb4に対応している</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -366,7 +421,7 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
 <h3>バッチクラスとコマンドを作成</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:console PiyoCommand --command="piyo_cmd"</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan make:command PiyoCommand --command="piyo_cmd"</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>バッチコマンドを実行</h3>
@@ -796,70 +851,6 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/16/javascript-select-value/">Javascriptでselectボックスの値を取得する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-08-16T20:21:02+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>よく忘れるのでメモ。</p>
-
-<h3>取得方法</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>document.フォーム名.セレクト名.value</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>例)</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;form name="frm"&gt;
-</span><span class='line'>  &lt;select name="hoge"&gt;
-</span><span class='line'>    &lt;option value="a"&gt;A&lt;/option&gt;
-</span><span class='line'>    &lt;option value="b"&gt;B&lt;/option&gt;
-</span><span class='line'>    &lt;option value="c"&gt;C&lt;/option&gt;
-</span><span class='line'>  &lt;/select&gt;
-</span><span class='line'>&lt;/form&gt;
-</span><span class='line'>
-</span><span class='line'>document.frm.hoge.value</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/5">&larr; Older</a>
@@ -891,6 +882,10 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/01/22/php-array-string/">PHPで配列を、任意の文字列区切りに変換</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/12/27/git-untraking/">gitで管理されているファイルを管理対象から外す</a>
       </li>
     
@@ -906,10 +901,6 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
         <a href="/blog/2017/11/11/setting-eslint/">ESLintでJavaScriptのコードスタイルを統一</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2017/11/04/react-native-life-cycle/">react native life cycle</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -923,7 +914,7 @@ SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2017 - Masahiro Hori -
+  Copyright &copy; 2018 - Masahiro Hori -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a>. Background image by <a href="http://www.flickr.com/photos/joeshlabotnik/">Josh Shlabotnik</a></span>
 </p>
 
