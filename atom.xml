@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2018-01-22T22:26:55+09:00</updated>
+  <updated>2018-02-25T09:41:39+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[excel vlookup関数で検索値があれば○、なければ×を表示する]]></title>
+    <link href="http://engineer-diary.click/blog/2018/02/24/excel-vlookup/"/>
+    <updated>2018-02-24T19:54:05+09:00</updated>
+    <id>http://engineer-diary.click/blog/2018/02/24/excel-vlookup</id>
+    <content type="html"><![CDATA[<p>IF、ISERROR関数と合わせて使用する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>=IF(ISERROR(VLOOKUP(B2,$A$2:$A$796,FALSE)),"×","○")</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MySQL データエクスポートとインポート]]></title>
+    <link href="http://engineer-diary.click/blog/2018/01/28/mysql-import-export/"/>
+    <updated>2018-01-28T10:52:42+09:00</updated>
+    <id>http://engineer-diary.click/blog/2018/01/28/mysql-import-export</id>
+    <content type="html"><![CDATA[<h2>エクスポート</h2>
+
+<p>ファイル名に現在時間をつけてエクスポート</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysqldump -h 【ホスト名】 -u 【ユーザー名】 -p 【DB名】 &gt; 【ファイル名】_`date "+%Y%m%d-%H%M%S"`.sql</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>インポート</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysql -h 【ホスト名】 -u 【ユーザー名】 -p 【DB名】 &lt; 【ファイル名】_YYYYmmdd-HHMMSS.sql</span></code></pre></td></tr></table></div></figure>
+
+
+<p>または</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysql -h 【ホスト名】 -u 【ユーザー名】 -p 【DB名】
+</span><span class='line'>mysql &gt; source 【ファイル名】_YYYYmmdd-HHMMSS.sql;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>その他</h2>
+
+<h3>今どこのデータベースにつないでるか忘れたとき</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SELECT database();</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PHPで配列を、任意の文字列区切りに変換]]></title>
@@ -1063,89 +1113,6 @@ GIMPで画像を開くと、大抵の場合以下のような形で無駄に余�
 
 
 <p>解決しました。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ターミナルでfind、xargs、grepコマンドを使用し対象ディレクトリ内のファイル一覧から文字列を検索する]]></title>
-    <link href="http://engineer-diary.click/blog/2017/05/01/find-grep-xargs/"/>
-    <updated>2017-05-01T18:51:40+09:00</updated>
-    <id>http://engineer-diary.click/blog/2017/05/01/find-grep-xargs</id>
-    <content type="html"><![CDATA[<h2>構文</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>find 【検索ディレクトリ】 -type f | xargs grep 【検索文字列】</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[.htaccess Permission denied エラー]]></title>
-    <link href="http://engineer-diary.click/blog/2017/04/03/htaccess-permission-denied/"/>
-    <updated>2017-04-03T21:45:47+09:00</updated>
-    <id>http://engineer-diary.click/blog/2017/04/03/htaccess-permission-denied</id>
-    <content type="html"><![CDATA[<p>VagrantでCentOS7をインストールし、Apacheをいれてページを表示させようとすると下記エラーがApacheのエラーログに出力され、ページが表示できない問題に遭遇</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[Mon Apr 03 08:46:41.995046 2017] [core:crit] [pid 28125] (13)Permission denied: [client 10.0.2.2:65506] AH00529: /var/www/html/.htaccess pcfg_openfile: unable to check htaccess file, ensure it is readable and that '/var/www/html/' is executable</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>やったこと</h2>
-
-<h3>SELinuxを無効にしたところページが表示された</h3>
-
-<h4>SELinuxの設定状況を確認</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># getenforce
-</span><span class='line'>Enforcing</span></code></pre></td></tr></table></div></figure>
-
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">設定値</th>
-<th style="text-align:left;">意味</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">enforcing</td>
-<td style="text-align:left;">SELinux機能、アクセス制御が有効</td>
-</tr>
-<tr>
-<td style="text-align:left;">permissive</td>
-<td style="text-align:left;">SELinuxは警告を出力するが、アクセス制限は無効</td>
-</tr>
-<tr>
-<td style="text-align:left;">disabled</td>
-<td style="text-align:left;">SELinux機能、アクセス制御が無効</td>
-</tr>
-</tbody>
-</table>
-
-
-<p><br></p>
-
-<h4>SElinuxを無効にする</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># setenforce 0</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>SElinuxの設定ファイルを編集し、再起動時を行った際にもSELinuxを無効にする</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># vi /etc/selinux/config
-</span><span class='line'>SELINUX=disabled</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>SELinuxとは？</h3>
-
-<p>セキュリティ管理をしてくれるモジュール。<br/>
-今回はローカル環境なので無効としても問題なしと判断。</p>
 ]]></content>
   </entry>
   

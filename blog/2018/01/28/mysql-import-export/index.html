@@ -5,19 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Macでツールを使わずzipコマンドでディレクトリを圧縮し、解凍パスワードを付与する - エンジニア日記</title>
+  <title>MySQL データエクスポートとインポート - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="書式 1
-zip -e -r 【出力zipファイル名】.zip 【圧縮するディレクトリ】 実行例 1
-2
-3
-4
-5
-zip -e -r HOGE.zip HOGE
-Enter password: ← 解凍パスワード入力
-Verify password: ← 解凍パスワード確認 adding: &hellip;">
+  <meta name="description" content="エクスポート ファイル名に現在時間をつけてエクスポート 1
+mysqldump -h 【ホスト名】 -u 【ユーザー名】 -p 【DB名】 &gt; 【ファイル名】_`date "+%Y%m%d-%H%M%S"`.sql インポート 1
+mysql -h 【ホスト名】 -u 【ユーザー名】 -p &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -26,7 +20,7 @@ Verify password: ← 解凍パスワード確認 adding: &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2017/03/07/mac-zip-cmd/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2018/01/28/mysql-import-export/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -87,7 +81,7 @@ Verify password: ← 解凍パスワード確認 adding: &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Macでツールを使わずzipコマンドでディレクトリを圧縮し、解凍パスワードを付与する</h1>
+      <h1 class="entry-title">MySQL データエクスポートとインポート</h1>
     
     
       <p class="meta">
@@ -103,31 +97,41 @@ Verify password: ← 解凍パスワード確認 adding: &hellip;">
   
 
 
-<time datetime="2017-03-07T20:30:10+09:00" pubdate data-updated="true"></time>
+<time datetime="2018-01-28T10:52:42+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>書式</h2>
+<div class="entry-content"><h2>エクスポート</h2>
+
+<p>ファイル名に現在時間をつけてエクスポート</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>zip -e -r 【出力zipファイル名】.zip 【圧縮するディレクトリ】</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysqldump -h 【ホスト名】 -u 【ユーザー名】 -p 【DB名】 &gt; 【ファイル名】_`date "+%Y%m%d-%H%M%S"`.sql</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>実行例</h2>
+<h2>インポート</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysql -h 【ホスト名】 -u 【ユーザー名】 -p 【DB名】 &lt; 【ファイル名】_YYYYmmdd-HHMMSS.sql</span></code></pre></td></tr></table></div></figure>
+
+
+<p>または</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>zip -e -r HOGE.zip HOGE
-</span><span class='line'>Enter password:        ← 解凍パスワード入力
-</span><span class='line'>Verify password:       ← 解凍パスワード確認
-</span><span class='line'>  adding: HOGE/ (stored 0%)
-</span><span class='line'>  adding: HOGE/fuga.pdf (deflated 5%)</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysql -h 【ホスト名】 -u 【ユーザー名】 -p 【DB名】
+</span><span class='line'>mysql &gt; source 【ファイル名】_YYYYmmdd-HHMMSS.sql;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>その他</h2>
+
+<h3>今どこのデータベースにつないでるか忘れたとき</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SELECT database();</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -151,7 +155,7 @@ Verify password: ← 解凍パスワード確認 adding: &hellip;">
   
 
 
-<time datetime="2017-03-07T20:30:10+09:00" pubdate data-updated="true"></time>
+<time datetime="2018-01-28T10:52:42+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -159,7 +163,7 @@ Verify password: ← 解凍パスワード確認 adding: &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2017/03/07/mac-zip-cmd/" data-via="" data-counturl="http://engineer-diary.click/blog/2017/03/07/mac-zip-cmd/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2018/01/28/mysql-import-export/" data-via="" data-counturl="http://engineer-diary.click/blog/2018/01/28/mysql-import-export/" >Tweet</a>
   
   
   
@@ -168,10 +172,10 @@ Verify password: ← 解凍パスワード確認 adding: &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2017/03/05/laravel5-deleted-at/" title="Previous Post: Laravel5で論理削除を実装する手順">&laquo; Laravel5で論理削除を実装する手順</a>
+        <a class="basic-alignment left" href="/blog/2018/01/22/php-array-string/" title="Previous Post: PHPで配列を、任意の文字列区切りに変換">&laquo; PHPで配列を、任意の文字列区切りに変換</a>
       
       
-        <a class="basic-alignment right" href="/blog/2017/03/15/curl-post/" title="Next Post: curlコマンドでアクセストークンを付与し、APIをPOST送信する">curlコマンドでアクセストークンを付与し、APIをPOST送信する &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2018/02/24/excel-vlookup/" title="Next Post: excel vlookup関数で検索値があれば○、なければ×を表示する">excel vlookup関数で検索値があれば○、なければ×を表示する &raquo;</a>
       
     </p>
   </footer>

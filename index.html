@@ -9,11 +9,8 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="よく忘れるので、メモ 1
-$ret = implode('【区切り文字】', $array); 例) カンマ区切りに変換 1
-2
-$array = ['hoge', 'fuga', 'piyo'];
-$ret = implode(',', $array); ">
+  <meta name="description" content="IF、ISERROR関数と合わせて使用する。 1
+=IF(ISERROR(VLOOKUP(B2,$A$2:$A$796,FALSE)),"×","○") ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +77,110 @@ $ret = implode(',', $array); ">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/02/24/excel-vlookup/">Excel Vlookup関数で検索値があれば○、なければ×を表示する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-02-24T19:54:05+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>IF、ISERROR関数と合わせて使用する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>=IF(ISERROR(VLOOKUP(B2,$A$2:$A$796,FALSE)),"×","○")</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/01/28/mysql-import-export/">MySQL データエクスポートとインポート</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-01-28T10:52:42+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>エクスポート</h2>
+
+<p>ファイル名に現在時間をつけてエクスポート</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysqldump -h 【ホスト名】 -u 【ユーザー名】 -p 【DB名】 &gt; 【ファイル名】_`date "+%Y%m%d-%H%M%S"`.sql</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>インポート</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysql -h 【ホスト名】 -u 【ユーザー名】 -p 【DB名】 &lt; 【ファイル名】_YYYYmmdd-HHMMSS.sql</span></code></pre></td></tr></table></div></figure>
+
+
+<p>または</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysql -h 【ホスト名】 -u 【ユーザー名】 -p 【DB名】
+</span><span class='line'>mysql &gt; source 【ファイル名】_YYYYmmdd-HHMMSS.sql;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>その他</h2>
+
+<h3>今どこのデータベースにつないでるか忘れたとき</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SELECT database();</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -931,177 +1032,6 @@ Name を設定 (わかりやすいサービス名、Vagrant)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/09/17/sequelpro-vagrant-mysql/">Sequel ProでVagrantのMySQLに接続</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-09-17T11:10:05+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>1.接続するホスト情報を<code>vagrant ssh-config</code>で確認。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd vagrant_project
-</span><span class='line'>
-</span><span class='line'>vagrant ssh-config
-</span><span class='line'>Host hoge
-</span><span class='line'>  HostName 127.0.0.1
-</span><span class='line'>  User vagrant
-</span><span class='line'>  Port 2222
-</span><span class='line'>  UserKnownHostsFile /dev/null
-</span><span class='line'>  StrictHostKeyChecking no
-</span><span class='line'>  PasswordAuthentication no
-</span><span class='line'>  IdentityFile /Users/hoge/vagrant_project/.vagrant/machines/vh/virtualbox/private_key
-</span><span class='line'>  IdentitiesOnly yes
-</span><span class='line'>  LogLevel FATAL
-</span><span class='line'>  ForwardAgent yes</span></code></pre></td></tr></table></div></figure>
-
-
-<p>2.Sequel Proの設定画面にてSSHタブを選択し、接続情報を記述</p>
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">設定名</th>
-<th style="text-align:left;">値</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">MySQLホスト</td>
-<td style="text-align:left;">127.0.0.1</td>
-</tr>
-<tr>
-<td style="text-align:left;">ユーザー</td>
-<td style="text-align:left;">root</td>
-</tr>
-<tr>
-<td style="text-align:left;">パスワード</td>
-<td style="text-align:left;">rootユーザー パスワード</td>
-</tr>
-<tr>
-<td style="text-align:left;">データベーズ</td>
-<td style="text-align:left;">接続するデータベース名</td>
-</tr>
-<tr>
-<td style="text-align:left;">SSHホスト</td>
-<td style="text-align:left;">127.0.0.1</td>
-</tr>
-<tr>
-<td style="text-align:left;">SSHユーザー</td>
-<td style="text-align:left;">vagrant</td>
-</tr>
-<tr>
-<td style="text-align:left;">SSH鍵</td>
-<td style="text-align:left;">/Users/hoge/vagrant_project/.vagrant/machines/vh/virtualbox/private_key</td>
-</tr>
-<tr>
-<td style="text-align:left;">SSHポート</td>
-<td style="text-align:left;">2222</td>
-</tr>
-</tbody>
-</table>
-
-
-<p><br></p>
-
-<p><img src="/images/sequel_setting.png" alt="設定キャプチャ" /></p>
-
-<p>接続できました。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/09/03/s3-css-read-error/">S3にCSSファイルをアップロードしたら、読み込みエラー</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-09-03T10:15:45+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>S3にCSSファイルをアップロードし、上書き更新を行ったら突然下記読み込みエラーに遭遇。<br/>
-CSSが読み込まれなくなった。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Resource interpreted as Stylesheet but transferred with MIME type binary/octet-stream</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以下の手順でファイルのヘッダー情報を修正し、対応</p>
-
-<ol>
-<li>S3 consoleへ移動</li>
-<li>対象のCSSファイルを選択</li>
-<li>「さらに」をクリックし、メタデータを選択</li>
-<li>Content-Typeのvalueをbinary/octet-streamから「text/css」に変更</li>
-</ol>
-
-
-<p>エラーが解消されました。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/2">&larr; Older</a>
@@ -1129,6 +1059,14 @@ CSSが読み込まれなくなった。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/02/24/excel-vlookup/">excel vlookup関数で検索値があれば○、なければ×を表示する</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/01/28/mysql-import-export/">MySQL データエクスポートとインポート</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/01/22/php-array-string/">PHPで配列を、任意の文字列区切りに変換</a>
       </li>
     
@@ -1138,14 +1076,6 @@ CSSが読み込まれなくなった。</p>
     
       <li class="post">
         <a href="/blog/2017/11/23/meld-install/">Macのdiffツール「meld」インストールメモ</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/11/16/sql-update/">MySQLにて同テーブル内で別データのカラムをコピーする</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/11/11/setting-eslint/">ESLintでJavaScriptのコードスタイルを統一</a>
       </li>
     
   </ul>

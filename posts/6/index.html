@@ -9,14 +9,10 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="Goのインストール 1
-sudo brew install go Goの開発ディレクトリ元となる GOPATH 環境変数を設定 1
-2
-3
-4
-export GOPATH=$HOME/github/go
-export PATH=$PATH:$GOPATH/bin
-echo 'export &hellip;">
+  <meta name="description" content="Goでブログを更新したらブログのタイトルを入力して、定型文を投稿してくれるプログラムを作ってみた。 anacondaというtwitter投稿モジュールを使用
+twitterのアクセストークンなどの情報は外部ファイルに定義
+投稿する定型文も外部ファイルとして読み込む
+コマンドを叩きタイトルを入力する &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +79,393 @@ echo 'export &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/05/17/go-twitter-post/">Goでtwitterに投稿するプログラムを作成</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-17T00:43:30+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Goでブログを更新したらブログのタイトルを入力して、定型文を投稿してくれるプログラムを作ってみた。</p>
+
+<ul>
+<li>anacondaというtwitter投稿モジュールを使用</li>
+<li>twitterのアクセストークンなどの情報は外部ファイルに定義</li>
+<li>投稿する定型文も外部ファイルとして読み込む</li>
+<li>コマンドを叩きタイトルを入力する</li>
+<li>投稿する内容を表示し、実行可否を聞く</li>
+<li>回答に合わせて処理を行う</li>
+</ul>
+
+
+<h3>anacondaをダウンロード</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>go get github.com/ChimeraCoder/anaconda</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>ソース</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>package main
+</span><span class='line'>
+</span><span class='line'>import (
+</span><span class='line'>    "encoding/json"
+</span><span class='line'>    "fmt"
+</span><span class='line'>    "io/ioutil"
+</span><span class='line'>    "github.com/ChimeraCoder/anaconda"
+</span><span class='line'>    "os"
+</span><span class='line'>)
+</span><span class='line'>
+</span><span class='line'>type Config struct {
+</span><span class='line'>    ConsumerKey string `json:"consumer_key"`
+</span><span class='line'>    ConsumerSecret string `json:"consumer_secret"`
+</span><span class='line'>    AccessToken string `json:"access_token"`
+</span><span class='line'>    AccessTokenSecret string `json:"access_token_secret"`
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>func main(){
+</span><span class='line'>
+</span><span class='line'>    // ブログのtitleを受け取る
+</span><span class='line'>    var title string
+</span><span class='line'>    fmt.Print("title: ")
+</span><span class='line'>    fmt.Scan(&title)
+</span><span class='line'>
+</span><span class='line'>    // 投稿のフォーマットファイルを読み込み、タイトルを反映して内容の確認
+</span><span class='line'>    root_path := "/hoge/fuga/"
+</span><span class='line'>    buff_contents, err := ioutil.ReadFile(root_path+"twitter_post/post_contents.txt")
+</span><span class='line'>    if err != nil {
+</span><span class='line'>        fmt.Println(err)
+</span><span class='line'>        os.Exit(-1)
+</span><span class='line'>    }
+</span><span class='line'>    contents := string(buff_contents)
+</span><span class='line'>    contents = fmt.Sprintf(contents, title)
+</span><span class='line'>    fmt.Print("\n"+contents+"\n")
+</span><span class='line'>
+</span><span class='line'>    // twitterに投稿するか判断
+</span><span class='line'>    fmt.Println("twitterに投稿しますか? (Y/n)")
+</span><span class='line'>    var answer string
+</span><span class='line'>    fmt.Scan(&answer)
+</span><span class='line'>    if answer != "Y" {
+</span><span class='line'>        fmt.Println("投稿せずに処理を終了します。")
+</span><span class='line'>        os.Exit(1)
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    // twitterのaccess_tokenなどを設定ファイルから取得
+</span><span class='line'>    file, err := ioutil.ReadFile(root_path+"twitter_post/config.json")
+</span><span class='line'>    if err != nil {
+</span><span class='line'>        fmt.Println(err)
+</span><span class='line'>        os.Exit(-2)
+</span><span class='line'>    }
+</span><span class='line'>    var config Config
+</span><span class='line'>    json.Unmarshal(file, &config)
+</span><span class='line'>
+</span><span class='line'>    // twitter投稿
+</span><span class='line'>    anaconda.SetConsumerKey(config.ConsumerKey)
+</span><span class='line'>    anaconda.SetConsumerSecret(config.ConsumerSecret)
+</span><span class='line'>    api := anaconda.NewTwitterApi(config.AccessToken, config.AccessTokenSecret)
+</span><span class='line'>    _, twitter_err := api.PostTweet(contents, nil)
+</span><span class='line'>    if twitter_err != nil {
+</span><span class='line'>        fmt.Println(twitter_err)
+</span><span class='line'>        os.Exit(-3)
+</span><span class='line'>    }
+</span><span class='line'>    fmt.Println("Twitterに投稿しました。")
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>少しはまったこと</h3>
+
+<p>_, err := api.PostTweet(contents, nil)<br/>
+と実装したところ下記コンパイルエラーとなった。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>twitter_post/twitter_post.go:58: no new variables on left side of :=</span></code></pre></td></tr></table></div></figure>
+
+
+<p>原因は同じ変数名の宣言は同じブロックでは1度しかできないためのエラーだった。<br/>
+<br>
+でも、<br/>
+file, err := ioutil.ReadFile(root_path+&ldquo;twitter_post/config.json&rdquo;)<br/>
+この処理の時点でerrを宣言するのは2回目なのでこのときにエラーが起こらないのはなぜだろうと思っていたところ、</p>
+
+<blockquote><p>省略形式の時は宣言する変数のうち少なくともひとつがブランク変数(_)ではない、
+新しい変数であれば、他は再宣言ではなく単なる代入として扱えます。</p></blockquote>
+
+<p>とのことでした。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/05/16/go-jsonfile-read/">GoでJSONファイルを読み込み内容を構造体に詰め込むときにはまったのでメモ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-16T23:38:58+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>jsonファイル</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cat config.json 
+</span><span class='line'>{
+</span><span class='line'>    "consumer_key":"hogehogehoge"
+</span><span class='line'>  , "consumer_secret":"fugafugafuga"
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>ソースコード</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>package main
+</span><span class='line'>
+</span><span class='line'>// モジュール読み込み
+</span><span class='line'>import(
+</span><span class='line'>    "encoding/json"
+</span><span class='line'>    "fmt"
+</span><span class='line'>    "io/ioutil"
+</span><span class='line'>)
+</span><span class='line'>
+</span><span class='line'>// 構造体を宣言
+</span><span class='line'>type Config struct{
+</span><span class='line'>    consumer_key string `json:"consumer_key"`
+</span><span class='line'>    consumer_secret string `json:"consumer_secret"`
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>func main(){
+</span><span class='line'>
+</span><span class='line'>    // jsonファイルを読み込み
+</span><span class='line'>    file, err := ioutil.ReadFile(config.json)
+</span><span class='line'>    if err != nil {
+</span><span class='line'>        panic(err)
+</span><span class='line'>    }
+</span><span class='line'>    var config Config
+</span><span class='line'>    json.Unmarshal(file, &config)
+</span><span class='line'>
+</span><span class='line'>    // jsonファイルの中身を表示
+</span><span class='line'>    fmt.Println(config.consumer_key)
+</span><span class='line'>    fmt.Println(config.consumer_secret)
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>結果</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./json 
+</span><span class='line'>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>表示されない。。。</p>
+
+<h3>構造体の変数を変更してみる</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>type Config struct{
+</span><span class='line'>    ConsumerKey string `json:"consumer_key"`
+</span><span class='line'>    ConsumerSecret string `json:"consumer_secret"`
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>fmt.Println(config.ConsumerKey)
+</span><span class='line'>fmt.Println(config.ConsumerSecret)
+</span><span class='line'>
+</span><span class='line'>// 表示された
+</span><span class='line'>./json 
+</span><span class='line'>hogehogehoge
+</span><span class='line'>fugafugafuga</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>type Config struct{
+</span><span class='line'>    consumerKey string `json:"consumer_key"`
+</span><span class='line'>    consumerSecret string `json:"consumer_secret"`
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>fmt.Println(config.consumerKey)
+</span><span class='line'>fmt.Println(config.consumerSecret)
+</span><span class='line'>
+</span><span class='line'>// 表示されない。。
+</span><span class='line'>./json 
+</span><span class='line'>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>う〜ん、 <br/>
+構造体の変数の先頭は大文字じゃないといけないのかな・・・？</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -805,51 +1188,9 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/04/24/hello-world/">Hello World</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-04-24T19:12:54+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>My First Blog</h2>
-
-<p>初めての投稿です。<br/>
-仕事はWEBエンジニアをやっています。<br/>
-趣味でiPhoneアプリ作成もやっています。<br/>
-この前、無事に公開されました^^<br/>
-これから、日々の開発中にうまくいったこと、うまくいかなかったことなどをまとめる技術ブログとして、どんどん更新していこうと思います。</p>
-
-<p>よろしくお願いします。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="posts/7">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -878,6 +1219,14 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/02/24/excel-vlookup/">excel vlookup関数で検索値があれば○、なければ×を表示する</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/01/28/mysql-import-export/">MySQL データエクスポートとインポート</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/01/22/php-array-string/">PHPで配列を、任意の文字列区切りに変換</a>
       </li>
     
@@ -887,14 +1236,6 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
     
       <li class="post">
         <a href="/blog/2017/11/23/meld-install/">Macのdiffツール「meld」インストールメモ</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/11/16/sql-update/">MySQLにて同テーブル内で別データのカラムをコピーする</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/11/11/setting-eslint/">ESLintでJavaScriptのコードスタイルを統一</a>
       </li>
     
   </ul>
