@@ -9,8 +9,9 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="IF、ISERROR関数と合わせて使用する。 1
-=IF(ISERROR(VLOOKUP(B2,$A$2:$A$796,FALSE)),"×","○") ">
+  <meta name="description" content="フォーマット 1
+virtualenv -p 【python3バージョン番号】 【envname】 コマンド例 python3.6に切り替え 1
+virtualenv -p python3.6 venv ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +78,54 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/02/28/virtualenv-python3/">Virtualenvでpython3に切り替える</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-02-28T22:17:00+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>フォーマット</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>virtualenv -p 【python3バージョン番号】 【envname】</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>コマンド例</h2>
+
+<h3>python3.6に切り替え</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>virtualenv -p python3.6 venv</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -887,151 +936,6 @@ Name を設定 (わかりやすいサービス名、Vagrant)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/09/23/apache-ssl/">Let’s EncryptのSSL証明書を取得し、Apacheに設定する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-09-23T16:07:14+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>certbot-auto のセットアップ</h2>
-
-<p>(「certbot-auto」は Let’s Encrypt が提供しているツール)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># curl https://dl.eff.org/certbot-auto -o /usr/bin/certbot-auto
-</span><span class='line'>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-</span><span class='line'>                                 Dload  Upload   Total   Spent    Left  Speed
-</span><span class='line'>100 57175  100 57175    0     0   162k      0 --:--:-- --:--:-- --:--:--  163k
-</span><span class='line'>
-</span><span class='line'># chmod 700 /usr/bin/certbot-auto
-</span><span class='line'>
-</span><span class='line'># ls -l /usr/bin/certbot-auto
-</span><span class='line'>-rwx------. 1 root root 57175 Sep 23 06:27 /usr/bin/certbot-auto</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>certbot-auto コマンドを実行し、証明書を作成</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># certbot-auto certonly
-</span><span class='line'>Saving debug log to /var/log/letsencrypt/letsencrypt.log
-</span><span class='line'>
-</span><span class='line'>How would you like to authenticate with the ACME CA?
-</span><span class='line'>-------------------------------------------------------------------------------
-</span><span class='line'>1: Apache Web Server plugin - Beta (apache)
-</span><span class='line'>2: Spin up a temporary webserver (standalone)
-</span><span class='line'>3: Place files in webroot directory (webroot)
-</span><span class='line'>-------------------------------------------------------------------------------
-</span><span class='line'>Select the appropriate number [1-3] then [enter] (press 'c' to cancel): 3  # 既存のWEBサーバを使うモードを選択
-</span><span class='line'>Plugins selected: Authenticator webroot, Installer None
-</span><span class='line'>Please enter in your domain name(s) (comma and/or space separated)  (Enter 'c'
-</span><span class='line'>to cancel): 【your-domain.com】  # 取得したドメイン
-</span><span class='line'>Obtaining a new certificate
-</span><span class='line'>Performing the following challenges:
-</span><span class='line'>http-01 challenge for 【your-domain.com】
-</span><span class='line'>
-</span><span class='line'>Select the webroot for 【your-domain.com】:
-</span><span class='line'>-------------------------------------------------------------------------------
-</span><span class='line'>1: Enter a new webroot
-</span><span class='line'>-------------------------------------------------------------------------------
-</span><span class='line'>Press 1 [enter] to confirm the selection (press 'c' to cancel): 1   # 指示に従い1を押下する
-</span><span class='line'>Input the webroot for 【your-domain.com】: (Enter 'c' to cancel): 【/var/www/your-document-root】  # ドキュメントルート
-</span><span class='line'>Waiting for verification...
-</span><span class='line'>Cleaning up challenges
-</span><span class='line'>
-</span><span class='line'>IMPORTANT NOTES:
-</span><span class='line'> - Congratulations! Your certificate and chain have been saved at:
-</span><span class='line'>
-</span><span class='line'>・・・・・
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>/etc/letsencrypt/live/【your-domain.com】配下に証明書が自動生成される</p>
-
-<h2>Apacheに設定</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># vi /etc/httpd/conf.d/ssl.conf
-</span><span class='line'>
-</span><span class='line'>以下の項目を設定する。
-</span><span class='line'>
-</span><span class='line'>SSLCertificateFile /etc/letsencrypt/live/【your-domain.com】/cert.pem
-</span><span class='line'>SSLCertificateKeyFile /etc/letsencrypt/live/【your-domain.com】/privkey.pem
-</span><span class='line'>SSLCertificateChainFile /etc/letsencrypt/live/【your-domain.com】/chain.pem</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Apacheを再起動すると、httpsで安全な接続が出来るようになりました</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/2">&larr; Older</a>
@@ -1059,6 +963,10 @@ Name を設定 (わかりやすいサービス名、Vagrant)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/02/28/virtualenv-python3/">virtualenvでpython3に切り替える</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/02/24/excel-vlookup/">excel vlookup関数で検索値があれば○、なければ×を表示する</a>
       </li>
     
@@ -1072,10 +980,6 @@ Name を設定 (わかりやすいサービス名、Vagrant)
     
       <li class="post">
         <a href="/blog/2017/12/27/git-untraking/">gitで管理されているファイルを管理対象から外す</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/11/23/meld-install/">Macのdiffツール「meld」インストールメモ</a>
       </li>
     
   </ul>

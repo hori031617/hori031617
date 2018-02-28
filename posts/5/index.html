@@ -9,10 +9,9 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="本日、「Laravel Meetup Tokyo Vol.8」に行ってきました。
-セッションは2つあり、それぞれ内容を2回に分けて簡単にまとめます。
-以下は１つ目のセッションです。
-モジュール、DBのバックアップの大切さ、やり方についてのセッションでした。 Backing up with &hellip;">
+  <meta name="description" content="2つ目のセッションの内容はLaravel5.3に搭載された新機能のうち、
+2つを紹介してくれました。 1. Simple Pagination Blade側で指定できるようになり、Paginationに使用する関数を読んであげるだけで良くなった。
+※ 今までは自分でカスタマイズする必要があった. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +78,86 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/09/15/laravel-5-3/">Laravel Meetup Tokyo Vol.8に行ってきました 2/2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-09-15T06:32:32+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>2つ目のセッションの内容はLaravel5.3に搭載された新機能のうち、<br/>
+2つを紹介してくれました。</p>
+
+<h1>1. Simple Pagination</h1>
+
+<p>Blade側で指定できるようになり、Paginationに使用する関数を読んであげるだけで良くなった。<br/>
+※ 今までは自分でカスタマイズする必要があった.</p>
+
+<h2>Paginnation で使うメソッド</h2>
+
+<ul>
+<li>hasPages (ページがあるか？)</li>
+<li>onfirstPage (最初のページ)</li>
+<li>previousPageUrl (前のページ)</li>
+<li>nextPageUrl (次のページ)</li>
+<li>hasMorePages (次のページがあるか?)</li>
+</ul>
+
+
+<h1>2. Notification</h1>
+
+<p>通知を行う処理が楽に実装できるようになった。  <br/>
+※ 今まではEventを作って自分で実装する必要があった.<br/>
+イベント通知の処理は</p>
+
+<ul>
+<li>ユーザーが登録された</li>
+<li>お問い合わせがあった</li>
+</ul>
+
+
+<p>など</p>
+
+<h2>標準で用意されている通知方法</h2>
+
+<ul>
+<li>Mail</li>
+<li>Databaase</li>
+<li>SMS</li>
+<li>Slack</li>
+</ul>
+
+
+<p>セッション資料<br/>
+<a href="https://speakerdeck.com/localdisk/about-laravel-5-dot-3">https://speakerdeck.com/localdisk/about-laravel-5-dot-3</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -911,100 +990,6 @@ Tokenizer PHP Extension</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/05/21/php-smarty/">Smartyで出来る便利だと思ったこと</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-05-21T21:13:33+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>GETパラメータを取得</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.get.パラメータ名}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>POSTパラメータを取得</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.post.パラメータ名}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>クッキーを取得</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.cookie.クッキー名}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>セッション変数を取得</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.session.セッション変数名}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>PHPの定数にアクセス</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.const.定数名}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>現在時間を取得</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{$smarty.now}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>出力文字をスケープ</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{$hoge|escape}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>タイムスタンプで日付を比較</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{if $hoge|strtotime &gt;= $fuga|strtotime}
-</span><span class='line'>  piyo
-</span><span class='line'>{/if}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>日付のフォーマットを整える</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{* YYYY/mm/dd *}
-</span><span class='line'>{$date|date_format|"%Y/%m/%d"}</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/6">&larr; Older</a>
@@ -1036,6 +1021,10 @@ Tokenizer PHP Extension</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/02/28/virtualenv-python3/">virtualenvでpython3に切り替える</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/02/24/excel-vlookup/">excel vlookup関数で検索値があれば○、なければ×を表示する</a>
       </li>
     
@@ -1049,10 +1038,6 @@ Tokenizer PHP Extension</p>
     
       <li class="post">
         <a href="/blog/2017/12/27/git-untraking/">gitで管理されているファイルを管理対象から外す</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/11/23/meld-install/">Macのdiffツール「meld」インストールメモ</a>
       </li>
     
   </ul>
