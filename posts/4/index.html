@@ -9,13 +9,9 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="現在の時刻を確認 1
-2
-$ date
-2017年 1月 22日 日曜日 00:39:55 UTC タイムゾーンの設定を確認 1
-2
-$ ls -l /etc/localtime*
-lrwxrwxrwx. 1 root root 25 10月 3 13:47 /etc/localtime -&gt &hellip;">
+  <meta name="description" content="AWS環境にて。
+EC2にLaravel5で作成したプロジェクトがあり、テンプレートのリンク先をLaravelの関数であるroute()にて実装。
+EC2をELBにぶら下げ、ユーザーからのアクセスを ELB(443) → EC2(80) で処理するとき、route() &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +78,69 @@ lrwxrwxrwx. 1 root root 25 10月 3 13:47 /etc/localtime -&gt &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/01/30/elb-ec2-laravel5/">ELB(443) → EC2(80)のルートを通るときにLaravel5のroute()がhttpとなる問題</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-01-30T22:02:58+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>AWS環境にて。<br/>
+EC2にLaravel5で作成したプロジェクトがあり、テンプレートのリンク先をLaravelの関数であるroute()にて実装。<br/>
+EC2をELBにぶら下げ、ユーザーからのアクセスを ELB(443) → EC2(80) で処理するとき、route()から出力されるプロトコルはhttpとなってしまう。<br/>
+これは、Laravelとしては80番でリクエストが来ているため上記の動作となってしまう。</p>
+
+<h2>対応方法</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>app/Providers/AppServiceProvider.php  
+</span><span class='line'>public function boot()
+</span><span class='line'>{
+</span><span class='line'>    // 環境がローカル環境でないとき
+</span><span class='line'>    if (!app()-&gt;environment('local')) {
+</span><span class='line'>        // すべてのリクエストをhttpsとする
+</span><span class='line'>        \URL::forceSchema('https');
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>※ if文の条件は要調整</strong></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -689,66 +748,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/09/25/android-realm/">AndroidアプリにRealmを使用するため、インストールを行う</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-09-25T16:36:26+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>Realmとは？</h1>
-
-<p>NoSQL データベースの1つ<br/>
-その他に「MongoDB」「Redis」などがある<br/>
-モバイル向けのデータベース</p>
-
-<h1>Android Studioからインストールする</h1>
-
-<p>gradleというjavaのパッケージ管理システムを使用する</p>
-
-<h2>インストール手順</h2>
-
-<ul>
-<li><a href="https://realm.io/" title="公式サイト">公式サイト</a>より「Java」をクリック</li>
-<li>「Getting Started」セクションに記述されている内容を行う
-
-<ul>
-<li>Android Studioの左カラム「Gradle Scripts」より ProjectレベルとApplicationレベルのbuild.gradleファイルにRealmをインストールするパスを記述</li>
-</ul>
-</li>
-<li>ツールバーより「Sync Project with Gradle File」を押下</li>
-</ul>
-
-
-<p>エラーがなければイベントログに「Gradle build finished」となる</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/5">&larr; Older</a>
@@ -780,6 +779,10 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/03/31/git-ours-theirs/">Git コンフリクトした際に取り込み先の変更を優先する</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/02/28/virtualenv-python3/">virtualenvでpython3に切り替える</a>
       </li>
     
@@ -793,10 +796,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
     
       <li class="post">
         <a href="/blog/2018/01/22/php-array-string/">PHPで配列を、任意の文字列区切りに変換</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/12/27/git-untraking/">gitで管理されているファイルを管理対象から外す</a>
       </li>
     
   </ul>
