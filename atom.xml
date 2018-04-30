@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2018-03-31T21:49:27+09:00</updated>
+  <updated>2018-04-30T12:50:42+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[バージョンが古いXcodeを使用していて、iOSのバージョンアップ後、実機の動作確認ができなくなった場合の対応]]></title>
+    <link href="http://engineer-diary.click/blog/2018/04/30/xcode-ios/"/>
+    <updated>2018-04-30T12:41:20+09:00</updated>
+    <id>http://engineer-diary.click/blog/2018/04/30/xcode-ios</id>
+    <content type="html"><![CDATA[<p>アプリが最新のXcodeに対応していないため、古いバージョンのXcodeをしようしている。<br/>
+iOSを最新にアップデートしたところ、古いXcodeには最新のiOSのDisk Imageがないため、<br/>
+実機確認時に</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Could not find Developer Disk Image</span></code></pre></td></tr></table></div></figure>
+
+
+<p>のエラーを出力し、動作確認を行うことができない。</p>
+
+<h2>対応方法</h2>
+
+<ol>
+<li>現在使用しているXcodeとは別に、最新のXcodeをインストールする。</li>
+<li>最新のXcodeを右クリックし、パッケージの内容を表示</li>
+<li><code>Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport/</code>まで移動</li>
+<li>ここにDisk Imageがあり、対象バージョンのDisk Imageを古いXcodeの同じ場所にコピー</li>
+<li>古いXcodeを再起動</li>
+</ol>
+
+
+<p>上記の手順で実機の動作確認ができるようになりました。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git コンフリクトした際に取り込み先の変更を優先する]]></title>
@@ -1025,49 +1055,6 @@ CSSが読み込まれなくなった。</p>
 </span><span class='line'>    }
 </span><span class='line'>});</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[.ssh/config ファイルにサーバーの接続情報を記述し、管理する]]></title>
-    <link href="http://engineer-diary.click/blog/2017/05/28/ssh-config/"/>
-    <updated>2017-05-28T20:46:02+09:00</updated>
-    <id>http://engineer-diary.click/blog/2017/05/28/ssh-config</id>
-    <content type="html"><![CDATA[<p>~/.ssh/config</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Host abc_step_server
-</span><span class='line'>  HostName XX.XXX.XXX.XXX
-</span><span class='line'>  User hogehoge
-</span><span class='line'>  Port 12345   # ポートを指定
-</span><span class='line'>  IdentityFile ~/.ssh/key/private.key   # 秘密鍵を指定
-</span><span class='line'>
-</span><span class='line'>Host xyz_web_server
-</span><span class='line'>  HostName XX.XXX.XXX.XXX
-</span><span class='line'>  User fugafuga
-</span><span class='line'>  IdentityFile ~/.ssh/key/private.key
-</span><span class='line'>  ProxyCommand ssh -W %h:%p abc_step_server   # abc_step_serverを経由</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これで、</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ssh abc_step_server
-</span><span class='line'>ssh xyz_web_server</span></code></pre></td></tr></table></div></figure>
-
-
-<p>と打てば、各サーバーにログインできる。</p>
 ]]></content>
   </entry>
   

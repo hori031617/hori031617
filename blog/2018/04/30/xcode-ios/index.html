@@ -5,13 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>AndroidアプリにRealmを使用するため、インストールを行う - エンジニア日記</title>
+  <title>バージョンが古いXcodeを使用していて、iOSのバージョンアップ後、実機の動作確認ができなくなった場合の対応 - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="Realmとは？ NoSQL データベースの1つ
-その他に「MongoDB」「Redis」などがある
-モバイル向けのデータベース Android Studioからインストールする gradleというjavaのパッケージ管理システムを使用する インストール手順 公式サイトより「Java」をクリック &hellip;">
+  <meta name="description" content="アプリが最新のXcodeに対応していないため、古いバージョンのXcodeをしようしている。
+iOSを最新にアップデートしたところ、古いXcodeには最新のiOSのDisk Imageがないため、
+実機確認時に 1
+Could not find Developer Disk Image &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2016/09/25/android-realm/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2018/04/30/xcode-ios/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">AndroidアプリにRealmを使用するため、インストールを行う</h1>
+      <h1 class="entry-title">バージョンが古いXcodeを使用していて、iOSのバージョンアップ後、実機の動作確認ができなくなった場合の対応</h1>
     
     
       <p class="meta">
@@ -97,38 +98,35 @@
   
 
 
-<time datetime="2016-09-25T16:36:26+09:00" pubdate data-updated="true"></time>
+<time datetime="2018-04-30T12:41:20+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h1>Realmとは？</h1>
+<div class="entry-content"><p>アプリが最新のXcodeに対応していないため、古いバージョンのXcodeをしようしている。<br/>
+iOSを最新にアップデートしたところ、古いXcodeには最新のiOSのDisk Imageがないため、<br/>
+実機確認時に</p>
 
-<p>NoSQL データベースの1つ<br/>
-その他に「MongoDB」「Redis」などがある<br/>
-モバイル向けのデータベース</p>
-
-<h1>Android Studioからインストールする</h1>
-
-<p>gradleというjavaのパッケージ管理システムを使用する</p>
-
-<h2>インストール手順</h2>
-
-<ul>
-<li><a href="https://realm.io/" title="公式サイト">公式サイト</a>より「Java」をクリック</li>
-<li>「Getting Started」セクションに記述されている内容を行う
-
-<ul>
-<li>Android Studioの左カラム「Gradle Scripts」より ProjectレベルとApplicationレベルのbuild.gradleファイルにRealmをインストールするパスを記述</li>
-</ul>
-</li>
-<li>ツールバーより「Sync Project with Gradle File」を押下</li>
-</ul>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Could not find Developer Disk Image</span></code></pre></td></tr></table></div></figure>
 
 
-<p>エラーがなければイベントログに「Gradle build finished」となる</p>
+<p>のエラーを出力し、動作確認を行うことができない。</p>
+
+<h2>対応方法</h2>
+
+<ol>
+<li>現在使用しているXcodeとは別に、最新のXcodeをインストールする。</li>
+<li>最新のXcodeを右クリックし、パッケージの内容を表示</li>
+<li><code>Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport/</code>まで移動</li>
+<li>ここにDisk Imageがあり、対象バージョンのDisk Imageを古いXcodeの同じ場所にコピー</li>
+<li>古いXcodeを再起動</li>
+</ol>
+
+
+<p>上記の手順で実機の動作確認ができるようになりました。</p>
 </div>
 
 
@@ -151,7 +149,7 @@
   
 
 
-<time datetime="2016-09-25T16:36:26+09:00" pubdate data-updated="true"></time>
+<time datetime="2018-04-30T12:41:20+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -159,7 +157,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2016/09/25/android-realm/" data-via="" data-counturl="http://engineer-diary.click/blog/2016/09/25/android-realm/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2018/04/30/xcode-ios/" data-via="" data-counturl="http://engineer-diary.click/blog/2018/04/30/xcode-ios/" >Tweet</a>
   
   
   
@@ -168,10 +166,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/09/15/laravel-5-3/" title="Previous Post: Laravel Meetup Tokyo Vol.8に行ってきました 2/2">&laquo; Laravel Meetup Tokyo Vol.8に行ってきました 2/2</a>
+        <a class="basic-alignment left" href="/blog/2018/03/31/git-ours-theirs/" title="Previous Post: Git コンフリクトした際に取り込み先の変更を優先する">&laquo; Git コンフリクトした際に取り込み先の変更を優先する</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/10/17/laravel-artisan-command/" title="Next Post: よく使用するartisanコマンド">よく使用するartisanコマンド &raquo;</a>
       
     </p>
   </footer>
