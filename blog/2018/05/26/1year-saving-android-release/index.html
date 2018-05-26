@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>S3にCSSファイルをアップロードしたら、読み込みエラー - エンジニア日記</title>
+  <title>Androidアプリ リリース！ - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="S3にCSSファイルをアップロードし、上書き更新を行ったら突然下記読み込みエラーに遭遇。
-CSSが読み込まれなくなった。 1
-Resource interpreted as Stylesheet but transferred with MIME type binary/octet-stream &hellip;">
+  <meta name="description" content="約1年半前にリリースしていた1年貯金(iOS)のAndroid版をやっとリリースしました。 1年貯金(Android)
+https://play.google.com/store/apps/details?id=com.masahiro.hori.a1year_saving ちなみに、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@ Resource interpreted as Stylesheet but transferred with MIME type binary/octet-s
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2017/09/03/s3-css-read-error/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2018/05/26/1year-saving-android-release/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +80,7 @@ Resource interpreted as Stylesheet but transferred with MIME type binary/octet-s
   
   <header>
     
-      <h1 class="entry-title">S3にCSSファイルをアップロードしたら、読み込みエラー</h1>
+      <h1 class="entry-title">Androidアプリ リリース！</h1>
     
     
       <p class="meta">
@@ -97,31 +96,20 @@ Resource interpreted as Stylesheet but transferred with MIME type binary/octet-s
   
 
 
-<time datetime="2017-09-03T10:15:45+09:00" pubdate data-updated="true"></time>
+<time datetime="2018-05-26T18:44:03+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>S3にCSSファイルをアップロードし、上書き更新を行ったら突然下記読み込みエラーに遭遇。<br/>
-CSSが読み込まれなくなった。</p>
+<div class="entry-content"><p>約1年半前にリリースしていた1年貯金(iOS)のAndroid版をやっとリリースしました。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Resource interpreted as Stylesheet but transferred with MIME type binary/octet-stream</span></code></pre></td></tr></table></div></figure>
+<p>1年貯金(Android)<br/>
+<a href="https://play.google.com/store/apps/details?id=com.masahiro.hori.a1year_saving">https://play.google.com/store/apps/details?id=com.masahiro.hori.a1year_saving</a></p>
 
-
-<p>以下の手順でファイルのヘッダー情報を修正し、対応</p>
-
-<ol>
-<li>S3 consoleへ移動</li>
-<li>対象のCSSファイルを選択</li>
-<li>「さらに」をクリックし、メタデータを選択</li>
-<li>Content-Typeのvalueをbinary/octet-streamから「text/css」に変更</li>
-</ol>
-
-
-<p>エラーが解消されました。</p>
+<p>ちなみに、iOSはこちら<br/>
+<a href="https://itunes.apple.com/jp/app/1%E5%B9%B4%E8%B2%AF%E9%87%91/id1099402235?mt=8">https://itunes.apple.com/jp/app/1%E5%B9%B4%E8%B2%AF%E9%87%91/id1099402235?mt=8</a></p>
 </div>
 
 
@@ -144,7 +132,7 @@ CSSが読み込まれなくなった。</p>
   
 
 
-<time datetime="2017-09-03T10:15:45+09:00" pubdate data-updated="true"></time>
+<time datetime="2018-05-26T18:44:03+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -152,7 +140,7 @@ CSSが読み込まれなくなった。</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2017/09/03/s3-css-read-error/" data-via="" data-counturl="http://engineer-diary.click/blog/2017/09/03/s3-css-read-error/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2018/05/26/1year-saving-android-release/" data-via="" data-counturl="http://engineer-diary.click/blog/2018/05/26/1year-saving-android-release/" >Tweet</a>
   
   
   
@@ -161,10 +149,8 @@ CSSが読み込まれなくなった。</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2017/08/17/git-checkout-file/" title="Previous Post: gitでファイルをあるコミット履歴の状態に戻す">&laquo; gitでファイルをあるコミット履歴の状態に戻す</a>
+        <a class="basic-alignment left" href="/blog/2018/04/30/xcode-ios/" title="Previous Post: バージョンが古いXcodeを使用していて、iOSのバージョンアップ後、実機の動作確認ができなくなった場合の対応">&laquo; バージョンが古いXcodeを使用していて、iOSのバージョンアップ後、実機の動作確認ができなくなった場合の対応</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2017/09/17/sequelpro-vagrant-mysql/" title="Next Post: Sequel ProでVagrantのMySQLに接続">Sequel ProでVagrantのMySQLに接続 &raquo;</a>
       
     </p>
   </footer>

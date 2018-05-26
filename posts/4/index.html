@@ -9,8 +9,36 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="セレクタの第２引数に parent.document を指定する 例) 1
-$('#parent_id', parent.document).show(); ">
+  <meta name="description" content="サンプルコード php artisan make:controller HogeController で雛形を作成したものに処理を追加 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +105,134 @@ $('#parent_id', parent.document).show(); ">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/26/laravel-api/">Laravel5にてjsonを返却するAPIを作成する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-02-26T09:53:18+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>サンプルコード</h2>
+
+<h3>php artisan make:controller HogeController で雛形を作成したものに処理を追加</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+</span><span class='line'>
+</span><span class='line'>namespace App\Http\Controllers;
+</span><span class='line'>
+</span><span class='line'>use Illuminate\Http\Request;
+</span><span class='line'>use App\Http\Requests;
+</span><span class='line'>
+</span><span class='line'>use App\Model\Fuga;
+</span><span class='line'>use Response;    // 追加
+</span><span class='line'>use Validator;   // 追加
+</span><span class='line'>
+</span><span class='line'>class HogeController extends Controller
+</span><span class='line'>{
+</span><span class='line'>    public function getPiyo($id){
+</span><span class='line'>
+</span><span class='line'>        // 受け取った引数のバリデーションルールを作成
+</span><span class='line'>        $validator = Validator::make(['id' =&gt; $id],
+</span><span class='line'>                                     ['id' =&gt; 'required|integer']);
+</span><span class='line'>
+</span><span class='line'>        // バリデーションエラー
+</span><span class='line'>        if($validator-&gt;fails()){
+</span><span class='line'>            return Response::json([
+</span><span class='line'>                                'status' =&gt; 'NG',
+</span><span class='line'>                                'message' =&gt; '値が不正です'
+</span><span class='line'>                            ]);
+</span><span class='line'>        }
+</span><span class='line'>
+</span><span class='line'>        // DBから値を取得
+</span><span class='line'>        $fuga = new Fuga();
+</span><span class='line'>        $piyo = $fuga::find($id);
+</span><span class='line'>
+</span><span class='line'>        // jsonで返却
+</span><span class='line'>        return Response::json([
+</span><span class='line'>                            'status' =&gt; 'OK',
+</span><span class='line'>                            'piyo' =&gt; $piyo
+</span><span class='line'>                        ]);
+</span><span class='line'>    }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>ルーティングを設定</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Route::get('get_piyo/{id}', [
+</span><span class='line'>  'as'    =&gt; 'get_piyo',
+</span><span class='line'>  'uses'  =&gt; 'HogeController@getPiyo'
+</span><span class='line'>]);</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -613,78 +769,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/02/vagrant-box-add-error/">Vagrant Box Add で Transfer Closed</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-11-02T20:37:22+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>下記コマンドでboxを追加</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant box add {name} {url}
-</span><span class='line'>
-</span><span class='line'>vagrant box add centos/7 https://atlas.hashicorp.com/centos/boxes/7</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>エラーが発生</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>An error occurred while downloading the remote file. The error
-</span><span class='line'>message, if any, is reproduced below. Please fix this error and try
-</span><span class='line'>again.
-</span><span class='line'>
-</span><span class='line'>transfer closed with 386379308 bytes remaining to read</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>解決方法</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/.vagrant.d/tmp/
-</span><span class='line'>rm *
-</span><span class='line'>
-</span><span class='line'>再度 vagrant box add 〜 を実行</span></code></pre></td></tr></table></div></figure>
-
-
-<p>無事にboxを追加できました。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/5">&larr; Older</a>
@@ -716,6 +800,10 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/05/26/1year-saving-android-release/">Androidアプリ リリース！</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/04/30/xcode-ios/">バージョンが古いXcodeを使用していて、iOSのバージョンアップ後、実機の動作確認ができなくなった場合の対応</a>
       </li>
     
@@ -729,10 +817,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
     
       <li class="post">
         <a href="/blog/2018/02/24/excel-vlookup/">excel vlookup関数で検索値があれば○、なければ×を表示する</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/01/28/mysql-import-export/">MySQL データエクスポートとインポート</a>
       </li>
     
   </ul>

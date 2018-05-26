@@ -9,10 +9,8 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="アプリが最新のXcodeに対応していないため、古いバージョンのXcodeをしようしている。
-iOSを最新にアップデートしたところ、古いXcodeには最新のiOSのDisk Imageがないため、
-実機確認時に 1
-Could not find Developer Disk Image &hellip;">
+  <meta name="description" content="約1年半前にリリースしていた1年貯金(iOS)のAndroid版をやっとリリースしました。 1年貯金(Android)
+https://play.google.com/store/apps/details?id=com.masahiro.hori.a1year_saving ちなみに、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +77,48 @@ Could not find Developer Disk Image &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/05/26/1year-saving-android-release/">Androidアプリ リリース！</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-05-26T18:44:03+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>約1年半前にリリースしていた1年貯金(iOS)のAndroid版をやっとリリースしました。</p>
+
+<p>1年貯金(Android)<br/>
+<a href="https://play.google.com/store/apps/details?id=com.masahiro.hori.a1year_saving">https://play.google.com/store/apps/details?id=com.masahiro.hori.a1year_saving</a></p>
+
+<p>ちなみに、iOSはこちら<br/>
+<a href="https://itunes.apple.com/jp/app/1%E5%B9%B4%E8%B2%AF%E9%87%91/id1099402235?mt=8">https://itunes.apple.com/jp/app/1%E5%B9%B4%E8%B2%AF%E9%87%91/id1099402235?mt=8</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -552,128 +592,6 @@ iOSを最新にアップデートしたところ、古いXcodeには最新のiOS
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/11/11/setting-eslint/">ESLintでJavaScriptのコードスタイルを統一</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-11-11T14:27:29+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>ESLintとは？</h2>
-
-<ul>
-<li>特定のスタイルガイドライン(検証ルール)に準拠していない、問題のあるパターンやコードを見つけるための静的検証ツール。</li>
-<li>検証ルールの追加や、有効or無効化、検出レベル(ワーニング、エラーなど) が自由に設定できる。</li>
-</ul>
-
-
-<h2>ESLintのインストール</h2>
-
-<p>プロジェクトルートに移動し、下記コマンドを実行</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ npm install eslint --save-dev
-</span><span class='line'>
-</span><span class='line'>$ ./node_modules/.bin/eslint -v
-</span><span class='line'>v4.9.0</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>コーディングスタイルのルールを記述するファイル(json形式ならば.eslintrc.json)を下記コマンドで生成</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./node_modules/.bin/eslint --init
-</span><span class='line'>? How would you like to configure ESLint? (Use arrow keys)
-</span><span class='line'>❯ Answer questions about your style  (対話形式で作る)
-</span><span class='line'>  Use a popular style guide          (人気のスタイルガイドから作る)
-</span><span class='line'>  Inspect your JavaScript file(s)    (JavaScriptファイルから作る)
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>コーディングスタイルをチェック</h2>
-
-<p>プロジェクトルートに生成された、.eslintrc.jsonに記述されているルールに従ってチェックしてくれる</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./node_modules/.bin/eslint index.js
-</span><span class='line'>/index.js
-</span><span class='line'>   46:10  error    'hoge' is defined but never used                     no-unused-vars
-</span><span class='line'>   83:13  warning  Unexpected console statement                   no-console
-</span><span class='line'>   85:37  error    Empty block statement                                    no-empty
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>常にコーディングスタイルをチェックするように、IntelliJに設定する</h2>
-
-<p>設定より、</p>
-
-<ol>
-<li>Languages &amp; Frameworks</li>
-<li>JavaScript</li>
-<li>Code Quality Tools</li>
-<li>ESLint</li>
-<li>Enableにチェック</li>
-<li>ESLint package にeslintモジュールのパスを設定</li>
-</ol>
-
-
-<p><img src="/images/eslint.png" alt="ESLint" /></p>
-
-<h2>コーディングスタイル ルール一覧</h2>
-
-<h3>公式サイト</h3>
-
-<ul>
-<li><a href="https://eslint.org/docs/rules/">https://eslint.org/docs/rules/</a></li>
-</ul>
-
-
-<h3>qiita</h3>
-
-<h4>ESLintのエラールール。</h4>
-
-<ul>
-<li><a href="https://qiita.com/M-ISO/items/113ddd448bdc496af783">https://qiita.com/M-ISO/items/113ddd448bdc496af783</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/2">&larr; Older</a>
@@ -701,6 +619,10 @@ iOSを最新にアップデートしたところ、古いXcodeには最新のiOS
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/05/26/1year-saving-android-release/">Androidアプリ リリース！</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/04/30/xcode-ios/">バージョンが古いXcodeを使用していて、iOSのバージョンアップ後、実機の動作確認ができなくなった場合の対応</a>
       </li>
     
@@ -714,10 +636,6 @@ iOSを最新にアップデートしたところ、古いXcodeには最新のiOS
     
       <li class="post">
         <a href="/blog/2018/02/24/excel-vlookup/">excel vlookup関数で検索値があれば○、なければ×を表示する</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/01/28/mysql-import-export/">MySQL データエクスポートとインポート</a>
       </li>
     
   </ul>
