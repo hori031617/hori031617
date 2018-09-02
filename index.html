@@ -9,8 +9,17 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="約1年半前にリリースしていた1年貯金(iOS)のAndroid版をやっとリリースしました。 1年貯金(Android)
-https://play.google.com/store/apps/details?id=com.masahiro.hori.a1year_saving ちなみに、 &hellip;">
+  <meta name="description" content="モジュール作成 1
+2
+3
+4
+scrapy genspider [モジュール名] [サイトドメイン] 例)
+scrapy genspider hoge wwww.hoge.com モジュール実行コマンド 1
+2
+3
+4
+scrapy crawl [モジュール名] 例)
+scrapy crawl &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +86,225 @@ https://play.google.com/store/apps/details?id=com.masahiro.hori.a1year_saving �
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/09/02/scrapy-command/">Scrapy 各種コマンド</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-09-02T21:38:04+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+<li>モジュール作成</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scrapy genspider [モジュール名] [サイトドメイン]
+</span><span class='line'>
+</span><span class='line'>例)
+</span><span class='line'>scrapy genspider hoge wwww.hoge.com</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>モジュール実行コマンド</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scrapy crawl [モジュール名]
+</span><span class='line'>
+</span><span class='line'>例)
+</span><span class='line'>scrapy crawl hoge</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>実行結果の出力ファイル指定</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scrapy crawl hoge -o /home/fuga.csv</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>デバッグコマンド</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scrapy shell [対象URL]
+</span><span class='line'>
+</span><span class='line'>例)
+</span><span class='line'>scrapy shell 'https://www.hoge.com/'
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>インタラクティブモードになる
+</span><span class='line'>以下を入力していく
+</span><span class='line'>
+</span><span class='line'>&gt;&gt;&gt;
+</span><span class='line'>import re
+</span><span class='line'>import mojimoji
+</span><span class='line'>from bs4 import BeautifulSoup
+</span><span class='line'>from urllib.request import urlopen
+</span><span class='line'>
+</span><span class='line'>soup = BeautifulSoup(response.body, "html5lib")
+</span><span class='line'>
+</span><span class='line'>soup
+</span><span class='line'>↑ 取得結果が表示される
+</span><span class='line'>  この後、DOMの取得コマンドを実行し、結果を確認していく</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>文字化け時の対策</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>html_data = urlopen('https://hoge.com/fuga/').read()
+</span><span class='line'>html_data = html_data.decode('utf-8')
+</span><span class='line'>soup = BeautifulSoup(html_data, "html5lib")</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/06/30/laravel-cache/">Laravel 各種キャッシュクリアコマンド</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-06-30T09:55:44+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+<li>基本的なキャッシュクリア</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan cache:clear</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>configのキャッシュクリア</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan config:clear</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>ルーティングのキャッシュクリア</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan route:clear</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>viewのキャッシュクリアキャッシュクリア</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan view:clear</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>強力なキャッシュクリアコマンド</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>composer dump-autoload</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Configのキャッシュファイル削除</h2>
+
+<p>config キャッシュクリアコマンドで消えない場合は描きファイルを削除する</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd laravel_project/bootstrap/cache
+</span><span class='line'>rm -f config.php</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -480,118 +708,6 @@ iOSを最新にアップデートしたところ、古いXcodeには最新のiOS
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/11/23/meld-install/">Macのdiffツール「meld」インストールメモ</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-11-23T22:47:24+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>(必要であれば)Homebrewをアップデート</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>brew update</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>次にHomebrew-Caskをインストール</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>brew tap caskroom/cask</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>もしインストール時、権限エラーになった際は下記コマンドを実行する</h4>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo chown -R $(whoami) /usr/local/Cellar
-</span><span class='line'>sudo chown -R $(whoami) /usr/local</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>meldインストール</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>brew install caskroom/cask/meld</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>medl を起動する</h2>
-
-<p>ターミナルで下記コマンドを実行</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>meld</span></code></pre></td></tr></table></div></figure>
-
-
-<p>meldのウィンドウが立ち上がります。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/11/16/sql-update/">MySQLにて同テーブル内で別データのカラムをコピーする</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-11-16T22:01:54+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>UPDATE hoge AS h1, hoge AS h2
-</span><span class='line'>SET h1.fuga = h2.fuga
-</span><span class='line'>WHERE h1.id = 111 AND h2.id = 222;</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/2">&larr; Older</a>
@@ -619,6 +735,14 @@ iOSを最新にアップデートしたところ、古いXcodeには最新のiOS
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/09/02/scrapy-command/">scrapy 各種コマンド</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/06/30/laravel-cache/">Laravel 各種キャッシュクリアコマンド</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/05/26/1year-saving-android-release/">Androidアプリ リリース！</a>
       </li>
     
@@ -628,14 +752,6 @@ iOSを最新にアップデートしたところ、古いXcodeには最新のiOS
     
       <li class="post">
         <a href="/blog/2018/03/31/git-ours-theirs/">Git コンフリクトした際に取り込み先の変更を優先する</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/02/28/virtualenv-python3/">virtualenvでpython3に切り替える</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/02/24/excel-vlookup/">excel vlookup関数で検索値があれば○、なければ×を表示する</a>
       </li>
     
   </ul>

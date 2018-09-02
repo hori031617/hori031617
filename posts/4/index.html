@@ -9,36 +9,15 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="サンプルコード php artisan make:controller HogeController で雛形を作成したものに処理を追加 1
+  <meta name="description" content="書式 1
+zip -e -r 【出力zipファイル名】.zip 【圧縮するディレクトリ】 実行例 1
 2
 3
 4
 5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30 &hellip;">
+zip -e -r HOGE.zip HOGE
+Enter password: ← 解凍パスワード入力
+Verify password: ← 解凍パスワード確認 adding: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -105,6 +84,132 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/03/07/mac-zip-cmd/">Macでツールを使わずzipコマンドでディレクトリを圧縮し、解凍パスワードを付与する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-03-07T20:30:10+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>書式</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>zip -e -r 【出力zipファイル名】.zip 【圧縮するディレクトリ】</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>実行例</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>zip -e -r HOGE.zip HOGE
+</span><span class='line'>Enter password:        ← 解凍パスワード入力
+</span><span class='line'>Verify password:       ← 解凍パスワード確認
+</span><span class='line'>  adding: HOGE/ (stored 0%)
+</span><span class='line'>  adding: HOGE/fuga.pdf (deflated 5%)</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/03/05/laravel5-deleted-at/">Laravel5で論理削除を実装する手順</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-03-05T18:57:44+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>1. Migrateファイルを作成時、以下のカラムを記述</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$table-&gt;softDeletes();  // deleted_atカラムが追加される</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. Modelに以下を追加</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>use Illuminate\Database\Eloquent\SoftDeletes; // 追加する
+</span><span class='line'>
+</span><span class='line'>class Hoge extends Model
+</span><span class='line'>{
+</span><span class='line'>    // 論理削除を有効化
+</span><span class='line'>    use SoftDeletes;
+</span><span class='line'>    protected $dates = ['deleted_at'];</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上記1.2の設定で論理削除が有効になる。<br/>
+deleted_atに日付が登録されていれば、<br/>
+<strong>SELECT文にWHERE句などを記述しなくても、取得されない。</strong></p>
+
+<h2>3. Eloquentでdeleted_at に値を登録</h2>
+
+<h3>通常のdelete文から変更なし</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$fuga = Fuga::findOrFail($id);
+</span><span class='line'>$fuga-&gt;delete(); // deleted_at = now()が入って、delete文でカラムは削除されない。</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -643,132 +748,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/12/cloudwatch-events/">CloudWatch Events Cronのタイムゾーン</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-11-12T19:35:25+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>AWS Lambda で関数を作成し、その関数をCloudWatch Eventsで定期的に実行しようとして、cronを設定したが時間どおりに動作しなかった。</p>
-
-<p>CloudWatch Eventsのトラブルシューティングページを確認すると</p>
-
-<blockquote><p>ScheduleExpressions は UTC です。UTC タイムゾーンで自己トリガーするルールのスケジュールが設定されていることを確認します。</p></blockquote>
-
-<p>とあり、タイムゾーンをUTCで設定する必要があった。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/11/03/vagrant-shared-folder-error/">ローカルホストとリモートホストをマウント時にエラー</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-11-03T17:29:16+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>下記エラーが出力された</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Vagrant was unable to mount VirtualBox shared folders. This is usually
-</span><span class='line'>because the filesystem "vboxsf" is not available.</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>解決方法</h2>
-
-<h3>まず、vagrant up時に自動的に新しいバージョンのGuest Additionsに更新してくれる「vagrant-vbguest」というプラグインをインストール</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant plugin install vagrant-vbguest</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Vagrantが起動している状態でマウント失敗している仮想マシンの状態確認</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest --status
-</span><span class='line'>
-</span><span class='line'>[default] No installation found.</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Guest Additionsを更新</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>再度仮想マシンの状態確認</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest --status
-</span><span class='line'>
-</span><span class='line'>[default] GuestAdditions 5.1.8 running --- OK.</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>仮想マシンを再起動</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant reload</span></code></pre></td></tr></table></div></figure>
-
-
-<p>解決しました。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/5">&larr; Older</a>
@@ -800,6 +779,14 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/09/02/scrapy-command/">scrapy 各種コマンド</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/06/30/laravel-cache/">Laravel 各種キャッシュクリアコマンド</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/05/26/1year-saving-android-release/">Androidアプリ リリース！</a>
       </li>
     
@@ -809,14 +796,6 @@ LaravelはAutoLoaderがあり、composerがクラス管理をしており、comp
     
       <li class="post">
         <a href="/blog/2018/03/31/git-ours-theirs/">Git コンフリクトした際に取り込み先の変更を優先する</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/02/28/virtualenv-python3/">virtualenvでpython3に切り替える</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/02/24/excel-vlookup/">excel vlookup関数で検索値があれば○、なければ×を表示する</a>
       </li>
     
   </ul>

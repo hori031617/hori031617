@@ -9,8 +9,11 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="ESLintとは？ 特定のスタイルガイドライン(検証ルール)に準拠していない、問題のあるパターンやコードを見つけるための静的検証ツール。
-検証ルールの追加や、有効or無効化、検出レベル(ワーニング、エラーなど) が自由に設定できる。 ESLintのインストール プロジェクトルートに移動し、 &hellip;">
+  <meta name="description" content="(必要であれば)Homebrewをアップデート 1
+brew update 次にHomebrew-Caskをインストール 1
+brew tap caskroom/cask もしインストール時、権限エラーになった際は下記コマンドを実行する 1
+2
+sudo chown -R $(whoami) / &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +80,118 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/11/23/meld-install/">Macのdiffツール「meld」インストールメモ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-11-23T22:47:24+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>(必要であれば)Homebrewをアップデート</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew update</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>次にHomebrew-Caskをインストール</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew tap caskroom/cask</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>もしインストール時、権限エラーになった際は下記コマンドを実行する</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo chown -R $(whoami) /usr/local/Cellar
+</span><span class='line'>sudo chown -R $(whoami) /usr/local</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>meldインストール</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew install caskroom/cask/meld</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>medl を起動する</h2>
+
+<p>ターミナルで下記コマンドを実行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>meld</span></code></pre></td></tr></table></div></figure>
+
+
+<p>meldのウィンドウが立ち上がります。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/11/16/sql-update/">MySQLにて同テーブル内で別データのカラムをコピーする</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-11-16T22:01:54+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>UPDATE hoge AS h1, hoge AS h2
+</span><span class='line'>SET h1.fuga = h2.fuga
+</span><span class='line'>WHERE h1.id = 111 AND h2.id = 222;</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -969,84 +1084,6 @@ CSSが読み込まれなくなった。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/07/17/apk-install/">Adbコマンドでapkファイルを実機にインストールする</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-07-17T11:38:23+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>例)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>adb install -r ./android.apk</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/06/28/react-native-version/">React Nativeのバージョンを指定してプロジェクトを作成する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-06-28T21:45:41+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>react-native init --version="X.XX.X" myApp</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/3">&larr; Older</a>
@@ -1078,6 +1115,14 @@ CSSが読み込まれなくなった。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/09/02/scrapy-command/">scrapy 各種コマンド</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/06/30/laravel-cache/">Laravel 各種キャッシュクリアコマンド</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/05/26/1year-saving-android-release/">Androidアプリ リリース！</a>
       </li>
     
@@ -1087,14 +1132,6 @@ CSSが読み込まれなくなった。</p>
     
       <li class="post">
         <a href="/blog/2018/03/31/git-ours-theirs/">Git コンフリクトした際に取り込み先の変更を優先する</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/02/28/virtualenv-python3/">virtualenvでpython3に切り替える</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/02/24/excel-vlookup/">excel vlookup関数で検索値があれば○、なければ×を表示する</a>
       </li>
     
   </ul>

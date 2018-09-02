@@ -5,13 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Git コンフリクトした際に取り込み先の変更を優先する - エンジニア日記</title>
+  <title>Laravel 各種キャッシュクリアコマンド - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="下記、コマンドにて実行 1
-git checkout --theirs hoge.txt ちなみに、自分の変更を優先する場合は下記、コマンド 1
-git checkout --ours fuga.txt ">
+  <meta name="description" content="基本的なキャッシュクリア 1
+php artisan cache:clear configのキャッシュクリア 1
+php artisan config:clear ルーティングのキャッシュクリア 1
+php artisan route:clear viewのキャッシュクリアキャッシュクリア 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +21,7 @@ git checkout --ours fuga.txt ">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2018/03/31/git-ours-theirs/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2018/06/30/laravel-cache/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +82,7 @@ git checkout --ours fuga.txt ">
   
   <header>
     
-      <h1 class="entry-title">Git コンフリクトした際に取り込み先の変更を優先する</h1>
+      <h1 class="entry-title">Laravel 各種キャッシュクリアコマンド</h1>
     
     
       <p class="meta">
@@ -97,23 +98,63 @@ git checkout --ours fuga.txt ">
   
 
 
-<time datetime="2018-03-31T21:43:32+09:00" pubdate data-updated="true"></time>
+<time datetime="2018-06-30T09:55:44+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>下記、コマンドにて実行</p>
+<div class="entry-content"><ul>
+<li>基本的なキャッシュクリア</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git checkout --theirs hoge.txt</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan cache:clear</span></code></pre></td></tr></table></div></figure>
 
 
-<p>ちなみに、自分の変更を優先する場合は下記、コマンド</p>
+<ul>
+<li>configのキャッシュクリア</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git checkout --ours fuga.txt</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan config:clear</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>ルーティングのキャッシュクリア</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan route:clear</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>viewのキャッシュクリアキャッシュクリア</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan view:clear</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>強力なキャッシュクリアコマンド</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>composer dump-autoload</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Configのキャッシュファイル削除</h2>
+
+<p>config キャッシュクリアコマンドで消えない場合は描きファイルを削除する</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd laravel_project/bootstrap/cache
+</span><span class='line'>rm -f config.php</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -137,7 +178,7 @@ git checkout --ours fuga.txt ">
   
 
 
-<time datetime="2018-03-31T21:43:32+09:00" pubdate data-updated="true"></time>
+<time datetime="2018-06-30T09:55:44+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -145,7 +186,7 @@ git checkout --ours fuga.txt ">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2018/03/31/git-ours-theirs/" data-via="" data-counturl="http://engineer-diary.click/blog/2018/03/31/git-ours-theirs/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2018/06/30/laravel-cache/" data-via="" data-counturl="http://engineer-diary.click/blog/2018/06/30/laravel-cache/" >Tweet</a>
   
   
   
@@ -154,10 +195,10 @@ git checkout --ours fuga.txt ">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2018/02/28/virtualenv-python3/" title="Previous Post: virtualenvでpython3に切り替える">&laquo; virtualenvでpython3に切り替える</a>
+        <a class="basic-alignment left" href="/blog/2018/05/26/1year-saving-android-release/" title="Previous Post: Androidアプリ リリース！">&laquo; Androidアプリ リリース！</a>
       
       
-        <a class="basic-alignment right" href="/blog/2018/04/30/xcode-ios/" title="Next Post: バージョンが古いXcodeを使用していて、iOSのバージョンアップ後、実機の動作確認ができなくなった場合の対応">バージョンが古いXcodeを使用していて、iOSのバージョンアップ後、実機の動作確認ができなくなった場合の対応 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2018/09/02/scrapy-command/" title="Next Post: scrapy 各種コマンド">scrapy 各種コマンド &raquo;</a>
       
     </p>
   </footer>

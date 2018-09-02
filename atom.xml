@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2018-05-26T18:55:55+09:00</updated>
+  <updated>2018-09-02T22:08:46+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,171 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[scrapy 各種コマンド]]></title>
+    <link href="http://engineer-diary.click/blog/2018/09/02/scrapy-command/"/>
+    <updated>2018-09-02T21:38:04+09:00</updated>
+    <id>http://engineer-diary.click/blog/2018/09/02/scrapy-command</id>
+    <content type="html"><![CDATA[<ul>
+<li>モジュール作成</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scrapy genspider [モジュール名] [サイトドメイン]
+</span><span class='line'>
+</span><span class='line'>例)
+</span><span class='line'>scrapy genspider hoge wwww.hoge.com</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>モジュール実行コマンド</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scrapy crawl [モジュール名]
+</span><span class='line'>
+</span><span class='line'>例)
+</span><span class='line'>scrapy crawl hoge</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>実行結果の出力ファイル指定</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scrapy crawl hoge -o /home/fuga.csv</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>デバッグコマンド</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scrapy shell [対象URL]
+</span><span class='line'>
+</span><span class='line'>例)
+</span><span class='line'>scrapy shell 'https://www.hoge.com/'
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>インタラクティブモードになる
+</span><span class='line'>以下を入力していく
+</span><span class='line'>
+</span><span class='line'>&gt;&gt;&gt;
+</span><span class='line'>import re
+</span><span class='line'>import mojimoji
+</span><span class='line'>from bs4 import BeautifulSoup
+</span><span class='line'>from urllib.request import urlopen
+</span><span class='line'>
+</span><span class='line'>soup = BeautifulSoup(response.body, "html5lib")
+</span><span class='line'>
+</span><span class='line'>soup
+</span><span class='line'>↑ 取得結果が表示される
+</span><span class='line'>  この後、DOMの取得コマンドを実行し、結果を確認していく</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>文字化け時の対策</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>html_data = urlopen('https://hoge.com/fuga/').read()
+</span><span class='line'>html_data = html_data.decode('utf-8')
+</span><span class='line'>soup = BeautifulSoup(html_data, "html5lib")</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Laravel 各種キャッシュクリアコマンド]]></title>
+    <link href="http://engineer-diary.click/blog/2018/06/30/laravel-cache/"/>
+    <updated>2018-06-30T09:55:44+09:00</updated>
+    <id>http://engineer-diary.click/blog/2018/06/30/laravel-cache</id>
+    <content type="html"><![CDATA[<ul>
+<li>基本的なキャッシュクリア</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan cache:clear</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>configのキャッシュクリア</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan config:clear</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>ルーティングのキャッシュクリア</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan route:clear</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>viewのキャッシュクリアキャッシュクリア</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php artisan view:clear</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>強力なキャッシュクリアコマンド</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>composer dump-autoload</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Configのキャッシュファイル削除</h2>
+
+<p>config キャッシュクリアコマンドで消えない場合は描きファイルを削除する</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd laravel_project/bootstrap/cache
+</span><span class='line'>rm -f config.php</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Androidアプリ リリース！]]></title>
@@ -928,30 +1093,6 @@ CSSが読み込まれなくなった。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>git mv Hoge.txt hoge.txt</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[adbコマンドでapkファイルを実機にインストールする]]></title>
-    <link href="http://engineer-diary.click/blog/2017/07/17/apk-install/"/>
-    <updated>2017-07-17T11:38:23+09:00</updated>
-    <id>http://engineer-diary.click/blog/2017/07/17/apk-install</id>
-    <content type="html"><![CDATA[<p>例)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>adb install -r ./android.apk</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[React Nativeのバージョンを指定してプロジェクトを作成する]]></title>
-    <link href="http://engineer-diary.click/blog/2017/06/28/react-native-version/"/>
-    <updated>2017-06-28T21:45:41+09:00</updated>
-    <id>http://engineer-diary.click/blog/2017/06/28/react-native-version</id>
-    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>react-native init --version="X.XX.X" myApp</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>

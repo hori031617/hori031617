@@ -9,15 +9,7 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="下記コマンドでboxを追加 1
-2
-3
-vagrant box add {name} {url} vagrant box add centos/7 https://atlas.hashicorp.com/centos/boxes/7 エラーが発生 1
-2
-3
-4
-5
-An error &hellip;">
+  <meta name="description" content="AWS Lambda で関数を作成し、その関数をCloudWatch Eventsで定期的に実行しようとして、cronを設定したが時間どおりに動作しなかった。 CloudWatch Eventsのトラブルシューティングページを確認すると ScheduleExpressions は UTC です。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +76,132 @@ An error &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/12/cloudwatch-events/">CloudWatch Events Cronのタイムゾーン</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-11-12T19:35:25+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>AWS Lambda で関数を作成し、その関数をCloudWatch Eventsで定期的に実行しようとして、cronを設定したが時間どおりに動作しなかった。</p>
+
+<p>CloudWatch Eventsのトラブルシューティングページを確認すると</p>
+
+<blockquote><p>ScheduleExpressions は UTC です。UTC タイムゾーンで自己トリガーするルールのスケジュールが設定されていることを確認します。</p></blockquote>
+
+<p>とあり、タイムゾーンをUTCで設定する必要があった。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/03/vagrant-shared-folder-error/">ローカルホストとリモートホストをマウント時にエラー</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-11-03T17:29:16+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>下記エラーが出力された</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Vagrant was unable to mount VirtualBox shared folders. This is usually
+</span><span class='line'>because the filesystem "vboxsf" is not available.</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>解決方法</h2>
+
+<h3>まず、vagrant up時に自動的に新しいバージョンのGuest Additionsに更新してくれる「vagrant-vbguest」というプラグインをインストール</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant plugin install vagrant-vbguest</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Vagrantが起動している状態でマウント失敗している仮想マシンの状態確認</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest --status
+</span><span class='line'>
+</span><span class='line'>[default] No installation found.</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Guest Additionsを更新</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>再度仮想マシンの状態確認</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant vbguest --status
+</span><span class='line'>
+</span><span class='line'>[default] GuestAdditions 5.1.8 running --- OK.</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>仮想マシンを再起動</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant reload</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解決しました。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -764,99 +882,6 @@ An error &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/06/30/ext-change/">カレントディレクトリ配下のファイルの拡張子を変更する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-06-30T21:13:04+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>ttlファイルをtxtファイルにするために拡張子の変更をコマンドで行う。<br/>
-だが、以下の方法ではダメだった。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mv *.ttl *.txt</span></code></pre></td></tr></table></div></figure>
-
-
-<p><br>
-一括でファイルを変更するにはfor文で行う。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>for fname in *.ttl; do
-</span><span class='line'>mv $fname ${fname%.ttl}.txt;
-</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/06/29/replace-string/">カレントディレクトリにあるファイルの文字列を一度に置換する</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-06-29T19:56:42+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>find ./ -type f | xargs sed -i 's/置き換え前/置き換え後/g'</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>※ 注意 ※</strong><br/>
-<strong>このコマンドはファイルのバックアップは作成されないので、実行前にバックアップは取っておいたほうがいいです。</strong></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/6">&larr; Older</a>
@@ -888,6 +913,14 @@ An error &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/09/02/scrapy-command/">scrapy 各種コマンド</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/06/30/laravel-cache/">Laravel 各種キャッシュクリアコマンド</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/05/26/1year-saving-android-release/">Androidアプリ リリース！</a>
       </li>
     
@@ -897,14 +930,6 @@ An error &hellip;">
     
       <li class="post">
         <a href="/blog/2018/03/31/git-ours-theirs/">Git コンフリクトした際に取り込み先の変更を優先する</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/02/28/virtualenv-python3/">virtualenvでpython3に切り替える</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/02/24/excel-vlookup/">excel vlookup関数で検索値があれば○、なければ×を表示する</a>
       </li>
     
   </ul>

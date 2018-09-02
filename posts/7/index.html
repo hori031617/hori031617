@@ -9,24 +9,11 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="APIはPHPで作成
-ユーザーのパスワードをリセットするAPI
-リセットボタンを押下して呼び出される
-APIは実行結果をJSONデータで返却する
-JSONデータの戻り値を見て、成功、失敗を判断する
-失敗時にはエラーメッセージを表示する 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13 &hellip;">
+  <meta name="description" content="表題の実装を行った。
+APIを1つだけしか呼ばない場合だと問題は表面化しなかったのだが、
+２つ以上を呼び出すと先に呼び出したAPIの処理が終わってから次のAPIが実行されるという
+処理動作になっていた。
+そのため、画面表示に少し時間がかかる。 原因 APIでは session_start() &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -93,6 +80,151 @@ JSONデータの戻り値を見て、成功、失敗を判断する
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/05/12/session-write-close/">PHPでAPIを作成し、画面が表示されるときに非同期で２つ以上のAPIを呼ぶ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-12T07:24:11+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>表題の実装を行った。<br/>
+APIを1つだけしか呼ばない場合だと問題は表面化しなかったのだが、<br/>
+２つ以上を呼び出すと先に呼び出したAPIの処理が終わってから次のAPIが実行されるという<br/>
+処理動作になっていた。<br/>
+そのため、画面表示に少し時間がかかる。</p>
+
+<h3>原因</h3>
+
+<p>APIでは <strong>session_start()</strong> 処理が記述されていた。<br/>
+session_start() 処理が走るとセッションに排他ロックがかかるため<br/>
+次のAPIが書き込み待ちになり実行が遅れるというものだった。</p>
+
+<h3>対応策</h3>
+
+<p>セッションへの書き込みが完了したら（セッションに対する処理が終われば）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>session_write_close()</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+を呼び出し、排他ロックを解除する。</p>
+
+<h3>参考URL</h3>
+
+<p><a href="http://unsolublesugar.com/20121103/113321/">http://unsolublesugar.com/20121103/113321/</a>
+<a href="http://www.objective-php.net/blog/detail/20110813">http://www.objective-php.net/blog/detail/20110813</a>
+<a href="http://blog2.elephantech.net/php/%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%97%E3%81%A6%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E7%B5%82%E4%BA%86%E3%81%99/">http://blog2.elephantech.net/php/%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E4%BF%9D%E5%AD%98%E3%81%97%E3%81%A6%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E7%B5%82%E4%BA%86%E3%81%99/</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/05/10/github-pages-octopress-original-domain/">Github Pages、Octopressで独自ドメイン設定</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-10T21:37:07+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>GitHub PagesとOctopressを利用し、独自ドメインを設定するときにはまったのでメモ。<br/>
+独自ドメイン取得の流れと設定方法は下記</p>
+
+<ol>
+<li>お名前.comで独自ドメイン取得</li>
+<li>取得したドメインにAレコードを2つ追加し、それぞれGithubのDNSサーバーのIPアドレス(2016/05/10 時点で 192.30.252.153、192.30.252.154)を設定</li>
+<li>source/CNAME ファイルに取得した独自ドメインを記述</li>
+</ol>
+
+
+<p>と、ここまでは<strong>「GitHub Pages 独自ドメイン 設定」</strong>等でググれば、結構出てくるので問題はなかった。<br/>
+だが、いざ取得した独自ドメインでアクセスすると、CSSやJSのパスが上手く独自ドメイン反映後に対応していなく、CSSの読み込みエラーでページが崩れた。</p>
+
+<h3>何が起きたのか?</h3>
+
+<p>Github PagesのトップページのURLは <a href="http://username.github.io/repository-name">http://username.github.io/repository-name</a> となる。<br/>
+(リポジトリごとのWebページとして作成)<br/>
+そのため、CSSなどの読み込みパスは /repository-name/hoge.css となる。</p>
+
+<p>独自ドメイン設定後は <a href="http://original-domain">http://original-domain</a> となるためCSSの読み込みパスは /hoge.css としたいのだが、<br/>
+HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name/hoge.css のままとなり、読み込みエラーとなった。</p>
+
+<h3>解決方法</h3>
+
+<p>_config.yml を修正</p>
+
+<ul>
+<li>修正前</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># If publishing to a subdirectory as in http://site.com/project set 'root: /project'  
+</span><span class='line'>root: /repository-name</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>修正後</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># If publishing to a subdirectory as in http://site.com/project set 'root: /project'  
+</span><span class='line'>root: /</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -531,6 +663,14 @@ JSONデータの戻り値を見て、成功、失敗を判断する
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/09/02/scrapy-command/">scrapy 各種コマンド</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/06/30/laravel-cache/">Laravel 各種キャッシュクリアコマンド</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/05/26/1year-saving-android-release/">Androidアプリ リリース！</a>
       </li>
     
@@ -540,14 +680,6 @@ JSONデータの戻り値を見て、成功、失敗を判断する
     
       <li class="post">
         <a href="/blog/2018/03/31/git-ours-theirs/">Git コンフリクトした際に取り込み先の変更を優先する</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/02/28/virtualenv-python3/">virtualenvでpython3に切り替える</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/02/24/excel-vlookup/">excel vlookup関数で検索値があれば○、なければ×を表示する</a>
       </li>
     
   </ul>
