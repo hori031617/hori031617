@@ -4,7 +4,7 @@
   <title><![CDATA[エンジニア日記]]></title>
   <link href="http://engineer-diary.click/atom.xml" rel="self"/>
   <link href="http://engineer-diary.click/"/>
-  <updated>2018-09-02T22:08:46+09:00</updated>
+  <updated>2018-09-30T19:02:51+09:00</updated>
   <id>http://engineer-diary.click/</id>
   <author>
     <name><![CDATA[Masahiro Hori]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ PHPの情報をコマンドから確認する方法]]></title>
+    <link href="http://engineer-diary.click/blog/2018/09/30/phpinfo/"/>
+    <updated>2018-09-30T18:48:23+09:00</updated>
+    <id>http://engineer-diary.click/blog/2018/09/30/phpinfo</id>
+    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php phpinfo();</span></code></pre></td></tr></table></div></figure>
+
+
+<p>をindex.phpに保存してブラウザからアクセスという方法を取らなくても、<br/>
+コマンドからPHPの情報を確認する方法を纏める。</p>
+
+<ul>
+<li>phpinfo()を実行</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php -r 'phpinfo();'</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>phpinfo()の出力</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php -i</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>PHPのバージョンを出力</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php -v</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>インストールしているモジュールを出力</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php -m</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[scrapy 各種コマンド]]></title>
@@ -1079,20 +1129,6 @@ CSSが読み込まれなくなった。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>git checkout abcdefghijklmnopqrstuvwxyz hoge/fuga.txt</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[gitで大文字小文字のファイル名を変更する時]]></title>
-    <link href="http://engineer-diary.click/blog/2017/08/13/git-rename-mv/"/>
-    <updated>2017-08-13T09:38:15+09:00</updated>
-    <id>http://engineer-diary.click/blog/2017/08/13/git-rename-mv</id>
-    <content type="html"><![CDATA[<p>単純にリネームしても、<code>git status</code>で変更と認識されない。<br/>
-下記コマンドで対応する。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git mv Hoge.txt hoge.txt</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>

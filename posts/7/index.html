@@ -9,11 +9,8 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="表題の実装を行った。
-APIを1つだけしか呼ばない場合だと問題は表面化しなかったのだが、
-２つ以上を呼び出すと先に呼び出したAPIの処理が終わってから次のAPIが実行されるという
-処理動作になっていた。
-そのため、画面表示に少し時間がかかる。 原因 APIでは session_start() &hellip;">
+  <meta name="description" content="PostgreSQLでのPrimaryKeyはシーケンス番号で管理されている。
+MySQLだと特に気にしなくてもいいのだがPostgreSQLで特に何も気にしてなかったときにエラーとなった事象。 テーブル定義 1 hoge_id | integer | not null default &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +77,90 @@ APIを1つだけしか呼ばない場合だと問題は表面化しなかった�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/05/14/postgresql-sequence/">PostgreSQLでのAUTO_INCREMENTのしくみ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-14T12:56:15+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>PostgreSQLでのPrimaryKeyはシーケンス番号で管理されている。<br/>
+MySQLだと特に気にしなくてもいいのだがPostgreSQLで特に何も気にしてなかったときにエラーとなった事象。</p>
+
+<h3>テーブル定義</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> hoge_id | integer | not null default nextval('mst_hoge_hoge_id_seq'::regclass)</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>hoge_idの登録状況</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>select  hoge_id from mst_hoge order by  hoge_id desc limit 2;
+</span><span class='line'>  hoge_id
+</span><span class='line'>---------------------
+</span><span class='line'>                 110
+</span><span class='line'>                 109</span></code></pre></td></tr></table></div></figure>
+
+
+<p> hoge_id を nextval で取得しアプリケーションからINSERTを行ったところあるときに突然下記エラーとなった。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>postgres: ERROR: duplicate key value violates unique constraint "mst_hoge_pkey" </span></code></pre></td></tr></table></div></figure>
+
+
+<h3>原因</h3>
+
+<p>テストデータで直接INSET文を実行したときにmst_hoge_ hoge_id_seqの値を同様に更新する考慮が漏れていた。<br/>
+結果、nextvalで取得できる値がテストデータ投入前時のhoge_idが返却され、一意制約エラーとなった。</p>
+
+<h3>対応</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SELECT setval('mst=hoge_id_seq', 最後の数値);  -- これで値が書きかわる 
+</span><span class='line'>
+</span><span class='line'>select last_value from mst_hoge_ hoge_id_seq;  -- 確認
+</span><span class='line'> last_value
+</span><span class='line'>------------
+</span><span class='line'>        110</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -663,6 +744,10 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/09/30/phpinfo/"> PHPの情報をコマンドから確認する方法</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/09/02/scrapy-command/">scrapy 各種コマンド</a>
       </li>
     
@@ -676,10 +761,6 @@ HTMLの読み込みパスは変わらず (当たり前か笑)、/repository-name
     
       <li class="post">
         <a href="/blog/2018/04/30/xcode-ios/">バージョンが古いXcodeを使用していて、iOSのバージョンアップ後、実機の動作確認ができなくなった場合の対応</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/03/31/git-ours-theirs/">Git コンフリクトした際に取り込み先の変更を優先する</a>
       </li>
     
   </ul>

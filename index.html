@@ -9,17 +9,11 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="モジュール作成 1
-2
-3
-4
-scrapy genspider [モジュール名] [サイトドメイン] 例)
-scrapy genspider hoge wwww.hoge.com モジュール実行コマンド 1
-2
-3
-4
-scrapy crawl [モジュール名] 例)
-scrapy crawl &hellip;">
+  <meta name="description" content="1
+&lt;?php phpinfo(); をindex.phpに保存してブラウザからアクセスという方法を取らなくても、
+コマンドからPHPの情報を確認する方法を纏める。 phpinfo()を実行 1
+php -r 'phpinfo();' phpinfo()の出力 1
+php -i &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +80,83 @@ scrapy crawl &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/09/30/phpinfo/">PHPの情報をコマンドから確認する方法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-09-30T18:48:23+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php phpinfo();</span></code></pre></td></tr></table></div></figure>
+
+
+<p>をindex.phpに保存してブラウザからアクセスという方法を取らなくても、<br/>
+コマンドからPHPの情報を確認する方法を纏める。</p>
+
+<ul>
+<li>phpinfo()を実行</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php -r 'phpinfo();'</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>phpinfo()の出力</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php -i</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>PHPのバージョンを出力</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php -v</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>インストールしているモジュールを出力</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php -m</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -654,60 +725,6 @@ iOSを最新にアップデートしたところ、古いXcodeには最新のiOS
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/12/27/git-untraking/">Gitで管理されているファイルを管理対象から外す</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-12-27T22:40:01+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>ローカルで、あるファイルが長期的に編集状態にあり、かつ間違ってコミット対象としない時などに便利。</p>
-
-<h2>管理対象から外す</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git update-index --skip-worktree【ファイル名】</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>管理対象外のファイルを確認</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git ls-files -v | grep ^S</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>管理対象に戻す</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git update-index --no-skip-worktree【ファイル名】</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/2">&larr; Older</a>
@@ -735,6 +752,10 @@ iOSを最新にアップデートしたところ、古いXcodeには最新のiOS
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/09/30/phpinfo/"> PHPの情報をコマンドから確認する方法</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/09/02/scrapy-command/">scrapy 各種コマンド</a>
       </li>
     
@@ -748,10 +769,6 @@ iOSを最新にアップデートしたところ、古いXcodeには最新のiOS
     
       <li class="post">
         <a href="/blog/2018/04/30/xcode-ios/">バージョンが古いXcodeを使用していて、iOSのバージョンアップ後、実機の動作確認ができなくなった場合の対応</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/03/31/git-ours-theirs/">Git コンフリクトした際に取り込み先の変更を優先する</a>
       </li>
     
   </ul>

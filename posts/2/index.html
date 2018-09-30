@@ -9,11 +9,9 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="(必要であれば)Homebrewをアップデート 1
-brew update 次にHomebrew-Caskをインストール 1
-brew tap caskroom/cask もしインストール時、権限エラーになった際は下記コマンドを実行する 1
-2
-sudo chown -R $(whoami) / &hellip;">
+  <meta name="description" content="ローカルで、あるファイルが長期的に編集状態にあり、かつ間違ってコミット対象としない時などに便利。 管理対象から外す 1
+git update-index --skip-worktree【ファイル名】 管理対象外のファイルを確認 1
+git ls-files -v | grep ^S 管理対象に戻す &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +78,60 @@ sudo chown -R $(whoami) / &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/12/27/git-untraking/">Gitで管理されているファイルを管理対象から外す</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-12-27T22:40:01+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ローカルで、あるファイルが長期的に編集状態にあり、かつ間違ってコミット対象としない時などに便利。</p>
+
+<h2>管理対象から外す</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git update-index --skip-worktree【ファイル名】</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>管理対象外のファイルを確認</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git ls-files -v | grep ^S</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>管理対象に戻す</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git update-index --no-skip-worktree【ファイル名】</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1043,47 +1095,6 @@ CSSが読み込まれなくなった。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/08/13/git-rename-mv/">Gitで大文字小文字のファイル名を変更する時</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-08-13T09:38:15+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>単純にリネームしても、<code>git status</code>で変更と認識されない。<br/>
-下記コマンドで対応する。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git mv Hoge.txt hoge.txt</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/3">&larr; Older</a>
@@ -1115,6 +1126,10 @@ CSSが読み込まれなくなった。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/09/30/phpinfo/"> PHPの情報をコマンドから確認する方法</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/09/02/scrapy-command/">scrapy 各種コマンド</a>
       </li>
     
@@ -1128,10 +1143,6 @@ CSSが読み込まれなくなった。</p>
     
       <li class="post">
         <a href="/blog/2018/04/30/xcode-ios/">バージョンが古いXcodeを使用していて、iOSのバージョンアップ後、実機の動作確認ができなくなった場合の対応</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/03/31/git-ours-theirs/">Git コンフリクトした際に取り込み先の変更を優先する</a>
       </li>
     
   </ul>

@@ -5,13 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Git コンフリクトした際に取り込み先の変更を優先する - エンジニア日記</title>
+  <title> PHPの情報をコマンドから確認する方法 - エンジニア日記</title>
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="下記、コマンドにて実行 1
-git checkout --theirs hoge.txt ちなみに、自分の変更を優先する場合は下記、コマンド 1
-git checkout --ours fuga.txt ">
+  <meta name="description" content="1
+&lt;?php phpinfo(); をindex.phpに保存してブラウザからアクセスという方法を取らなくても、
+コマンドからPHPの情報を確認する方法を纏める。 phpinfo()を実行 1
+php -r 'phpinfo();' phpinfo()の出力 1
+php -i &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +22,7 @@ git checkout --ours fuga.txt ">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://engineer-diary.click/blog/2018/03/31/git-ours-theirs/">
+  <link rel="canonical" href="http://engineer-diary.click/blog/2018/09/30/phpinfo/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +83,7 @@ git checkout --ours fuga.txt ">
   
   <header>
     
-      <h1 class="entry-title">Git コンフリクトした際に取り込み先の変更を優先する</h1>
+      <h1 class="entry-title">PHPの情報をコマンドから確認する方法</h1>
     
     
       <p class="meta">
@@ -97,23 +99,54 @@ git checkout --ours fuga.txt ">
   
 
 
-<time datetime="2018-03-31T21:43:32+09:00" pubdate data-updated="true"></time>
+<time datetime="2018-09-30T18:48:23+09:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>下記、コマンドにて実行</p>
+<div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php phpinfo();</span></code></pre></td></tr></table></div></figure>
+
+
+<p>をindex.phpに保存してブラウザからアクセスという方法を取らなくても、<br/>
+コマンドからPHPの情報を確認する方法を纏める。</p>
+
+<ul>
+<li>phpinfo()を実行</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git checkout --theirs hoge.txt</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php -r 'phpinfo();'</span></code></pre></td></tr></table></div></figure>
 
 
-<p>ちなみに、自分の変更を優先する場合は下記、コマンド</p>
+<ul>
+<li>phpinfo()の出力</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git checkout --ours fuga.txt</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php -i</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>PHPのバージョンを出力</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php -v</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>インストールしているモジュールを出力</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>php -m</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -137,7 +170,7 @@ git checkout --ours fuga.txt ">
   
 
 
-<time datetime="2018-03-31T21:43:32+09:00" pubdate data-updated="true"></time>
+<time datetime="2018-09-30T18:48:23+09:00" pubdate data-updated="true"></time>
       
 
 
@@ -145,7 +178,7 @@ git checkout --ours fuga.txt ">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2018/03/31/git-ours-theirs/" data-via="" data-counturl="http://engineer-diary.click/blog/2018/03/31/git-ours-theirs/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://engineer-diary.click/blog/2018/09/30/phpinfo/" data-via="" data-counturl="http://engineer-diary.click/blog/2018/09/30/phpinfo/" >Tweet</a>
   
   
   
@@ -154,10 +187,8 @@ git checkout --ours fuga.txt ">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2018/02/28/virtualenv-python3/" title="Previous Post: virtualenvでpython3に切り替える">&laquo; virtualenvでpython3に切り替える</a>
+        <a class="basic-alignment left" href="/blog/2018/09/02/scrapy-command/" title="Previous Post: scrapy 各種コマンド">&laquo; scrapy 各種コマンド</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2018/04/30/xcode-ios/" title="Next Post: バージョンが古いXcodeを使用していて、iOSのバージョンアップ後、実機の動作確認ができなくなった場合の対応">バージョンが古いXcodeを使用していて、iOSのバージョンアップ後、実機の動作確認ができなくなった場合の対応 &raquo;</a>
       
     </p>
   </footer>

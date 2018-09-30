@@ -9,7 +9,9 @@
   <meta name="author" content="Masahiro Hori">
 
   
-  <meta name="description" content="AWS Lambda で関数を作成し、その関数をCloudWatch Eventsで定期的に実行しようとして、cronを設定したが時間どおりに動作しなかった。 CloudWatch Eventsのトラブルシューティングページを確認すると ScheduleExpressions は UTC です。 &hellip;">
+  <meta name="description" content="アカウント作成 1
+CREATE USER 'アカウント名'@'localhost' IDENTIFIED BY 'パスワード'; パスワード変更 1
+SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード'); ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +78,52 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/04/mysql-create-account/">MySQLでアカウント作成とパスワード変更</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-12-04T16:44:57+09:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>アカウント作成</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE USER 'アカウント名'@'localhost' IDENTIFIED BY 'パスワード';</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>パスワード変更</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>SET PASSWORD FOR 'アカウント名'@'localhost' = PASSWORD('新パスワード');</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -812,76 +860,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/07/13/mysql-authority/">MySQLでユーザーにDB、テーブルに対して権限付与するコマンド</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-07-13T22:51:12+09:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>MySQL DBに移動</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>USE mysql</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>登録されているユーザーを確認</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>SELECT user, host FROM user;</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>ユーザーに付与されている権限を確認</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>SHOW GRANTS FOR 'ユーザ名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>すべての操作権限を指定テーブルに付与</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT ALL PRIVILEGES ON `DB名`.テーブル TO 'ユーザ名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>すべての操作権限を対象DBのすべてのテーブルに付与</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT ALL PRIVILEGES ON `DB名`.* TO 'ユーザー名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>SELECT、UPDATE、INSERT、DELETE権限指定テーブルに付与</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>GRANT SELECT,UPDATE,INSERT,DELETE ON `DB名`.テーブル TO 'ユーザ名'@'ホスト名';</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="posts/6">&larr; Older</a>
@@ -913,6 +891,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/09/30/phpinfo/"> PHPの情報をコマンドから確認する方法</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/09/02/scrapy-command/">scrapy 各種コマンド</a>
       </li>
     
@@ -926,10 +908,6 @@
     
       <li class="post">
         <a href="/blog/2018/04/30/xcode-ios/">バージョンが古いXcodeを使用していて、iOSのバージョンアップ後、実機の動作確認ができなくなった場合の対応</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/03/31/git-ours-theirs/">Git コンフリクトした際に取り込み先の変更を優先する</a>
       </li>
     
   </ul>

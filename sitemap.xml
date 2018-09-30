@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://engineer-diary.click/blog/2018/09/30/phpinfo/</loc>
+<lastmod>2018-09-30T18:48:23+09:00</lastmod>
+</url>
+<url>
 <loc>http://engineer-diary.click/blog/2018/09/02/scrapy-command/</loc>
 <lastmod>2018-09-02T21:38:04+09:00</lastmod>
 </url>
@@ -273,5 +277,23 @@
 </url>
 <url>
 <loc>http://engineer-diary.click/</loc>
+</url>
+<url>
+<loc>http://engineer-diary.click/posts/2/</loc>
+</url>
+<url>
+<loc>http://engineer-diary.click/posts/3/</loc>
+</url>
+<url>
+<loc>http://engineer-diary.click/posts/4/</loc>
+</url>
+<url>
+<loc>http://engineer-diary.click/posts/5/</loc>
+</url>
+<url>
+<loc>http://engineer-diary.click/posts/6/</loc>
+</url>
+<url>
+<loc>http://engineer-diary.click/posts/7/</loc>
 </url>
 </urlset>
